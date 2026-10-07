@@ -65,7 +65,7 @@ ssh nas "cd ~/nanoclaw && ./scripts/deploy.sh --health-check"
 ## When NOT to update
 
 - If private has uncommitted work — commit or stash first
-- If AyeAye is mid-task — nuke the container first, update, then let it respawn
+- If JeanClawVanDame is mid-task — nuke the container first, update, then let it respawn
 - If upstream has breaking changes — read the changelog first, test locally
 
 ## Conflict strategy

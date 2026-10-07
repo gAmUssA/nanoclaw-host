@@ -18,7 +18,7 @@ No other path may direct-push to `main`. Every other change to `jbaruch/nanoclaw
 ## Why these paths qualify
 
 - Operator persona prose — the agent's voice, preferences, and silence rules — authored and read by the operator, not a `rule` / `skill` / `script` / `manifest` / `workflow` / `configuration` artifact
-- Mutated only by the operator-approved in-chat apply flow (`tessl__soul-searching-apply`, entered on Baruch's "apply N" reply)
+- Mutated only by the operator-approved in-chat apply flow (`tessl__soul-searching-apply`, entered on Viktor's "apply N" reply)
 - The immediate-durability requirement is structural: `deploy.sh` reverts an uncommitted `/workspace/global/` edit, so the approved change must reach `main` to persist
 
 ## What the direct-push does NOT carry

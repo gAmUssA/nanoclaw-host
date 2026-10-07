@@ -24,7 +24,7 @@ concurrency:
 jobs:
   trigger:
     # Fork PRs cannot read secrets — skip them (adopt via the adopt-fork-pr skill).
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    if: github.repository_owner == 'jbaruch' && (github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-latest
     steps:
       - name: Dispatch the single-PR review to coding-policy

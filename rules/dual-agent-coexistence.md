@@ -4,7 +4,7 @@ alwaysApply: true
 
 # Dual-Agent Coexistence
 
-Two agents improve this system asynchronously: the container agent (AyeAye) and the host agent (you).
+Two agents improve this system asynchronously: the container agent (JeanClawVanDame) and the host agent (you).
 
 ## Read before judging
 
