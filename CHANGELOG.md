@@ -1,5 +1,9 @@
 # Changelog
 
+### Add the run-ledger contract (jbaruch/nanoclaw#1024)
+
+New rule `run-ledger-contract`: the authority-of-record for `task_occurrences`, the host's scheduled-run ledger, which the admin plugin's heartbeat precheck and system-audit now read. The policy reviewer found no documented writer/reader contract for a host-owned table those skills consume, and the table had no per-record version. jbaruch/nanoclaw state migration 24 adds `schema_version`; this rule names the owner, the schema of record, every field's presence and meaning, the readers and what each does with an unreadable ledger or a row of another version, and the cross-pipeline rollout a later bump follows. The rule is scoped (`applyTo:`) to the ledger's writer, migrations and two readers. `coding-policy: stateful-artifacts` names only an owner skill, and no skill owns a host-runtime table; an operator owner exception covers the gap until jbaruch/coding-policy#773 amends the rule.
+
 ## 0.1.67 — 2026-09-15
 
 ### Split incoming-update instructions (#61)

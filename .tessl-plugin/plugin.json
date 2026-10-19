@@ -33,6 +33,7 @@
     "rules/ugos-compose-projects.md",
     "rules/snitchmd-image-floating.md",
     "rules/sync-cli-floating.md",
-    "rules/os-package-floating.md"
+    "rules/os-package-floating.md",
+    "rules/run-ledger-contract.md"
   ]
 }
