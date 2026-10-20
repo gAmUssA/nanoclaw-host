@@ -50,7 +50,7 @@ Inputs: `TILE_NAME` selects the plugin, the argument selects the scope (`all`, o
 
 Output: `PR opened: <url>` and `Branch: <name>` on stdout — capture both. A non-zero exit means no PR was opened; read the script's stderr for which validation refused.
 
-Placement validation, duplicate detection, the skill-review pass, branch naming, and the reviewer summon are the script's own — see the header of `scripts/promote-to-tile-repo.sh` in `jbaruch/nanoclaw`, which `promote-from-host.sh` wraps.
+Placement validation, duplicate detection, the skill-review pass, and branch naming are the script's own — see the header of `scripts/promote-to-tile-repo.sh` in `jbaruch/nanoclaw`, which `promote-from-host.sh` wraps. Opening the PR starts Codex policy and Claude quality review through the target repository's PR-event workflow.
 
 Proceed immediately to Step 4.
 
@@ -71,11 +71,11 @@ TILE_NAME=<plugin> ./scripts/push-staged-to-branch.sh \
   <local-staging-dir> <plugin> <branch> "<commit msg>" <skill|all|--rules-only>
 ```
 
-Inside containers, the equivalent is the `push_staged_to_branch` MCP tool. Both call `scripts/push-staged-to-branch.sh`, which re-summons the reviewers after pushing.
+Inside containers, the equivalent is the `push_staged_to_branch` MCP tool. Both call `scripts/push-staged-to-branch.sh`. The push updates the open PR; its `synchronize` event starts both reviewers.
 
 **Never hand-roll the review watch.** `coding-policy: ci-safety` routes it through `skills/release/watch-pr-reviews.sh` alone — the gate fields it resolves, its poll interval, and its give-up budget live in that script's header.
 
-Plugin repos run `publish.yml` on push to `main`, not on `pull_request`, so `gh pr checks` returns nothing at PR time. Do not wait for a green CI box that is not coming.
+Plugin repos run `publish.yml` on push to `main`. The release skill checks PR-time CI and both review verdicts before merging, then confirms the registry publication.
 
 Proceed immediately to Step 5 once `release` reports the release confirmed.
 
