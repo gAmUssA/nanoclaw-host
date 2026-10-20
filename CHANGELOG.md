@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.70 — 2026-10-20
+
 ### Retire Copilot review (jbaruch/coding-policy 0.5.0)
 
 coding-policy 0.5.0 replaced Copilot with an isolated Claude code-quality reviewer that runs from the central fleet beside the Codex policy reviewer, posting as `jbaruch-claude-reviewer[bot]`; Copilot is no longer requested or awaited. Rule `copilot-nudge-after-10min` is removed: there is no Copilot request left to nudge, and the Claude lane starts with every fleet dispatch. `ship-code`, `extract-to-overlay` and `persona-persist-direct-push` now name the Codex and Claude reviewers.
