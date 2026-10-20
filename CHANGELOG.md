@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.72 — 2026-10-20
+
 ### Promotion reviews follow PR events
 
 The promote skill now describes the opened and synchronize events that start the independent Codex policy and Claude quality reviews. The promotion scripts no longer summon reviewers directly (jbaruch/nanoclaw#1059). It also distinguishes PR-time CI from the post-merge publisher, replacing the obsolete claim that plugin PRs have no CI checks.
