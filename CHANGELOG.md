@@ -1,5 +1,9 @@
 # Changelog
 
+### Credentials live in the vault (jbaruch/nanoclaw#1048)
+
+`host-conventions` gains a section stating the vault-only rule for runtime credentials and the deploy gate that now enforces it: `jbaruch/nanoclaw` `scripts/deploy.sh` step 1b runs `scripts/check-env-credentials.py` and refuses to deploy while the NAS `.env` holds a credential-shaped variable that `scripts/env-credential-allowlist.json` does not name. The 2026-07-21 strip had left three Trakt secrets in `.env` for three months with nothing to notice; the allowlist keeps only `ONECLI_API_KEY` plus entries citing the open migration issues (#1046 Telegram, #1047 GitHub). A host script that must keep a credential outside the vault, as the Trakt renewal does until OneCLI has generic OAuth (#1051), keeps it in its own mode-600 file outside the project tree.
+
 ## 0.1.72 — 2026-10-20
 
 ### Promotion reviews follow PR events
