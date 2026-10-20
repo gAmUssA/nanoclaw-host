@@ -27,7 +27,8 @@ Operational contract for Docker Compose projects on UGOS Pro (NASync) where the 
 
 - Operator action via UGOS Pro UI on a symlinked project is limited to Start and Stop
 - Never invoke UGOS Pro's "Edit" UI on a symlinked project — UGOS dumps UI-entered env into the compose file's `environment:` block and the dir symlink lands those literals in the tracked repo file
-- Never paste literal env values into UGOS Pro's project env UI — same failure mode; secrets stay in `~/nanoclaw/.env` (gitignored), reached through the `.env` symlink chain
+- Never paste literal env values into UGOS Pro's project env UI — same failure mode; env values stay in `~/nanoclaw/.env` (gitignored), reached through the `.env` symlink chain
+- A credential among them follows `rules/host-conventions.md` Credentials live in the vault
 - Compose edits flow through repo PR review and `./scripts/deploy.sh` only
 
 ## Surface sync
