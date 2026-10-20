@@ -20,8 +20,19 @@ All scripts in `scripts/` source `scripts/common.sh` for shared config (`NAS_HOS
 
 ## Credentials live in the vault
 
-- Runtime credentials live in the OneCLI vault, never the NAS `.env`
+- Runtime credentials live in the OneCLI vault, never the NAS `.env` or a compose file
+- `~/nanoclaw/.env` holds non-secret configuration
 - `jbaruch/nanoclaw` `scripts/deploy.sh` step 1b refuses to deploy while `.env` holds a credential-shaped variable outside `scripts/env-credential-allowlist.json` (`scripts/check-env-credentials.py`)
-- The allowlist holds `ONECLI_API_KEY`, the key that reaches the vault, plus each variable an open migration issue still covers, citing that issue
-- Remove an allowlist entry when its issue closes
-- A credential a host script needs outside the vault gets its own mode-600 file outside the project tree, read only by that script (`~/.config/nanoclaw/trakt.env`, jbaruch/nanoclaw#1045)
+- `ONECLI_API_KEY`, the key that reaches the vault, is the allowlist's one permanent entry
+- Narrow exception for a credential an open migration issue still moves out of `.env`.
+- Applies while that issue is open
+- Preconditions (all required):
+  1. Its allowlist entry cites the issue as `owner/repo#N`
+  2. The entry is removed when the issue closes
+- Narrow exception for a credential no vault injection path can carry, such as a request-body OAuth refresh secret.
+- Applies to a host script that must read the value itself
+- Preconditions (all required):
+  1. An open issue tracks moving it into the vault (Trakt: jbaruch/nanoclaw#1051)
+  2. It lives in its own env file outside the project tree, mode 600, read only by that script
+  3. The script never prints it
+- Every other credential lives in the vault
