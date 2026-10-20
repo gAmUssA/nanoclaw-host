@@ -23,7 +23,7 @@ No other path may direct-push to `main`. Every other change to `jbaruch/nanoclaw
 
 ## What the direct-push does NOT carry
 
-- No pull request, no CI run, no gh-aw policy review, no Copilot review
+- No pull request, no CI run, no fleet policy review, no Claude code review
 - Compensating controls: operator approval originates the apply; the `#324` confirmation-token gate blocks an untrusted-provenance `persist_global_file` call; the deterministic gate below bounds what can land
 
 ## Deterministic push-time gate (carve-out Form B)

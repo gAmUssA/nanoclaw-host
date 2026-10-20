@@ -16,7 +16,6 @@
   "rules": [
     "rules/host-conventions.md",
     "rules/repo-chain.md",
-    "rules/copilot-nudge-after-10min.md",
     "rules/post-merge-publish-watch.md",
     "rules/tessl-version-floating.md",
     "rules/orchestrator-dep-refresh.md",

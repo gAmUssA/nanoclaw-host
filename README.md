@@ -15,7 +15,6 @@ tessl install jbaruch/nanoclaw-host
 | Rule | Summary |
 |------|---------|
 | [boyscout-host](rules/boyscout-host.md) | Host agent owns the full stack (source, plugin repos, scripts, deploy, NAS, containers) — fix any problem you find, except owner's-domain content (SOUL.md, personal skills, group memory). |
-| [copilot-nudge-after-10min](rules/copilot-nudge-after-10min.md) | When you summon a Copilot review via the GraphQL `requestReviews` mutation (see the `ship-code` and `promote` skills for the full lifecycle and the exact GraphQL call) and the review hasn't started within 10 minutes, post a follow-up PR comment that tags `@copilot` to re-activate it. |
 | [cross-tier-skill-state](rules/cross-tier-skill-state.md) | Cross-trust-tier skills must persist state under `/workspace/state/<skill-name>/` (RW in every container). Tier-pinned skills may use `/workspace/group/`. |
 | [dual-agent-coexistence](rules/dual-agent-coexistence.md) | Two agents (AyeAye and host) update this system asynchronously. Never assume the latest version; never assume the other agent's work is stale or inferior without reading it. |
 | [host-conventions](rules/host-conventions.md) | Deployment mechanics: always use `./scripts/deploy.sh`, registry is the delivery artifact, scripts source `scripts/common.sh`. |

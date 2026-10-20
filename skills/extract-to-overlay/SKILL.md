@@ -71,7 +71,7 @@ Proceed immediately to Step 4.
 
 ## Step 4 — Ship target plugin
 
-Worktree-isolate the target plugin's worktree if not already done in Step 3. Invoke `Skill(skill: "release")` once for the target plugin. The release skill runs the full PR lifecycle: PR creation, dual-lens automated review (gh-aw + Copilot), review iteration, merge, post-merge publish-plugin watch per `rules/post-merge-publish-watch.md`.
+Worktree-isolate the target plugin's worktree if not already done in Step 3. Invoke `Skill(skill: "release")` once for the target plugin. The release skill runs the full PR lifecycle: PR creation, dual-lens automated review (Codex policy + Claude code quality), review iteration, merge, post-merge publish-plugin watch per `rules/post-merge-publish-watch.md`.
 
 Do NOT invoke `Skill(skill: "ship-code")` here — `ship-code` is scoped to the `jbaruch/nanoclaw` private repository per `rules/repo-chain.md`, not plugin-repo lifecycles.
 

@@ -19,6 +19,6 @@ Proceed immediately to Step 2.
 
 ## Step 2 — Release the private change
 
-Invoke `Skill(skill: "release")` once for `jbaruch/nanoclaw`. It owns PR creation, policy and Copilot review, CI, feedback handling, merge, and branch cleanup. Use explicit repository targets throughout.
+Invoke `Skill(skill: "release")` once for `jbaruch/nanoclaw`. It owns PR creation, Codex policy and Claude code review, CI, feedback handling, merge, and branch cleanup. Use explicit repository targets throughout.
 
 If release is blocked, report the blocker and finish here. After the private PR merges and cleanup completes, report its URL and finish here.
