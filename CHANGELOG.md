@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.69 — 2026-10-19
+
+### Add the run-ledger contract (jbaruch/nanoclaw#1024)
+
+New rule `run-ledger-contract`: the authority-of-record for `task_occurrences`, the host's scheduled-run ledger, which the admin plugin's heartbeat precheck and system-audit now read. The policy reviewer found no documented writer/reader contract for a host-owned table those skills consume, and the table had no per-record version. jbaruch/nanoclaw state migration 24 adds `schema_version`; this rule names the owner, the schema of record, every field's presence and meaning, the readers and what each does with an unreadable ledger or a row of another version, and the cross-pipeline rollout a later bump follows. The rule is scoped (`applyTo:`) to the ledger's writer, migrations and two readers. `coding-policy: stateful-artifacts` names only an owner skill, and no skill owns a host-runtime table; an operator owner exception covers the gap until jbaruch/coding-policy#773 amends the rule.
+
+## 0.1.67 — 2026-09-15
+
+### Split incoming-update instructions (#61)
+
+Give remote verification, retired-target replacement, reviewed merging, and private-content preservation separate bullets. Their conditions and requirements remain unchanged.
+
+## 0.1.66 — 2026-09-12
+
+### Retire the public fork workflow
+
+Remove `sync-to-public` and the public shipping phase now that the public fork no longer exists. `ship-code` ends with the private PR lifecycle and delegates its review and merge gates to `release`. Rename `update-from-public` to `update-from-upstream`, pulling `qwibitai/nanoclaw` directly into a reviewed private update branch before deployment. Update repository safety rules, the manifest, README, and overlay extraction guidance to match. Upstream contributions still require explicit authorization.
+
 ## 0.1.65 — 2026-08-30
 
 ### `promote` Step 3 and Step 4 stop restating script internals (`#58`)
