@@ -33,6 +33,8 @@
     "rules/snitchmd-image-floating.md",
     "rules/sync-cli-floating.md",
     "rules/os-package-floating.md",
-    "rules/run-ledger-contract.md"
+    "rules/run-ledger-contract.md",
+    "rules/agent-container-filter.md",
+    "rules/browser-profile-storage.md"
   ]
 }
