@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.77 — 2026-10-21
+
 ### Persist approved browser access with a dedicated credential boundary
 
 Authorize website sessions and saved website passwords in the dedicated NAS browser for nanoclaw#1037. The operator explicitly requires approved access to remain autonomous across turns and restarts, approves CAPTCHA solving and retains MFA handoff. The storage contract requires authenticated encryption, unattended local key provisioning outside the project and agent mounts, consistent checkpoints and synthetic restart/recovery validation. It does not authorize an unencrypted production profile or move API credentials out of OneCLI.
