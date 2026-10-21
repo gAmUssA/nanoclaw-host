@@ -31,7 +31,7 @@ No other path may direct-push to `main`. Every other change to `jbaruch/nanoclaw
 - The gate is code, not agent judgment — `validateGlobalFilesToPersist` and the pre-push allowlist check in `persistGlobalFilesToGit`, both in `jbaruch/nanoclaw` `src/git-persist.ts`
 - `validateGlobalFilesToPersist` accepts only the exact covered basenames — never a caller-supplied path component (absolute, `..`, or subdir escape rejected)
 - Before pushing, `persistGlobalFilesToGit` enumerates every path the push would change on `main` (`git diff --name-only origin/main..HEAD`) and pushes only when ALL match the covered paths
-- An out-of-glob path is refused outright (`stage: 'git'` error, no push) — stricter than a branch+PR fallback: nothing but the covered persona files ever direct-pushes
+- Out-of-glob pending changes go to a deterministic `persona-review/<commit>` branch and an automatically opened PR. The caller receives the review URL; `main` stays unchanged until the required CI and reviews pass. Only the covered persona files direct-push.
 
 ## Surface sync
 
