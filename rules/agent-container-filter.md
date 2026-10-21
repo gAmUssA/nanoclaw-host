@@ -1,5 +1,6 @@
 ---
-alwaysApply: true
+alwaysApply: false
+applyTo: "scripts/exclude-infra-containers.sh, scripts/list-agent-containers.sh, scripts/deploy.sh — when invoking or modifying agent-container enumeration"
 ---
 
 # Agent Container Filter

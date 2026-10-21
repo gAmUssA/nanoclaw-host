@@ -1,5 +1,6 @@
 ---
-alwaysApply: true
+alwaysApply: false
+applyTo: "container/visible-browser/**, container/skills/visible-browser/**, src/visible-browser*, docker-compose.yml, scripts/deploy.sh — when implementing, operating or using authenticated persistence for the dedicated browser"
 ---
 
 # Browser Profile Storage
@@ -17,7 +18,9 @@ alwaysApply: true
 - Keep the live decrypted profile in the dedicated non-agent browser service, on private memory-backed storage or the encrypted filesystem.
 - Use owner-only profile directories and ciphertext files.
 - Keep the profile encryption key outside the project tree, group mounts, images, logs and ordinary backups.
-- Permit a dedicated mode-600 host key file when the storage adapter requires local key bytes; mount it read-only only into the non-agent browser service.
+- OneCLI or another secrets manager provisions the profile encryption key.
+- Runtime setup may materialize that managed key into a dedicated mode-600 host cache outside the project.
+- Mount the managed key cache read-only only into the non-agent browser service.
 - Never put that key in `.env`, command arguments, an agent container or model context.
 - Provision and unlock storage unattended after the initial setup.
 - Missing keys, failed authentication and corrupt archives fail closed without replacing the previous ciphertext.
@@ -25,10 +28,12 @@ alwaysApply: true
 ## Access and retention
 
 - Only the literal main-tier agent may control browser sessions through the private CDP bridge.
-- Private operator viewing uses the existing approved device/identity path; never expose CDP or enable Funnel.
+- Private operator viewing uses the existing approved device/identity path.
+- Never expose CDP or enable Funnel.
 - Browser autofill may reuse saved website credentials for an approved account and matching origin.
 - Agents must not reveal, export or log passwords, cookies, storage tokens or profile encryption keys.
-- CAPTCHA solving is operator-approved; MFA requires operator handoff.
+- CAPTCHA solving is operator-approved.
+- MFA requires operator handoff.
 - Retain approved sessions and saved passwords until the operator removes them or the website expires or revokes them.
 - Never clear authentication on a recurring schedule or routine deployment.
 
