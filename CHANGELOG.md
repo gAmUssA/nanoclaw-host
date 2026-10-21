@@ -1,5 +1,9 @@
 # Changelog
 
+### Save mixed persona changes through a review PR
+
+Align the persona persistence authority with the generic content-only direct-push contract. The host still direct-pushes only the two named persona files. If pending commits include another path, it saves a deterministic review branch and opens a PR instead of only refusing the update. The host returns the review URL and leaves main unchanged. Implementation ships in jbaruch/nanoclaw#1047.
+
 ## 0.1.74 — 2026-10-21
 
 ### Retire the run-ledger owner exception (#65)
