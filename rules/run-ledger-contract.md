@@ -10,7 +10,6 @@ Authority-of-record for `task_occurrences` in `/workspace/store/messages.db`, th
 ## Owner and schema
 
 - Owner: the `jbaruch/nanoclaw` scheduler, through `src/db-task-occurrences.ts` and its state migrations; no container skill writes or migrates the table
-- No skill owns this host-runtime table: `coding-policy: stateful-artifacts` names only an owner skill, an operator owner exception covers that gap, and `jbaruch/coding-policy#773` tracks the policy change
 - Schema of record: `src/state-migrations/state-022-task-occurrences.ts` and `state-024-task-occurrences-schema-version.ts` in `jbaruch/nanoclaw`
 - One row per occurrence, keyed `(task_id, scheduled_for)`; `scheduled_for` is the task's `next_run` at dispatch
 - A cadence-registry task's `task_id` is `cadence-registry::<group>::tessl__<skill>`
