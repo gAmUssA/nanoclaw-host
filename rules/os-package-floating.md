@@ -25,7 +25,7 @@ The authoritative machine-readable copy is `COVERED_IMAGES` in `jbaruch/nanoclaw
 ## Bounds and deploy-time enforcement
 
 - Each covered image's base MUST stay pinned to a specific tag or digest: agent, orchestrator and visible browser pin `node:26-trixie-slim` by digest, the sidecar pins `python:3.14-slim` by minor tag
-- `.github/dependabot.yml`'s `docker` ecosystem tracks the agent, orchestrator and audible sidecar; the visible-browser base mirrors the agent's pin, with a deterministic test enforcing alignment
+- `.github/dependabot.yml`'s `docker` ecosystem tracks all four image directories; a deterministic test also keeps the visible-browser base aligned with the agent's pin
 - A base moved to a floating `:latest` voids this carve-out for that image
 - Each covered image MUST be rebuilt on every deploy: agent at `deploy.sh` step 2a, orchestrator and visible browser at 2b, build-script sidecars at 2a-bis
 - CI additionally builds the audible-backup and visible-browser images on every pull request; the browser canary verifies sandbox startup, private CDP access and profile persistence
