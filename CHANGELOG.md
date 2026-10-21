@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.76 — 2026-10-21
+
 ### Declare the persistent browser's OS packages
 
 Cover `container/visible-browser/Dockerfile` for nanoclaw#1037 with its exact distro package set, watched-agent base alignment, canonical deploy rebuild cadence and real-image CI canary. This lets Chromium receive distro security updates while keeping the bounded runtime-package contract enforced at deployment.
