@@ -1,5 +1,9 @@
 # Changelog
 
+### Retire the run-ledger owner exception (#65)
+
+Remove the temporary owner-exception sentence from `run-ledger-contract`. coding-policy#773 now recognizes runtime-owned tables and their migrations, so the existing scheduler ownership and reader contract satisfy the policy directly. The ledger schema, replay protection and reader behavior stay unchanged.
+
 ## 0.1.73 — 2026-10-20
 
 ### Credentials live in the vault (jbaruch/nanoclaw#1048)
