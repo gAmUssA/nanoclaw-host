@@ -35,6 +35,7 @@
     "rules/os-package-floating.md",
     "rules/run-ledger-contract.md",
     "rules/agent-container-filter.md",
-    "rules/browser-profile-storage.md"
+    "rules/browser-profile-storage.md",
+    "rules/task-restart-recovery.md"
   ]
 }
