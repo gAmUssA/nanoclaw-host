@@ -49,4 +49,6 @@ All scripts in `scripts/` source `scripts/common.sh` for shared config (`NAS_HOS
   1. An open issue tracks moving it into the vault
   2. It lives in its own env file outside the project tree, mode 600, read only by that script
   3. The script never prints it
+- Narrow exception for website sessions and saved website passwords in the dedicated NAS browser.
+- Preconditions are binding: read `rules/browser-profile-storage.md` before enabling authenticated persistence.
 - Every other credential lives in the vault

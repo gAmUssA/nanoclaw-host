@@ -14,6 +14,8 @@ tessl install jbaruch/nanoclaw-host
 
 | Rule | Summary |
 |------|---------|
+| [agent-container-filter](rules/agent-container-filter.md) | Line-oriented contract for the root repository's agent-container filter and deploy consumers, including infrastructure exclusions and regression coverage. |
+| [browser-profile-storage](rules/browser-profile-storage.md) | Persistent website sessions and browser password autofill for approved autonomous access, with encrypted storage, private main-tier control, checkpoint recovery, approved CAPTCHA solving and operator MFA. |
 | [boyscout-host](rules/boyscout-host.md) | Host agent owns the full stack (source, plugin repos, scripts, deploy, NAS, containers) — fix any problem you find, except owner's-domain content (SOUL.md, personal skills, group memory). |
 | [cross-tier-skill-state](rules/cross-tier-skill-state.md) | Cross-trust-tier skills must persist state under `/workspace/state/<skill-name>/` (RW in every container). Tier-pinned skills may use `/workspace/group/`. |
 | [dual-agent-coexistence](rules/dual-agent-coexistence.md) | Two agents (AyeAye and host) update this system asynchronously. Never assume the latest version; never assume the other agent's work is stale or inferior without reading it. |
