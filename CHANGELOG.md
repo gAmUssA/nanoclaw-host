@@ -1,5 +1,9 @@
 # Changelog
 
+### Declare the learning evidence runtime (#570)
+
+Own the pinned scanner installation/renewal contract and the main-only read-only transcript namespace for nanoclaw-admin#570. Consumers must bind source selection to the registered current group and keep SDK writes isolated. The runtime manifest supplies the dependency and source-view bounds; the host enables the view only for a compatible published provider.
+
 ## 0.1.77 — 2026-10-21
 
 ### Persist approved browser access with a dedicated credential boundary
