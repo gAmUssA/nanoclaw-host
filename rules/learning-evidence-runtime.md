@@ -1,5 +1,6 @@
 ---
-alwaysApply: true
+alwaysApply: false
+applyTo: "skills/learning-evidence*/**, rules/learning-evidence*.md, src/session-transcript-view*, src/volume-mounts.ts, container/Dockerfile — when implementing or verifying the learning evidence runtime"
 ---
 
 # Learning Evidence Runtime
@@ -20,7 +21,8 @@ alwaysApply: true
 - Native skill processes receive their chat and session context from host input.
 - Consumers resolve the current chat through `NANOCLAW_CHAT_JID` and the registered `groups` array in `/workspace/ipc/available_groups.json` before selecting a source.
 - Source identifiers cannot select another group, a link or a path outside the projected session directory.
-- Read source bytes only through the published provenance and credential auditor; a mount supplies no approval authority.
+- Read source bytes only through the published provenance and credential auditor.
+- A mount supplies no approval authority.
 
 ## Scanner dependency
 
@@ -29,4 +31,5 @@ alwaysApply: true
 - The committed `/container` Docker Dependabot job proposes reviewed renewal of both image references.
 - The minimum compatible scanner version in the runtime manifest is an interface bound, not a second resolved image pin.
 - Runtime callers never download a scanner or accept session-supplied scanner configuration, baselines or allow comments.
-- Missing, incompatible or failed scanners yield no learning evidence; supplemental checks cannot replace the detector.
+- Missing, incompatible or failed scanners yield no learning evidence.
+- Supplemental checks cannot replace the detector.
