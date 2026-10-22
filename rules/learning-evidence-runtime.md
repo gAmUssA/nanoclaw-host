@@ -6,7 +6,7 @@ alwaysApply: true
 
 ## Authority
 
-- The host owns the runtime contract in `.tessl-plugin/learning-evidence-runtime.json` for `jbaruch/nanoclaw-admin` learning-evidence consumers.
+- The host owns the runtime contract in `skills/learning-evidence-runtime/runtime.json` for `jbaruch/nanoclaw-admin` learning-evidence consumers.
 - The manifest declares the scanner dependency, its image-installation pin, renewal owner and the bounded source-view protocol.
 - A consumer rejects unsupported or incomplete contracts before enabling the view.
 

@@ -11,7 +11,8 @@
     "skills/reconcile",
     "skills/update-from-upstream",
     "skills/ship-code",
-    "skills/add-ugos-project"
+    "skills/add-ugos-project",
+    "skills/learning-evidence-runtime"
   ],
   "rules": [
     "rules/host-conventions.md",
