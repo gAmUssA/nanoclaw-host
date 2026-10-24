@@ -2,6 +2,8 @@
 
 ### Allow isolated release test environments
 
+Define the cross-repository rollout order for package additions: publish the approved inventory, change the consumer's gate, Dockerfile comment and changelog in one reviewed PR, install the authority before deploying. During the interval, the consumer's existing narrower set remains binding. This preserves deploy-time checks without requiring atomic commits across independently published repositories.
+
 Add `python3-venv` to the agent image's assessed OS-package set for the main-only learning release runtime (#570). It enables source checkouts to create private Python test environments without changing the image's system interpreter. The consumer change must update `COVERED_IMAGES`, its Dockerfile package list/comment and CHANGELOG together; the existing digest/rebuild/deploy gates still apply. Publish and install this authority before deploying that consumer.
 
 ## 0.1.81 — 2026-10-24

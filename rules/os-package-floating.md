@@ -48,3 +48,9 @@ Adding a package to a covered image is a reviewed edit to `COVERED_IMAGES`, neve
 ## Surface sync
 
 When a covered image's package set or base changes, update in lock-step: this rule's Covered-images list, `COVERED_IMAGES` in `jbaruch/nanoclaw` `scripts/deploy.sh`, the Dockerfile comment beside the install, and `jbaruch/nanoclaw`'s CHANGELOG. See `coding-policy: context-artifacts` Surface Sync.
+
+- For a cross-repository package addition, publish this approved inventory first.
+- Update all named consumer surfaces together in one reviewed PR.
+- Until that PR lands, the consumer's narrower recorded set remains authoritative for its images.
+- Install the published authority before deploying the consumer addition.
+- Every deployed package must appear in both the installed authority and the consumer's recorded set.
