@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.84 — 2026-10-24
+
 ### Document terminal cancellation recovery (#580)
 
 Declare the host-owned versioned native cancellation result for watcher recovery. Require a correlated definite failure and fresh unchanged own-task proof before one new attempt, preserve uncertainty and legacy clients, and retain native source-folder authorization.
