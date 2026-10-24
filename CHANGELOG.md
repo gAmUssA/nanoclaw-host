@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.80 — 2026-10-24
+
 ### Define versioned learning hint reads
 
 Declare the host-owned `learning_hints_v1` view and the learning collector's read-only schema, scope and refusal contract. A per-row projection version avoids changing legacy message/task writers. Publish this authority before deploying the view and enabling the compatible admin reader for nanoclaw-admin#570; hints remain untrusted and never establish evidence or approval.
