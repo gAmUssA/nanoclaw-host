@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-applyTo: "container/visible-browser/**, container/skills/visible-browser/**, src/visible-browser*, docker-compose.yml, scripts/deploy.sh — when implementing, operating or using authenticated persistence for the dedicated browser"
+applyTo: "container/visible-browser/**, container/skills/visible-browser/**, src/visible-browser*, docker-compose.yml, scripts/deploy.sh, skills/watchers/** — when implementing, operating or using authenticated persistence for the dedicated browser"
 ---
 
 # Browser Profile Storage
@@ -46,3 +46,13 @@ applyTo: "container/visible-browser/**, container/skills/visible-browser/**, src
 - Restore checkpoints only into the same dedicated browser identity and storage boundary.
 - Document the last successful checkpoint and crash-recovery limits.
 - Verify saved-login reuse, encrypted storage, restart, recreation and failure recovery with synthetic credentials before production use.
+
+## Native visible-browser lookup
+
+- Host `jbaruch/nanoclaw` installs `container/visible-browser/validate-agent-cdp.mts` as `/usr/local/lib/nanoclaw/validate-visible-browser.mts` in the agent image.
+- Invoke only `node /usr/local/lib/nanoclaw/validate-visible-browser.mts`; it takes no stdin or task-supplied endpoint.
+- The host injects non-secret `VISIBLE_BROWSER_CDP_URL` only for main's private browser attachment; operators never set this capability variable in `.env`.
+- Exit 0 emits only JSON `{"available":true}` and a newline; unavailable, substituted, malformed or headless results exit nonzero with empty stdout and an actionable redacted diagnostic.
+- Preserve every access and retention constraint after this lookup; availability grants no owner identity or website action authority.
+- Missing target or incompatible output requires repairing the installed image, never local-browser fallback or credential export.
+- Regression coverage: `jbaruch/nanoclaw` `src/visible-browser-guard.test.ts`; native browser coverage also runs `container/visible-browser/runtime-canary.mts`.

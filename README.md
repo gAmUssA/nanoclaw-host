@@ -20,6 +20,7 @@ tessl install jbaruch/nanoclaw-host
 | [cross-tier-skill-state](rules/cross-tier-skill-state.md) | Cross-trust-tier skills must persist state under `/workspace/state/<skill-name>/` (RW in every container). Tier-pinned skills may use `/workspace/group/`. |
 | [dual-agent-coexistence](rules/dual-agent-coexistence.md) | Two agents (AyeAye and host) update this system asynchronously. Never assume the latest version; never assume the other agent's work is stale or inferior without reading it. |
 | [host-conventions](rules/host-conventions.md) | Deployment mechanics: always use `./scripts/deploy.sh`, registry is the delivery artifact, scripts source `scripts/common.sh`. |
+| [group-ipc-snapshots](rules/group-ipc-snapshots.md) | Host-owned group/task projections, supported versions, trust filtering, exact watcher binding proof and compatible reader rollout. |
 | [no-deferral](rules/no-deferral.md) | Every session is the only session — fix problems now, not "later". Forbidden-pattern bullets enumerated. |
 | [no-error-suppression](rules/no-error-suppression.md) | Never use `\|\| true`, `2>/dev/null`, empty `catch {}`, or any form of silent error swallowing in scripts. If something fails, it must fail visibly. |
 | [nuke-semantics](rules/nuke-semantics.md) | Nuke a group = kill the running container only. Never delete registrations or group folders. |

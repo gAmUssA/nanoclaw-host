@@ -37,6 +37,7 @@
     "rules/run-ledger-contract.md",
     "rules/agent-container-filter.md",
     "rules/browser-profile-storage.md",
+    "rules/group-ipc-snapshots.md",
     "rules/task-restart-recovery.md",
     "rules/learning-evidence-runtime.md",
     "rules/learning-hints-contract.md"
