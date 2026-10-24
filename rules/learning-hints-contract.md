@@ -9,19 +9,24 @@ applyTo: "src/state-migrations/**, skills/learning-pass/**, tests/test_learning_
 
 - Host `jbaruch/nanoclaw` owns `learning_hints_v1` in `/workspace/store/messages.db`.
 - Schema of record: `src/state-migrations/state-027-learning-hints.ts` in that repository.
-- Migration 27 creates a read-only view over host-owned `messages`, `scheduled_tasks` and `task_run_logs`; their existing writers and schemas remain unchanged.
+- Migration 27 owns the view definition; the view has no row writer, stored rows or defaults.
+- SQLite evaluates the projection over host-owned `messages`, `scheduled_tasks` and `task_run_logs` on each read.
+- Source writers: `src/db-messages.ts` `storeMessage`/`storeMessageDirect` and `src/db-tasks.ts` `createTask`/`logTaskRun`; existing writer schemas remain unchanged.
 - Each projected row carries integer `schema_version: 1`; a changed projection uses a new versioned view and migration.
 
 ## Record Fields
 
-| Field | Format and meaning |
+| Field | Required/null/default guarantees and meaning |
 | --- | --- |
-| `kind` | `chat_message` for non-bot inbound messages; `task_failure` for error logs joined to an existing task |
-| `identity` | Source id cast to TEXT; unique only with kind and chat/group scope |
-| `chat_jid` | Message chat TEXT; NULL for task hints |
-| `group_folder` | Task group TEXT; NULL for message hints |
-| `occurred_at` | Source timestamp TEXT; readers accept only timezone-qualified ISO instants |
-| `text` | Source content/error TEXT; nullable or oversized legacy values supply no hint |
+| `schema_version` | Always integer literal 1; never NULL |
+| `kind` | Always a non-NULL literal: `chat_message` for non-bot inbound messages; `task_failure` for error logs joined to an existing task |
+| `identity` | Source id cast to TEXT; required nonempty TEXT for a usable row; unique only with kind and chat/group scope |
+| `chat_jid` | Required nonempty source chat TEXT for message rows; literal NULL for task rows |
+| `group_folder` | Required nonempty source group TEXT for task rows; literal NULL for message rows |
+| `occurred_at` | Required source timestamp TEXT for a usable row; timezone-qualified ISO instant with `Z` or `±HH:MM` |
+| `text` | Source content/error with no default; NULL, non-TEXT, undersized or oversized values supply no hint |
+
+- Required fields copied from malformed legacy rows retain their original values; the view never fabricates a missing identity, scope or timestamp.
 
 ## Readers and Boundary
 
