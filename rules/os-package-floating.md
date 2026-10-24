@@ -10,7 +10,7 @@ The `apt-get install` package lists in `jbaruch/nanoclaw`'s four container image
 
 ## Covered images and package sets
 
-- `container/Dockerfile` (agent) — chromium, fonts-liberation, fonts-noto-color-emoji, libgbm1, libnss3, libatk-bridge2.0-0, libgtk-3-0, libx11-xcb1, libxcomposite1, libxdamage1, libxrandr2, libasound2, libpangocairo-1.0-0, libcups2, libdrm2, libxshmfence1, curl, git, jq, poppler-utils, python3, sqlite3, gh
+- `container/Dockerfile` (agent) — chromium, fonts-liberation, fonts-noto-color-emoji, libgbm1, libnss3, libatk-bridge2.0-0, libgtk-3-0, libx11-xcb1, libxcomposite1, libxdamage1, libxrandr2, libasound2, libpangocairo-1.0-0, libcups2, libdrm2, libxshmfence1, curl, git, jq, poppler-utils, python3, python3-venv, sqlite3, gh
 - `Dockerfile.orchestrator` — ca-certificates, curl, docker.io, g++, gh, make, python3, sqlite3
 - `container/audible-backup/Dockerfile` (sidecar) — ffmpeg
 - `container/visible-browser/Dockerfile` (persistent browser) — ca-certificates, chromium, curl, fonts-liberation, fonts-noto-color-emoji, novnc, openbox, websockify, x11vnc, xvfb
@@ -48,3 +48,9 @@ Adding a package to a covered image is a reviewed edit to `COVERED_IMAGES`, neve
 ## Surface sync
 
 When a covered image's package set or base changes, update in lock-step: this rule's Covered-images list, `COVERED_IMAGES` in `jbaruch/nanoclaw` `scripts/deploy.sh`, the Dockerfile comment beside the install, and `jbaruch/nanoclaw`'s CHANGELOG. See `coding-policy: context-artifacts` Surface Sync.
+
+- For a cross-repository package addition, publish this approved inventory first.
+- Update all named consumer surfaces together in one reviewed PR.
+- Until that PR lands, the consumer's narrower recorded set remains authoritative for its images.
+- Install the published authority before deploying the consumer addition.
+- Every deployed package must appear in both the installed authority and the consumer's recorded set.
