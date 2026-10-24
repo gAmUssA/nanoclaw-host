@@ -59,6 +59,21 @@ applyTo: "src/group-snapshots*, src/ipc-deps*, src/task-scheduler*, src/message-
 - Native own-task cancellation uses `{type: "cancel_task", taskId}`; host `src/ipc-handlers/tasks.ts` derives authorization from the source folder, never caller-supplied role flags.
 - These projections grant no write or migration access to the underlying host database.
 
+## Terminal Cancellation Readback
+
+- Native `cancel_task` accepts `task_id` and optional `request_id`; retain the actual attempt id in its returned JSON.
+- Request identities follow `TASK_CANCEL_REQUEST_ID` in host-owned `container/agent-runner/src/task-cancel-result.ts`.
+- The host writer is `src/ipc-handlers/tasks.ts`; `docs/task-cancellation-results.md` owns the complete schema, compatibility and failure semantics.
+- Schema 1 has exactly `schema_version`, `request_id`, `task_id`, `outcome` and UTC `observed_at`.
+- Outcomes are `cancelled`, `absent`, `failed`, `denied` and `uncertain`; only a correlated terminal `failed` result supplies definite non-application proof for recovery.
+- Require fresh complete task readback at least as new as `observed_at`, the same own id/group and exact intended schedule/context/script/prompt before recording one new cancellation attempt.
+- A valid active, paused or completed own task may be cancelled; isolated scheduling admission still requires active status.
+- Task presence, queue acknowledgment, timeout, denial or uncertain output never permits automatic replay.
+- Fresh verified absence can confirm removal without another operation.
+- A receipt supplies no operator identity, approval, cross-group access or task-database write authority.
+- Runtime host and MCP readers deploy together; preserve old fire-and-forget IPC clients and install this authority before enabling a new cross-plugin reader.
+- Regression coverage: host `src/ipc-auth.test.ts` and `container/agent-runner/src/task-cancel-result.test.ts`; consumer `jbaruch/nanoclaw-admin` `tests/test_watcher_workflow.py`.
+
 ## Rollout and Verification
 
 - Publish and install this authority before enabling cross-plugin consumers.
