@@ -22,7 +22,7 @@ applyTo: "src/group-snapshots*, src/ipc-deps*, src/task-scheduler*, src/message-
 | `id` | Required nonempty string containing the exact native task id; opaque, no default |
 | `groupFolder` | Required string naming the registered folder; native folder syntax is `[A-Za-z0-9][A-Za-z0-9_-]{0,63}`, with reserved `global` excluded |
 | `prompt` | Required stored prompt string; historical serialized Buffer values may be displayed defensively but never satisfy an exact string binding |
-| `script` | Optional string or null; omission/null means no script, and an empty string stays distinct |
+| `script` | Optional string or null; omission/null means no script; native refreshers may omit an empty string, which supplies no executable-script proof |
 | `schedule_type` | Required string `cron`, `interval` or `once` |
 | `schedule_value` | Required string: native cron expression, decimal interval milliseconds or native ISO-8601 once value; legacy once values may use host-local time |
 | `context_mode` | Required version-1 string `group` or `isolated`; absent/ignored in version 0 |
