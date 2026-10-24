@@ -1,5 +1,9 @@
 # Changelog
 
+### Allow isolated release test environments
+
+Add `python3-venv` to the agent image's assessed OS-package set for the main-only learning release runtime (#570). It enables source checkouts to create private Python test environments without changing the image's system interpreter. The consumer change must update `COVERED_IMAGES`, its Dockerfile package list/comment and CHANGELOG together; the existing digest/rebuild/deploy gates still apply. Publish and install this authority before deploying that consumer.
+
 ## 0.1.81 — 2026-10-24
 
 ### Complete the learning hint rollout contract
