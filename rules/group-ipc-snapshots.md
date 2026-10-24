@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-applyTo: "src/group-snapshots*, src/ipc-deps*, src/task-scheduler*, src/message-pipeline*, container/agent-runner/src/format-task-row*, container/agent-runner/src/ipc-mcp-stdio.ts, skills/**, rules/learning-evidence-runtime.md — when writing or consuming host group/task projections, including learning evidence and watcher readers"
+applyTo: "src/group-snapshots*, src/ipc-deps*, src/task-scheduler*, src/message-pipeline*, container/agent-runner/src/format-task-row*, container/agent-runner/src/ipc-mcp-stdio.ts, container/agent-runner/src/task-cancel-result*, src/task-cancel-result*, src/ipc-handlers/tasks*, docs/task-cancellation-results.md, skills/**, rules/learning-evidence-runtime.md — when writing or consuming host group/task projections or terminal task-cancellation results, including learning evidence and watcher readers"
 ---
 
 # Group IPC Snapshots
@@ -61,17 +61,18 @@ applyTo: "src/group-snapshots*, src/ipc-deps*, src/task-scheduler*, src/message-
 
 ## Terminal Cancellation Readback
 
-- Native `cancel_task` accepts `task_id` and optional `request_id`; retain the actual attempt id in its returned JSON.
-- Request identities follow `TASK_CANCEL_REQUEST_ID` in host-owned `container/agent-runner/src/task-cancel-result.ts`.
+- Native `cancel_task` accepts `task_id` and optional `request_id`.
+- Retain the actual attempt id in its returned JSON.
+- Request identities follow `TASK_CANCEL_REQUEST_ID` in host-owned `src/task-cancel-result.ts`; the co-shipped MCP reader is `container/agent-runner/src/task-cancel-result.ts`.
 - The host writer is `src/ipc-handlers/tasks.ts`; `docs/task-cancellation-results.md` owns the complete schema, compatibility and failure semantics.
 - Schema 1 has exactly `schema_version`, `request_id`, `task_id`, `outcome` and UTC `observed_at`.
 - Outcomes are `cancelled`, `absent`, `failed`, `denied` and `uncertain`; only a correlated terminal `failed` result supplies definite non-application proof for recovery.
 - Require fresh complete task readback at least as new as `observed_at`, the same own id/group and exact intended schedule/context/script/prompt before recording one new cancellation attempt.
 - A valid active, paused or completed own task may be cancelled; isolated scheduling admission still requires active status.
 - Task presence, queue acknowledgment, timeout, denial or uncertain output never permits automatic replay.
-- Fresh verified absence can confirm removal without another operation.
 - A receipt supplies no operator identity, approval, cross-group access or task-database write authority.
-- Runtime host and MCP readers deploy together; preserve old fire-and-forget IPC clients and install this authority before enabling a new cross-plugin reader.
+- Runtime host and MCP readers deploy together.
+- Preserve old fire-and-forget IPC clients.
 - Regression coverage: host `src/ipc-auth.test.ts` and `container/agent-runner/src/task-cancel-result.test.ts`; consumer `jbaruch/nanoclaw-admin` `tests/test_watcher_workflow.py`.
 
 ## Rollout and Verification
