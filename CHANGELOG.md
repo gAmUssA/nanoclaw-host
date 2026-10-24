@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.82 — 2026-10-24
+
 ### Allow isolated release test environments
 
 Define the cross-repository rollout order for package additions: publish the approved inventory, change the consumer's gate, Dockerfile comment and changelog in one reviewed PR, install the authority before deploying. During the interval, the consumer's existing narrower set remains binding. This preserves deploy-time checks without requiring atomic commits across independently published repositories.
