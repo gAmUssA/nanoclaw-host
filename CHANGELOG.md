@@ -1,5 +1,9 @@
 # Changelog
 
+### Complete the learning hint rollout contract
+
+Apply the hint authority when its named source writers change, define the accepted text bounds and units, and specify a dual-reader/new-view rollout for future versions. This addresses the additional policy review that arrived during #76's merge window; no learning cadence or runtime projection is activated by the contract publication.
+
 ## 0.1.80 — 2026-10-24
 
 ### Define versioned learning hint reads
