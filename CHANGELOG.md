@@ -1,5 +1,11 @@
 # Changelog
 
+### Define watcher runtime read contracts (#580)
+
+Declare the host-owned task and registered-group projections, their supported record versions, visibility, context variables and exact effect-proof requirements. Keep legacy task metadata readable without inventing isolated context, and require compatible readers before a writer flip. New watcher activation waits for the installed authority and actual runtime proof.
+
+Name the image-delivered persistent-browser validator, its exact success/error contract, main-only endpoint injection and existing regression coverage. This lookup grants no additional browser access, owner identity or website action authority; saved credentials and encrypted-profile boundaries remain binding.
+
 ## 0.1.82 — 2026-10-24
 
 ### Allow isolated release test environments
