@@ -38,6 +38,7 @@
     "rules/agent-container-filter.md",
     "rules/browser-profile-storage.md",
     "rules/task-restart-recovery.md",
-    "rules/learning-evidence-runtime.md"
+    "rules/learning-evidence-runtime.md",
+    "rules/learning-hints-contract.md"
   ]
 }
