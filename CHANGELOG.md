@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.83 — 2026-10-24
+
 ### Define watcher runtime read contracts (#580)
 
 Declare the host-owned task and registered-group projections, their supported record versions, visibility, context variables and exact effect-proof requirements. Keep legacy task metadata readable without inventing isolated context, and require compatible readers before a writer flip. New watcher activation waits for the installed authority and actual runtime proof.
