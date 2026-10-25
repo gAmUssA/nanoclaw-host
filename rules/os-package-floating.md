@@ -13,7 +13,7 @@ The `apt-get install` package lists in `jbaruch/nanoclaw`'s four container image
 - `container/Dockerfile` (agent) — chromium, fonts-liberation, fonts-noto-color-emoji, libgbm1, libnss3, libatk-bridge2.0-0, libgtk-3-0, libx11-xcb1, libxcomposite1, libxdamage1, libxrandr2, libasound2, libpangocairo-1.0-0, libcups2, libdrm2, libxshmfence1, curl, git, jq, poppler-utils, python3, python3-venv, sqlite3, gh
 - `Dockerfile.orchestrator` — ca-certificates, curl, docker.io, g++, gh, make, python3, sqlite3
 - `container/audible-backup/Dockerfile` (sidecar) — ffmpeg
-- `container/visible-browser/Dockerfile` (persistent browser) — ca-certificates, chromium, curl, fonts-liberation, fonts-noto-color-emoji, novnc, openbox, websockify, x11vnc, xvfb
+- `container/visible-browser/Dockerfile` (persistent browser) — ca-certificates, chromium, curl, fonts-liberation, fonts-noto-color-emoji, novnc, openbox, websockify, x11-utils, x11vnc, xvfb
 
 The authoritative machine-readable copy is `COVERED_IMAGES` in `jbaruch/nanoclaw` `scripts/deploy.sh` step 3b-quater; this list is the human-readable mirror.
 

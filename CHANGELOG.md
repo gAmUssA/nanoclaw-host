@@ -1,5 +1,11 @@
 # Changelog
 
+### Declare the browser recovery notice dependency (#1129)
+
+Add `x11-utils` to the persistent browser's approved OS-package inventory. The watchdog's owner-visible restart notice uses `xmessage`, and native acceptance can inspect its window with `xwininfo`; both binaries are supplied by that Debian package. Declaring the package directly avoids depending on its incidental presence through another desktop package.
+
+Publish this inventory before the consumer adds the package to its Dockerfile, deploy gate and changelog together. Install the published authority before deployment. This provider change alone enables no watchdog, browser restart or network exposure; the full consumer remains in jbaruch/nanoclaw#1129.
+
 ## 0.1.84 — 2026-10-24
 
 ### Document terminal cancellation recovery (#580)
