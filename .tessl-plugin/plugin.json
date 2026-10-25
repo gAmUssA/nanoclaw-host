@@ -16,6 +16,7 @@
   ],
   "rules": [
     "rules/host-conventions.md",
+    "rules/agent-file-permissions.md",
     "rules/repo-chain.md",
     "rules/post-merge-publish-watch.md",
     "rules/tessl-version-floating.md",
