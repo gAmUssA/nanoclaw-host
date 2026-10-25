@@ -1,5 +1,9 @@
 # Changelog
 
+### Agent file permissions
+
+Add an always-applied host rule for agent-owned writes and private modes, including checkpoints, media intake, atomic replacement and recovery. Repeated root-run maintenance left agent state unwritable and private documents world-readable (#82). Require identity verification, bounded descriptor-safe repairs and actual agent access checks. The plugin's current scripts contain no live group-state writers; the NanoClaw runtime checkpoint and media producers are tracked separately for correction and deployment.
+
 ## 0.1.85 — 2026-10-25
 
 ### Declare the browser recovery notice dependency (#1129)
