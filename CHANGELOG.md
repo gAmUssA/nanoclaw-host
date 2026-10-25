@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.85 — 2026-10-25
+
 ### Declare the browser recovery notice dependency (#1129)
 
 Add `x11-utils` to the persistent browser's approved OS-package inventory. The watchdog's owner-visible restart notice uses `xmessage`, and native acceptance can inspect its window with `xwininfo`; both binaries are supplied by that Debian package. Declaring the package directly avoids depending on its incidental presence through another desktop package.
