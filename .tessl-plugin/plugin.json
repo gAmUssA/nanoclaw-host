@@ -1,6 +1,6 @@
 {
   "name": "jbaruch/nanoclaw-host",
-  "version": "0.1.89",
+  "version": "0.1.90",
   "description": "Skills and rules for the NanoClaw host agent (Claude Code on Mac), covering plugin promotion, container management, staging checks, repository safety, and upstream updates.",
   "private": false,
   "skills": [
@@ -12,7 +12,8 @@
     "skills/update-from-upstream",
     "skills/ship-code",
     "skills/add-ugos-project",
-    "skills/learning-evidence-runtime"
+    "skills/learning-evidence-runtime",
+    "skills/host-contracts"
   ],
   "rules": [
     "rules/host-conventions.md",

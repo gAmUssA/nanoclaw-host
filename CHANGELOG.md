@@ -4,6 +4,13 @@
 
 Declare the host-minted per-container bootstrap context independently of persistent SDK sessions. Bind the admin schema-2 update continuation to the version-1 native context and require a different maintenance bootstrap before final installed readback. Missing or unsupported context refuses continuation; identity supplies no approval.
 
+
+## 0.1.90 — 2026-10-26
+
+### Load host procedures when their task applies (coding-policy#642)
+
+Retain the host ownership, credential, main-only browser, private pairing, projection trust and delivery boundaries in compact rule routers. Move the complete operation and exception contracts into the co-shipped host-contracts references, requiring explicit full reads before each affected action and refusing missing installed references. Combined native-session acceptance is tracked in coding-policy#642; no live NanoClaw configuration or role is changed by this extraction.
+
 ## 0.1.89 — 2026-10-26
 
 ### Declare the host-owned flight-assist location snapshot (nanoclaw-travel#349)
