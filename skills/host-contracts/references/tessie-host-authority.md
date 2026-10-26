@@ -10,7 +10,7 @@ credential or grant and performs no provider operation on import or registration
 Native `tessie_request` uses `IpcHandlerContext.sourceGroup`, verified from the IPC
 task directory. Resolve exactly one current registered JID for that folder,
 rechecking after native I/O and before dispatch. Caller chat IDs and role fields
-are never authority. No main-chat bypass exists.
+are never authority. Main IPC calls use the same protected role/VIN checks.
 
 Host owner provisions `DATA_DIR/tessie-authority` at `0700`, owned by effective
 host UID, and empty child `.agent-empty` at `0555`. Existing unsafe directories
@@ -39,7 +39,7 @@ presence in live inventory. Inventory output contains admitted vehicles only.
 
 ## Existing OneCLI gateway
 
-Use the existing normal `main` OneCLI route through `resolveOneCliRoute` and the
+Use the existing owner-authorized normal `main` OneCLI route through `resolveOneCliRoute` and the
 bounded no-redirect JSON helpers. The gateway injects the existing vaulted Tessie
 key for exact `api.tessie.com`; no key value enters host request bodies, agent
 containers, output, logs or chat. Existing OneCLI configuration is sufficient.
