@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-applyTo: "src/state-migrations/**, src/learning-usage-*.ts, src/credential-proxy.ts, src/container-runner.ts, src/volume-mounts.ts, src/index.ts, skills/learning-pass/**, tests/test_learning_usage.py — when writing, publishing or reading host-observed learning usage"
+applyTo: "src/state-migrations/**, src/learning-usage-*.ts, src/credential-proxy.ts, src/container-runner.ts, container/agent-runner/src/native-context-env.ts, src/volume-mounts.ts, src/index.ts, skills/learning-pass/**, skills/learning-apply/**, tests/test_learning_usage.py — when writing, publishing or reading host-observed learning usage"
 ---
 
 # Learning Usage Runtime
@@ -70,6 +70,15 @@ applyTo: "src/state-migrations/**, src/learning-usage-*.ts, src/credential-proxy
 - Refuse refresh on a missing mount, contract, view or column.
 - A refusal supplies no archive candidate.
 - A row, digest or candidate supplies no owner identity, approval or archive authority.
+
+- The host mints a fresh lowercase UUIDv4 `bootstrapId` for each container spawn, overriding caller input.
+- Persistent SDK session ids do not identify a bootstrap.
+- `container/agent-runner/src/native-context-env.ts` exposes this host input as `NANOCLAW_BOOTSTRAP_SCHEMA=1` and `NANOCLAW_BOOTSTRAP_ID`, alongside the host-selected `NANOCLAW_SESSION_NAME`.
+- Schema 1 requires its id as a lowercase UUIDv4; the host-selected session name defaults to `default`.
+- Admin `learning-continuation.py` schema 2 records the pre-update maintenance bootstrap id and resumes only under a different valid maintenance id.
+- A missing, malformed or unsupported bootstrap context refuses continuation.
+- Shared unversioned session files supply no identity.
+- Bootstrap identity supplies no owner approval or permission for a side effect.
 
 ## Rollout
 
