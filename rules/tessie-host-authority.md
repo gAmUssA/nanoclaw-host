@@ -1,13 +1,13 @@
 ---
 alwaysApply: false
-applyTo: "src/host-plugins/tessie/**, src/volume-mounts.ts, skills/tessie-*/**, tests/test_native.py, docs/tessie-host-authority.md — when implementing or using native Tessie vehicle authorization, routing, receipts or location projection"
+applyTo: "src/host-plugins/tessie/**, src/volume-mounts.ts, skills/tessie-*/**, tests/test_native.py, docs/tessie-host-authority.md — when implementing or using native Tessie vehicle authorization, routing, receipts, location projection or private mount/mask handling"
 ---
 
 # Tessie Host Authority
 
 ## Required Read
 
-- Before producing or consuming native Tessie requests, changing protected vehicle policy or gateway routing, or claiming installed readiness, read `skills/host-contracts/references/tessie-host-authority.md` in full.
+- Before producing or consuming native Tessie requests, changing protected vehicle policy, gateway routing or private mounts/masks, relying on the empty-disabled opaque mount exception, or claiming installed readiness, read `skills/host-contracts/references/tessie-host-authority.md` in full.
 - Resolve the reference within this installed plugin.
 - Its full text and named sections bind as rule content.
 - Missing or unreadable content stops the affected action.
@@ -24,6 +24,9 @@ applyTo: "src/host-plugins/tessie/**, src/volume-mounts.ts, skills/tessie-*/**, 
 - Never fall back to direct HTTP or provision a new credential through a consumer.
 
 ## Enablement and Receipts
+
+- Always mask known project/private aliases, including disabled or never-provisioned storage.
+- Refuse direct private mounts and physical symlink routes that bypass a known mask.
 
 - Keep the default-disabled producer inactive until protected policy, existing gateway and installed authority are ready.
 - Merge the actual producer before publishing consumers.
