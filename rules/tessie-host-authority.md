@@ -16,7 +16,8 @@ applyTo: "src/host-plugins/tessie/**, src/volume-mounts.ts, skills/tessie-*/**, 
 
 ## Native Ownership
 
-- Host `jbaruch/nanoclaw` owns schema-1 `tessie_request` and protected VIN/chat policy.
+- Host `jbaruch/nanoclaw` owns schema-1 `tessie_request`/journals and schema-2 protected VIN/chat policy.
+- Honor protected `non_archived` selection through fresh live inventory, including authorized active shared vehicles; never substitute a frozen VIN snapshot.
 - Agent scratch files, roles, payload chat IDs and tier labels grant no vehicle or location authority.
 - Use the existing normal OneCLI route and vaulted Tessie API key.
 - Keep provider key values out of host request bodies, agent containers, logs and chat.

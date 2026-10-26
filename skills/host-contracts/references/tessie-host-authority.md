@@ -1,4 +1,4 @@
-# Tessie host authority, schema 1
+# Tessie host authority: policy 2, wire and journal 1
 
 Producer: `jbaruch/nanoclaw` `src/host-plugins/tessie/`. Consumer:
 `jbaruch/nanoclaw-tesla` deterministic scripts. Default disabled
@@ -24,18 +24,45 @@ metadata before/after reading. Linux leaf access stays beneath `/proc/self/fd`.
 The same held directory anchors private command journals. No agent write API or
 agent scratch fallback exists.
 
-Policy has exactly `schema_version: 1`, arrays
-`owner_chats`, `control_chats`, `read_chats`, `vehicles`, nullable
-`default_vehicle`, nullable integer `low_battery_percent` (1–100). Vehicles have
-exactly `vin`, normalized nonempty `alias`, and boolean `shared`. VINs/aliases are
-unique. Default alias must be listed. Empty roles/vehicles authorize nobody.
-Host owner supplies actual existing IDs only during separately authorized setup.
+Protected `policy.json` has exactly `schema_version: 2`, `vehicle_selection`,
+arrays `owner_chats`, `control_chats`, `read_chats`, `vehicles`, nullable
+`default_vehicle`, and nullable integer `low_battery_percent` (1–100).
+`vehicle_selection` is `explicit` or `non_archived`. Empty roles authorize nobody.
+The host owner supplies actual existing chat identities during separately
+owned setup. Agent scratch data never updates this policy.
 
-Live inventory must contain the selected listed VIN exactly once. Non-shared
-entries additionally require native `last_state.access_type === 'OWNER'` and
-`is_active === true`. The broker normalizes the nested access field for its
-client inventory projection. Explicit protected `shared: true` still requires
-presence in live inventory. Inventory output contains admitted vehicles only.
+In `explicit` mode, vehicles have exactly `vin`, normalized nonempty `alias`, and
+boolean `shared`. VINs/aliases are unique; the default alias must be listed or
+null. Live inventory must contain a selected listed VIN exactly once. Non-shared
+entries require native `last_state.access_type === 'OWNER'` and
+`is_active === true`. Protected `shared: true` explicitly permits that listed
+vehicle's live account access.
+
+In `non_archived` mode, protected `vehicles` must be empty and `default_vehicle`
+null. This is the owner's explicit dynamic opt-in for every non-archived vehicle
+in this Tessie account, including current or future shared vehicles. Each policy
+projection, discovery, read or new control obtains fresh bounded `/vehicles`
+inventory. Admit only unique valid VINs with actual `is_active === true` and
+recognized native access `OWNER` or `DRIVER`; missing/null/unknown metadata never
+grants access. Derived `shared` is false for OWNER and true for DRIVER. Newly
+active/unarchived vehicles join without a policy edit; archived vehicles leave
+before another provider operation. There is no snapshot writer, mirror or daemon.
+
+Derive aliases from normalized nonempty native `last_state.display_name`, using
+stable `Vehicle <VIN>` when absent. Duplicate names receive a VIN suffix that
+fully disambiguates them; any remaining ambiguity refuses dispatch. Aliases are
+presentation and confirmation inputs, never vehicle identity. A rename requires
+the new exact `<alias>:<action>` confirmation; it cannot silently retarget a VIN.
+Only admitted vehicles enter the schema-1 own-role client policy and inventory
+projections. Normalize native nested access for that deterministic reader.
+
+The runtime reads protected policy version 2 only. An unsupported policy version
+refuses with actionable `policy_version`; it is never silently accepted, migrated,
+rewritten or treated as an empty/open policy. The host owner preserves the prior
+file and provisions the reviewed version while the feature is disabled. Policy
+version 1 was declared before the producer was enabled; no live writer cutover
+or automatic migration is part of this source delivery. Deploy/install this
+reader and authority before provisioning version 2 or enabling the consumer.
 
 ## Existing OneCLI gateway
 
@@ -76,7 +103,9 @@ never enter this projection. Native atomic `writeScriptResult` publishes replies
 A fixed per-broker queue serializes authorizations and requests; pending work is
 bounded to 32. Before a control POST, exclusively create and fsync a private
 `command-<digest>.json` intent, then fsync its directory. Bind request ID to source
-JID and complete normalized request. No POST occurs before intent durability.
+JID and complete normalized request (fixed field order and sorted query/body keys).
+After durable intent I/O, recheck current registered identity and protected policy
+immediately before POST. No POST occurs before intent durability.
 
 The broker-owned `DATA_DIR/tessie-authority/command-<digest>.json` journals use
 the Stateful Artifacts **Gate Store carve-out**: an existing uncertain intent
@@ -99,8 +128,12 @@ completed records with all fields validated can be returned. Unsupported,
 partial, malformed, mismatched or uncertain state is preserved and refused;
 there is no implicit migration, guessed default, rewrite or fresh POST.
 
-Completed identical native retries return their original receipt without a second
-POST. Different bindings, torn journals, timeouts and unknown outcomes never
+Completed identical native retries return their original receipt after current
+policy/role and normalized request binding checks, before gateway/inventory I/O.
+This is historical readback, including when a dynamic vehicle was later archived
+or renamed; it never performs a new effect or admits a new intent. New controls
+always require fresh live admission and current alias confirmation. No second
+POST is sent. Different bindings, torn journals, timeouts and unknown outcomes never
 replay automatically, including after restart. Keep private intent history until
 the owner resolves uncertainty; no implicit pruning or manual erasure recovery.
 Tessie `result: true` means acceptance only. The consumer requires matching state
