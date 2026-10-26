@@ -4,8 +4,8 @@ description: >
   Resolve required NanoClaw host contracts, load operation constraints and identify
   exception checks before host work. Use for "deploy NanoClaw", "publish a plugin",
   "update image packages", "extract an overlay", "restore browser login", "relink
-  WhatsApp", "recover a task" or "enable learning evidence" when a nanoclaw-host
-  rule requires its full procedure. This skill reads the applicable policy;
+  WhatsApp", "recover a task", "check memory budgets" or "enable learning evidence"
+  when a nanoclaw-host rule requires its full procedure. This skill reads the applicable policy;
   it does not deploy, operate services or grant approval.
 user-invocable: false
 ---
