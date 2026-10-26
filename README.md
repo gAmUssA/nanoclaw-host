@@ -16,6 +16,7 @@ tessl install jbaruch/nanoclaw-host
 |------|---------|
 | [agent-container-filter](rules/agent-container-filter.md) | Line-oriented contract for the root repository's agent-container filter and deploy consumers, including infrastructure exclusions and regression coverage. |
 | [agent-file-permissions](rules/agent-file-permissions.md) | Agent identity, private modes, descriptor-safe privileged repairs, atomic replacement, recovery archives and verification as the agent. |
+| [whatsapp-channel-control](rules/whatsapp-channel-control.md) | Fixed-account owner-only channel relinking, private codes, saved-registration confirmation and the bounded live-phone testing authority. |
 | [browser-profile-storage](rules/browser-profile-storage.md) | Persistent website sessions and browser password autofill for approved autonomous access, with encrypted storage, private main-tier control, checkpoint recovery, approved CAPTCHA solving and operator MFA. |
 | [boyscout-host](rules/boyscout-host.md) | Host agent owns the full stack (source, plugin repos, scripts, deploy, NAS, containers) — fix any problem you find, except owner's-domain content (SOUL.md, personal skills, group memory). |
 | [cross-tier-skill-state](rules/cross-tier-skill-state.md) | Cross-trust-tier skills must persist state under `/workspace/state/<skill-name>/` (RW in every container). Tier-pinned skills may use `/workspace/group/`. |
