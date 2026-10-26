@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.89 — 2026-10-26
+
 ### Declare the host-owned flight-assist location snapshot (nanoclaw-travel#349)
 
 Name the existing NanoClaw producer, per-group state path and schema-1 fields as host authority. Bind travel readers to read-only validation and caller freshness, including rejection of future captures and no presence conclusion from a missing fix. This supplies the installed provider contract required before travel can use the snapshot to suppress an airport departure notice.
