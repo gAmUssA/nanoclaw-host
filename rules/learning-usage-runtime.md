@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-applyTo: "src/state-migrations/**, src/learning-usage-*.ts, src/credential-proxy.ts, src/container-runner.ts, src/volume-mounts.ts, src/index.ts, skills/learning-pass/**, tests/test_learning_usage.py — when writing, publishing or reading host-observed learning usage"
+applyTo: "src/state-migrations/**, src/learning-usage-*.ts, src/credential-proxy.ts, src/container-runner.ts, container/agent-runner/src/native-context-env.ts, src/volume-mounts.ts, src/index.ts, skills/learning-pass/**, skills/learning-apply/**, tests/test_learning_usage.py — when writing, publishing or reading host-observed learning usage"
 ---
 
 # Learning Usage Runtime
@@ -19,3 +19,5 @@ applyTo: "src/state-migrations/**, src/learning-usage-*.ts, src/credential-proxy
 - Keep capture outside agent databases and mounts; mask its aliases even when capture fails and refuse startup without a verified empty mask.
 - Only main receives the kernel read-only usage companion and separate admitted-target registry view.
 - Missing coverage means unknown; a row, digest or archive candidate supplies no owner identity, approval or archive authority.
+
+- Learning update continuations require the host-minted version-1 bootstrap context and a different valid maintenance bootstrap after the update.

@@ -66,6 +66,15 @@
 - A refusal supplies no archive candidate.
 - A row, digest or candidate supplies no owner identity, approval or archive authority.
 
+- The host mints a fresh lowercase UUIDv4 `bootstrapId` for each container spawn, overriding caller input.
+- Persistent SDK session ids do not identify a bootstrap.
+- `container/agent-runner/src/native-context-env.ts` exposes this host input as `NANOCLAW_BOOTSTRAP_SCHEMA=1` and `NANOCLAW_BOOTSTRAP_ID`, alongside the host-selected `NANOCLAW_SESSION_NAME`.
+- Schema 1 requires its id as a lowercase UUIDv4; the host-selected session name defaults to `default`.
+- Admin `learning-continuation.py` schema 2 records the pre-update maintenance bootstrap id and resumes only under a different valid maintenance id.
+- A missing, malformed or unsupported bootstrap context refuses continuation.
+- Shared unversioned session files supply no identity.
+- Bootstrap identity supplies no owner approval or permission for a side effect.
+
 ## Rollout
 
 - Deploy host capture first; coverage accrues before any consumer exists.
