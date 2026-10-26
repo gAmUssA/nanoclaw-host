@@ -45,6 +45,7 @@
     "rules/learning-hints-contract.md",
     "rules/whatsapp-channel-control.md",
     "rules/learning-usage-runtime.md",
-    "rules/flight-assist-location.md"
+    "rules/flight-assist-location.md",
+    "rules/memory-budget-policy.md"
   ]
 }

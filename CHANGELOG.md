@@ -1,5 +1,9 @@
 # Changelog
 
+### Declare the canonical memory-budget provider (nanoclaw#1142, nanoclaw-admin#639)
+
+Define the fixed immutable image analyzer and its versioned metadata output for admin memory readers. Bind the one host/image policy and parser, unknown-budget refusal, dual-version maintenance results and reader-before-writer rollout. Lookup and counts grant no live memory-write authority; native image verification remains required.
+
 ## 0.1.93 — 2026-10-26
 
 ### Route learning delivery from owner replies to maintenance (nanoclaw-admin#570)
