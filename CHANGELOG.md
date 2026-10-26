@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.93 — 2026-10-26
+
 ### Route learning delivery from owner replies to maintenance (nanoclaw-admin#570)
 
 Separate the actual caller bootstrap from the continuation target. Owner replies arrive in default, while the scheduled wake resumes in maintenance; requiring the caller to already be maintenance refused every direct approval. The admin-owned schema-2 gate binds the caller UUID and exact existing promotion, then a different maintenance bootstrap performs installed readback without a new approval.
