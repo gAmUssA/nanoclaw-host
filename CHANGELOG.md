@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.92 — 2026-10-26
+
 ### Preserve the installed floating-image authority (coding-policy#642)
 
 Keep the approved snitchmd image policy at its original startup rule path with its original bytes. The 0.1.90 package landed, but its relocated reference failed install moderation. Retain the existing authority while the remaining host contracts stay on demand; no dependency, runtime or security requirement changes.
