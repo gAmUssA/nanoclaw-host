@@ -78,6 +78,15 @@ bounded to 32. Before a control POST, exclusively create and fsync a private
 `command-<digest>.json` intent, then fsync its directory. Bind request ID to source
 JID and complete normalized request. No POST occurs before intent durability.
 
+The broker-owned `DATA_DIR/tessie-authority/command-<digest>.json` journals use
+the Stateful Artifacts **Gate Store carve-out**: an existing uncertain intent
+refuses a POST, while absence permits admitting a new intent. A reader meeting
+an unsupported journal version refuses with the safe actionable `journal_version`
+diagnostic: update the host reader for the retained schema, preserve the intent,
+inspect cached vehicle state, and never delete the journal or replay the prior
+command to recover. Only version 1 is currently accepted. If the owner later
+accepts an older version, it must migrate and rewrite that older record on read.
+
 The host owns journal schema 1. An intent has exactly integer `schema_version: 1`,
 `binding` (lowercase SHA-256 of the source JID and complete normalized request),
 and `outcome: 'uncertain'`. A completed record has exactly `schema_version: 1`,
