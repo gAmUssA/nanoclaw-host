@@ -24,7 +24,7 @@ metadata before/after reading. Linux leaf access stays beneath `/proc/self/fd`.
 The same held directory anchors private command journals. No agent write API or
 agent scratch fallback exists.
 
-Policy has exactly `schema_version: 1`, native `credential_id`, arrays
+Policy has exactly `schema_version: 1`, arrays
 `owner_chats`, `control_chats`, `read_chats`, `vehicles`, nullable
 `default_vehicle`, nullable integer `low_battery_percent` (1–100). Vehicles have
 exactly `vin`, normalized nonempty `alias`, and boolean `shared`. VINs/aliases are
@@ -37,34 +37,14 @@ entries additionally require native `last_state.access_type === 'OWNER'` and
 client inventory projection. Explicit protected `shared: true` still requires
 presence in live inventory. Inventory output contains admitted vehicles only.
 
-## Native OneCLI contract
+## Existing OneCLI gateway
 
-Pinned implementation evidence: OneCLI 2.14 source routes `app.ts`,
-`routes/org-policy.ts`, `routes/policy.ts`, `routes/policy-reflect.ts`,
-`services/policy-service.ts`, native gateway `policy-engine/src/evaluate.rs`.
-Workspace policy CRUD was removed; do not invent a working `/v1/policy/rules`.
-
-Before each provider operation, read `/v1/agents`,
-`/v1/org/policy/rules?status=published`, and
-`/v1/agents/<dedicated-id>/effective-credentials` using private host bootstrap
-authentication. Require exactly one actor named `nanoclaw-host-tessie`.
-Require current complete org published DTOs, a single generation and unique
-lowercase UUID IDs, ordered by priority then native UUID byte order.
-
-Require an enabled unconditional exact `api.tessie.com` network block for empty
-identity list, unrestricted methods/paths, without approval/rate modifiers.
-Every earlier enabled allow must name only the dedicated host agent. Require a
-preceding unconditional exact-secret host-only grant. Require effective host
-reflection with only the configured usable Tessie secret, exact host, and no
-connections. A representative GET `/` status is not whole-domain denial proof.
-Org blocks apply without injections; workspace grants cannot widen them. This
-fences all current and future ordinary agent actors, not a finite tier sample.
-
-Missing metadata, unsupported DTOs, absent grant/fence, private store failure or
-unknown registered scope fails closed. Provider route is one-use and uses the
-existing `getOneCliOutboundConfigForAgent` plus bounded no-redirect OneCLI HTTP
-helpers. No direct network fallback, credential forwarding to an agent, dynamic
-provider host, arbitrary Fleet path, browser or Tessie MCP path exists.
+Use the existing normal `main` OneCLI route through `resolveOneCliRoute` and the
+bounded no-redirect JSON helpers. The gateway injects the existing vaulted Tessie
+key for exact `api.tessie.com`; no key value enters host request bodies, agent
+containers, output, logs or chat. Existing OneCLI configuration is sufficient.
+Missing gateway configuration refuses the request without direct HTTP fallback. The host's protected VIN/chat
+checks apply before its provider requests.
 
 ## Wire schema
 
@@ -122,7 +102,7 @@ receipt as unconfirmed. No automatic resend follows uncertainty.
 
 Publish/install the matching `nanoclaw-host` authority before enabling consumers.
 Merge this producer before publishing a reader. Keep broker disabled until native
-identity/policy/fence are provisioned by the host owner. Deploy producer/consumer
+VIN/chat policy is provisioned by the host owner. Deploy producer/consumer
 through canonical host workflow, then separately verify installed bytes, real
 role denial, cached sleeping-car reads, and one explicitly authorized reversible
 control on a selected awake vehicle with post-dispatch readback. Verify actual

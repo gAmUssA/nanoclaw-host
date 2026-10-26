@@ -2,7 +2,7 @@
 
 ### Declare native Tessie vehicle authority (nanoclaw-tesla#1)
 
-Publish the host-owned schema-1 request/policy/receipt contract before enabling Tesla consumers. Require protected VIN/chat roles, current registered IPC identity, actual native OneCLI org-policy isolation for every ordinary agent actor, fixed provider routes and host-side non-owner data projection. Private policy/journals remain hidden even while the broker is disabled. Durable intents prevent unknown-outcome replay, and actual dispatch timestamps distinguish acceptance from confirmed state. Producer merge and owner-provisioned installed/live acceptance remain separate readiness gates; this authority grants no vehicle or vault operation.
+Publish the host-owned schema-1 request/policy/receipt contract before enabling Tesla consumers. Require protected VIN/chat roles, current registered IPC identity, existing OneCLI gateway injection of the vaulted Tessie key, fixed provider routes and host-side non-owner data projection. Private policy/journals remain hidden even while the broker is disabled. Durable intents prevent unknown-outcome replay, and actual dispatch timestamps distinguish acceptance from confirmed state. Producer merge and owner-provisioned installed/live acceptance remain separate readiness gates; this authority grants no vehicle or vault operation.
 
 ## 0.1.94 — 2026-10-26
 

@@ -7,7 +7,7 @@ applyTo: "src/host-plugins/tessie/**, src/volume-mounts.ts, skills/tessie-*/**, 
 
 ## Required Read
 
-- Before producing or consuming native Tessie requests, changing protected vehicle policy or native isolation, or claiming installed readiness, read `skills/host-contracts/references/tessie-host-authority.md` in full.
+- Before producing or consuming native Tessie requests, changing protected vehicle policy or gateway routing, or claiming installed readiness, read `skills/host-contracts/references/tessie-host-authority.md` in full.
 - Resolve the reference within this installed plugin.
 - Its full text and named sections bind as rule content.
 - Missing or unreadable content stops the affected action.
@@ -18,13 +18,13 @@ applyTo: "src/host-plugins/tessie/**, src/volume-mounts.ts, skills/tessie-*/**, 
 
 - Host `jbaruch/nanoclaw` owns schema-1 `tessie_request` and protected VIN/chat policy.
 - Agent scratch files, roles, payload chat IDs and tier labels grant no vehicle or location authority.
-- Require a dedicated host actor plus actual published org-wide OneCLI Tessie isolation.
-- Never substitute a representative credential status or a finite tier sample for domain denial.
+- Use the existing normal OneCLI route and vaulted Tessie API key.
+- Keep provider key values out of host request bodies, agent containers, logs and chat.
 - Never fall back to direct HTTP or provision a new credential through a consumer.
 
 ## Enablement and Receipts
 
-- Keep the default-disabled producer inactive until protected policy, native fence and installed authority are ready.
+- Keep the default-disabled producer inactive until protected policy, existing gateway and installed authority are ready.
 - Merge the actual producer before publishing consumers.
 - Require fresh registered scope and live admitted VIN before provider dispatch.
 - Preserve accepted controls when confirmation fails.
