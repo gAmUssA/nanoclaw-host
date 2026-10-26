@@ -64,6 +64,30 @@ version 1 was declared before the producer was enabled; no live writer cutover
 or automatic migration is part of this source delivery. Deploy/install this
 reader and authority before provisioning version 2 or enabling the consumer.
 
+## Empty-disabled opaque mount exception
+
+Known project views and resolvable project/private aliases always receive the
+empty private-directory mask, even while Tessie is disabled or never provisioned.
+Host spawn bootstrap may create only never-provisioned empty `0700` storage and
+its owned, empty `0555` mask through held no-follow directories. Existing unsafe
+storage refuses startup; bootstrap writes no policy or command authority.
+
+A narrow exception preserves existing owner-approved host mounts whose paths are
+opaque inside a Docker-out-of-Docker orchestrator. Preconditions (all required):
+
+1. Tessie is disabled and the held private store contains only `.agent-empty`.
+2. The mount passed the existing host-owner mount allowlist.
+3. No other host authority requires resolving that mount; its stronger guard wins.
+4. The host owner quiesces agent admission, retires every pre-provision agent
+   including opaque-mount agents, and provisions policy/enables the authority
+   before resuming admission. Existing containers cannot acquire masks later.
+
+When Tessie is enabled or any private content is retained, refuse unresolvable
+mounts with an actionable host-resolvable-path diagnostic. Later disablement does
+not reopen mounts over retained policy, journals or unknown private entries.
+Direct private mounts and canonical/physical symlink routes that bypass a known
+mask remain refused. This exception grants no vehicle operation or policy writer.
+
 ## Existing OneCLI gateway
 
 Use the existing owner-authorized normal `main` OneCLI route through `resolveOneCliRoute` and the

@@ -1,5 +1,9 @@
 # Changelog
 
+### Preserve empty-disabled Tessie mount compatibility (nanoclaw-tesla#1)
+
+Name the bounded opaque-mount exception: known project/private aliases stay masked, while never-provisioned disabled Tessie preserves owner-approved opaque host mounts under a mandatory quiesced retirement/provision/enablement procedure. Enabled or retained authority refuses unresolved paths even after later disablement. Empty mask bootstrap grants no vehicle or policy-write authority.
+
 ## 0.1.96 — 2026-10-26
 
 ### Honor dynamic non-archived Tessie vehicle selection (nanoclaw-tesla#1)

@@ -28,6 +28,7 @@ applyTo: "src/host-plugins/tessie/**, src/volume-mounts.ts, skills/tessie-*/**, 
 - Keep the default-disabled producer inactive until protected policy, existing gateway and installed authority are ready.
 - Merge the actual producer before publishing consumers.
 - Require fresh registered scope and live admitted VIN before provider dispatch.
+- Apply the named empty-disabled opaque mount exception only with its full quiescence, retirement and retained-state preconditions.
 - Preserve accepted controls when confirmation fails.
 - Unknown outcomes never permit automatic replay.
 - Require post-dispatch state evidence before reporting confirmation.
