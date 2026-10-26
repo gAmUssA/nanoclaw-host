@@ -51,6 +51,11 @@ applyTo: "src/state-migrations/**, src/learning-usage-*.ts, src/credential-proxy
 
 ## Readers and Boundary
 
+- Mount the host-installed registry kernel read-only at `/workspace/learning-installed` for main only.
+- Keep this all-target content view separate from tier-selected prompts and skills.
+- `jbaruch/nanoclaw-admin` `skills/learning-pass/scripts/learning-delivery.py` verifies every admitted target through that view.
+- A missing provider or changed installed content refuses delivery finalization.
+
 - `jbaruch/nanoclaw-admin` `skills/learning-pass/scripts/learning-usage.py` accepts projection version 1 read-only and never migrates.
 - Require a kernel read-only root and database, the exact contract and columns, and one row per proposal.
 - Refuse refresh on a missing mount, contract, view or column.

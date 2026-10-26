@@ -2,7 +2,7 @@
 
 ### Declare private learning usage capture and projection (nanoclaw-admin#570)
 
-Define the host-owned private-store migration and `learning_usage_v1` reader contract. Require a main-only kernel read-only companion, installed producer/reader authority, fail-closed masking even when capture cannot start, and conservative forward-only coverage. Usage rows supply archive hints only; each archive still requires a fresh owner decision and reviewed publication.
+Define the host-owned private-store migration and `learning_usage_v1` reader contract. Require a main-only kernel read-only companion, installed producer/reader authority, fail-closed masking even when capture cannot start, and conservative forward-only coverage. Provide a separate main-only read-only registry view for all admitted targets without loading overlay or untrusted prompts. Usage rows supply archive hints only; each archive still requires a fresh owner decision and reviewed publication.
 
 ## 0.1.87 — 2026-10-26
 
