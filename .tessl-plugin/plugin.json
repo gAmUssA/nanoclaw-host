@@ -41,6 +41,7 @@
     "rules/group-ipc-snapshots.md",
     "rules/task-restart-recovery.md",
     "rules/learning-evidence-runtime.md",
-    "rules/learning-hints-contract.md"
+    "rules/learning-hints-contract.md",
+    "rules/whatsapp-channel-control.md"
   ]
 }

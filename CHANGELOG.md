@@ -1,5 +1,9 @@
 # Changelog
 
+### Establish WhatsApp relink acceptance authority (nanoclaw#1146)
+
+Define the host-owned fixed-account relink and private code-delivery contract. Limit the Platform-Bound Untestable Carve-Out to native WhatsApp pairing transport and owner phone approval, retain deterministic CI coverage for the surrounding controls, and require installed continuity and saved-registration acceptance before reporting live completion.
+
 ## 0.1.86 — 2026-10-25
 
 ### Agent file permissions
