@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.96 — 2026-10-26
+
 ### Honor dynamic non-archived Tessie vehicle selection (nanoclaw-tesla#1)
 
 Declare protected policy version 2 with explicit or dynamic `non_archived` selection. Fresh inventory admits current and future active OWNER/DRIVER vehicles, derives safe aliases and shared flags, and refuses unknown metadata or ambiguous identities. Archive and rename changes take effect before new operations; completed receipt readback remains available without provider I/O. Unsupported policy versions refuse actionably without implicit migration. Wire and command-journal schemas remain version 1; installation, owner provisioning and live control acceptance remain separate gates.
