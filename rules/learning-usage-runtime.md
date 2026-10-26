@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-applyTo: "src/state-migrations/**, src/learning-usage-*.ts, src/credential-proxy.ts, src/container-runner.ts, src/index.ts, skills/learning-pass/**, tests/test_learning_usage.py — when writing, publishing or reading host-observed learning usage"
+applyTo: "src/state-migrations/**, src/learning-usage-*.ts, src/credential-proxy.ts, src/container-runner.ts, src/volume-mounts.ts, src/index.ts, skills/learning-pass/**, tests/test_learning_usage.py — when writing, publishing or reading host-observed learning usage"
 ---
 
 # Learning Usage Runtime
@@ -28,16 +28,24 @@ applyTo: "src/state-migrations/**, src/learning-usage-*.ts, src/credential-proxy
 
 ## Record Fields
 
+- Every column is required with no default.
+- Only `last_used_at` accepts NULL.
+
 | Field | Required/null/default guarantees and meaning |
 | --- | --- |
 | `schema_version` | Always integer 1 |
 | `proposal_id` | Positive integer ledger proposal id; one row per id |
-| `tile` | Proposal tile from the host-bound first-seen identity |
-| `lesson_key` | Proposal lesson key from the host-bound first-seen identity |
+| `tile` | Required nonempty TEXT matching `^nanoclaw(?:-[a-z0-9-]+)?$`, from the host-bound first-seen identity |
+| `lesson_key` | Required TEXT of 1–120 UTF-16 code units from the host-bound first-seen proposal identity |
 | `observed_from` | Latest of coverage start, ledger `merged_at` and entry-point stability start |
 | `observed_through` | Projection build time; UTC ISO with milliseconds and `Z` like every time field |
 | `last_used_at` | Latest observed use inside the window; NULL means none observed |
-| `source_sha256` | SHA-256 of `{schema_version: 1, tile, entry_points: [{path, sha256}]}` over installed entry points |
+| `source_sha256` | Required 64-character lowercase hexadecimal SHA-256 of the canonical installed-entry-point representation below |
+
+- Hash UTF-8 bytes of ECMAScript `JSON.stringify` with no whitespace and property insertion order `schema_version`, `tile`, `entry_points`.
+- Set `schema_version` to 1 and `tile` to the row’s tile.
+- Sort `entry_points` lexicographically by complete `<tile>/skills/<name>/SKILL.md` path.
+- Each entry has property order `path`, `sha256`; `sha256` is the 64-character lowercase hexadecimal SHA-256 of that installed file’s bytes.
 
 ## Coverage and Eligibility
 
@@ -46,7 +54,8 @@ applyTo: "src/state-migrations/**, src/learning-usage-*.ts, src/credential-proxy
 - A run continues prior coverage only after a clean stop bound to the graceful-shutdown marker its startup consumed.
 - Rows exist only for merged edits whose every installed surface is a still-installed `skills/<name>/SKILL.md`.
 - Rules, scripts and other skill files supply no row.
-- A changed entry-point digest restarts that window; a changed proposal identity withholds its row.
+- A changed entry-point digest restarts that window.
+- A changed proposal identity withholds its row.
 - Capture is forward-only; a missing row means unknown, never unused.
 
 ## Readers and Boundary
