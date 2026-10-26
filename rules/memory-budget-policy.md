@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-applyTo: "src/memory-budget*, src/memory-diet*, container/shared/memory-budget-*, container/agent-runner/src/memory-diet-tools*, tests/fixtures/memory-diet-unicode.json, skills/memory-diet/**, skills/memory-hygiene/**, tests/test_memory_*.py — when analyzing canonical memory budgets or operating memory-diet plans, results or journals"
+applyTo: "src/memory-budget*, src/memory-diet*, container/shared/memory-budget-*, container/agent-runner/src/memory-diet-tools*, tests/fixtures/memory-diet-*.json, docs/MEMORY-MAINTENANCE.md, skills/memory-diet/**, skills/memory-hygiene/**, tests/test_memory_*.py — when analyzing canonical memory budgets or operating memory-diet plans, results or journals"
 ---
 
 # Memory Budget Policy
@@ -14,7 +14,14 @@ applyTo: "src/memory-budget*, src/memory-diet*, container/shared/memory-budget-*
 - Read explicitly when triggered.
 - Never `@`-import the reference.
 
-## Boundary
+## Ownership and Authorization
+
+- Only the host owns memory extraction and private-journal migration.
+- Admin readers never rewrite private journals.
+- Execute a live memory diet only on an explicit main-group request.
+- Metadata and lookup grant no memory-write authority.
+
+## Provider and Rollout
 
 - Only the host/image owns the canonical policy and parser.
 - Consumers use the fixed immutable image target.
@@ -22,4 +29,3 @@ applyTo: "src/memory-budget*, src/memory-diet*, container/shared/memory-budget-*
 - Never substitute a separate exemption list or parser.
 - Keep active-rule sections live and report their growth without turning exemptions into alarms or extraction targets.
 - Install dual-version readers before enabling the new host writer.
-- Metadata and lookup grant no memory-write authority.
