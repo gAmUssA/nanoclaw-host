@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.90 — 2026-10-26
+
 ### Load host procedures when their task applies (coding-policy#642)
 
 Retain the host ownership, credential, main-only browser, private pairing, projection trust and delivery boundaries in compact rule routers. Move the complete operation and exception contracts into the co-shipped host-contracts references, requiring explicit full reads before each affected action and refusing missing installed references. Combined native-session acceptance is tracked in coding-policy#642; no live NanoClaw configuration or role is changed by this extraction.
