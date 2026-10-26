@@ -11,7 +11,8 @@ applyTo: "src/host-plugins/tessie/**, src/volume-mounts.ts, skills/tessie-*/**, 
 - Resolve the reference within this installed plugin.
 - Its full text and named sections bind as rule content.
 - Missing or unreadable content stops the affected action.
-- Read explicitly when triggered; never `@`-import the reference.
+- Read explicitly when triggered.
+- Never `@`-import the reference.
 
 ## Native Ownership
 
@@ -26,6 +27,7 @@ applyTo: "src/host-plugins/tessie/**, src/volume-mounts.ts, skills/tessie-*/**, 
 - Keep the default-disabled producer inactive until protected policy, native fence and installed authority are ready.
 - Merge the actual producer before publishing consumers.
 - Require fresh registered scope and live admitted VIN before provider dispatch.
-- Preserve accepted controls when confirmation fails; unknown outcomes never permit automatic replay.
+- Preserve accepted controls when confirmation fails.
+- Unknown outcomes never permit automatic replay.
 - Require post-dispatch state evidence before reporting confirmation.
 - Keep runtime vehicle acceptance separate from source tests and publication.

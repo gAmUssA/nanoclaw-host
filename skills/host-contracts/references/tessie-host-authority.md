@@ -98,6 +98,18 @@ bounded to 32. Before a control POST, exclusively create and fsync a private
 `command-<digest>.json` intent, then fsync its directory. Bind request ID to source
 JID and complete normalized request. No POST occurs before intent durability.
 
+The host owns journal schema 1. An intent has exactly integer `schema_version: 1`,
+`binding` (lowercase SHA-256 of the source JID and complete normalized request),
+and `outcome: 'uncertain'`. A completed record has exactly `schema_version: 1`,
+the same `binding`, `outcome: 'complete'`, and `reply`. Its reply has exactly
+`schema_version: 1`, integer HTTP `status` (100–599), `data`, and finite
+nonnegative `dispatched_at_epoch`. A 2xx receipt's data has exactly boolean
+`result`; every non-2xx receipt's data is null. The filename hashes source JID
+and native request ID, independently of the request binding. Only version 1
+completed records with all fields validated can be returned. Unsupported,
+partial, malformed, mismatched or uncertain state is preserved and refused;
+there is no implicit migration, guessed default, rewrite or fresh POST.
+
 Completed identical native retries return their original receipt without a second
 POST. Different bindings, torn journals, timeouts and unknown outcomes never
 replay automatically, including after restart. Keep private intent history until
