@@ -1,5 +1,12 @@
 # Changelog
 
+### Declare construction journal authority (nanoclaw#1039)
+
+Define exact native owner cards, private database 4, permanent attempt records 1,
+backup artifact 3, dedicated OneCLI Sheets grants, positive append confirmation
+and recovery without replay. Require matching installed producer/provider and
+real owner/native acceptance before reporting delivery.
+
 ### Cover the construction consumer manifest (nanoclaw#1039)
 
 Name `nanoclaw-construction` in the plugin-repository set for managed `jbaruch/*` dependencies. Retain the coding-policy SessionStart check and third-party pinning requirements. This adds one consumer path; no credential, image, or runtime authority changes.

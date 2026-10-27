@@ -14,6 +14,7 @@ tessl install jbaruch/nanoclaw-host
 
 | Rule | Summary |
 |------|---------|
+| [construction-journal-authority](rules/construction-journal-authority.md) | Exact owner-bound payment cards, protected append gates, dedicated native Sheets routing and monotone backup/recovery. |
 | [agent-container-filter](rules/agent-container-filter.md) | Line-oriented contract for the root repository's agent-container filter and deploy consumers, including infrastructure exclusions and regression coverage. |
 | [agent-file-permissions](rules/agent-file-permissions.md) | Agent identity, private modes, descriptor-safe privileged repairs, atomic replacement, recovery archives and verification as the agent. |
 | [whatsapp-channel-control](rules/whatsapp-channel-control.md) | Fixed-account owner-only channel relinking, private codes, saved-registration confirmation and the bounded live-phone testing authority. |
