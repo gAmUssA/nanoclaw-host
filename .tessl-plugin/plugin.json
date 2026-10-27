@@ -47,6 +47,7 @@
     "rules/learning-usage-runtime.md",
     "rules/flight-assist-location.md",
     "rules/memory-budget-policy.md",
-    "rules/tessie-host-authority.md"
+    "rules/tessie-host-authority.md",
+    "rules/outbound-delivery-receipts.md"
   ]
 }

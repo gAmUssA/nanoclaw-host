@@ -1,5 +1,9 @@
 # Changelog
 
+### Declare protected native outbound delivery receipts (nanoclaw-admin#625)
+
+Define the fixed own-main lookup, protected pre-send intent and complete native acknowledgment contract for cited report deduplication. Bind original payload hashes, host ACK timestamps, all chunk IDs and Gmail references from validated private callback cards. Keep legacy/partial coverage and uncertain attempts explicit without automatic resend. Consumer activation still requires the matching installed producer and native acceptance; receipt lookup grants no owner-decision or send authority.
+
 ## 0.1.97 — 2026-10-26
 
 ### Preserve empty-disabled Tessie mount compatibility (nanoclaw-tesla#1)
