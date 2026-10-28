@@ -174,7 +174,7 @@ role denial, cached sleeping-car reads, and one explicitly authorized reversible
 control on a selected awake vehicle with post-dispatch readback. Verify actual
 `tessie-watch` cadence registration before calling the recurring feature shipped.
 This source change exercises synthetic fixtures only; Tesla issue #1 remains open
-for runtime acceptance. Tesla2–7 follow the foundation; Tesla8 remains held.
+for runtime acceptance. Tesla2–6 follow the foundation; Tesla8 remains held. The separate Tesla7 running-late contract is `skills/host-contracts/references/tessie-running-late.md`; its proposals grant no vehicle control or location disclosure.
 
 Regression owners: `src/host-plugins/tessie/*.test.ts`,
 `src/container-runner.security.test.ts`, consumer `tests/test_native.py` and

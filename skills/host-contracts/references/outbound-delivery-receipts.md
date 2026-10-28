@@ -2,7 +2,9 @@
 
 ## Owner and Boundary
 
-Runtime `jbaruch/nanoclaw` owns receipt schema 1. Its private callback database is `DATA_DIR/owner-callbacks/callbacks.db`, outside agent authority. `src/state-migrations/callback-003-outbound-deliveries.ts` owns the `outbound_delivery_tracking` and `outbound_delivery_attempts` tables. The callback-store owner upgrades private database versions 1 and 2 to 3 while preserving existing callback and conference records; consumers never open, migrate or rewrite this database.
+Runtime `jbaruch/nanoclaw` is the sole owner of the proposed receipt schema1 and its `outbound_delivery_tracking` / `outbound_delivery_attempts` tables in private `DATA_DIR/owner-callbacks/callbacks.db`. Consumers never open, migrate or rewrite that database.
+
+This producer remains held in unmerged core PR1175. The historical `callback-003-outbound-deliveries.ts` identifier is not an installed migration or a supported predecessor for the running-late release. Actual core360fe82a8 uses private database2. The new reviewed source stack reserves database3 for `callback-003-promise-tasks.ts` (core PR1188) and database4 for `callback-004-tessie-running-late.ts` (core PR1189). The outbound-delivery owner must rebase, assign a nonconflicting migration and update this published contract, installer, readers and backup before enabling its consumer. This reference assigns no replacement migration number. An existing unknown/outbound-shaped database3 must remain held unchanged, never be reinterpreted as Tasks3 or reset. Keep outbound readiness false until the actual owner-controlled migration and native acceptance are complete.
 
 The producer covers native confirmed-operation `send_message` IPC requests from the uniquely registered main group to its own Telegram chat, on the direct bot path. The generated operation request ID identifies transport continuity, not semantic intent or owner approval. A request ID reused with changed content refuses; an existing uncertain request never sends again. A fresh request ID does not authorize retry of an earlier uncertain send.
 
