@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.102 — 2026-10-28
+
 ### Govern the dedicated private browser viewer (#1127)
 
 Authorize only first-party operator enrollment and native Tailscale node/ACME state for the noVNC viewer. Remove the proposed auth-key-cache/export dependency; retain private ownership, no credential logging, no routes/exit-node/SSH, fixed tailnet-only Serve443, Funnel/CDP prohibition and effective owner-device-only grants. Define the finite SSO/control-plane/off-network device interactions requiring real manual proof while keeping pinned-image startup, configuration/refusal, shell and filesystem behavior CI-gated. Source publication never supplies native acceptance or permission to widen grants.
