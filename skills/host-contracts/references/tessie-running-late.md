@@ -110,14 +110,25 @@ vehicle alias; it uses the visible approved event-title/ETA template.
 
 ## Storage, wire and deployment
 
-Host callback database4 adds Tessie-owned schema1 proposal, event-budget and
-attempt records. Migration3 belongs to Tasks; the sole private database installer
-owns ordered migration3 to4 without changing Tasks authority. These tables use
-the Stateful Artifacts **gate-store exception**: unknown schemas or malformed
-records hold with a preservation/update diagnostic. Never treat them as empty,
-downgrade, delete or reinitialize to recover permission or delivery slots.
-Backups and recovery preserve consumed budgets/attempts monotonically and do not
-restore active owner approval from shared or imported data.
+The artifact is `DATA_DIR/owner-callbacks/callbacks.db`, native private callback database4. The sole logical state owner is the host running-late component `src/host-plugins/tessie-late/store.ts`; its schema of record is `src/state-migrations/callback-004-tessie-running-late.ts`. `src/callback-store.ts` owns installation and ordered accepted database1→2→3→4 migrations, preserving predecessor constraints before any version write. Tasks owns migration3. Running-late never changes its authority or tables.
+
+Every row has a required literal `schema_version: 1`, with SQL default1 only when the owner creates a row. Every other field is present; nullable fields use explicit null, never an omitted-field default. Current record readers accept only1. The three tables are:
+
+| Table | Complete record1 fields and formats |
+| --- | --- |
+| `tessie_late_proposals` | `proposal_id` unique lowercase hex64; `event_id` bounded native Calendar ID; `proposal_json` complete proposal1 JSON below; `proposal_sha256` lowercase hex64 of the owner's complete ordered proposal binding; `card_id` unique nullable native base64url22 card ID; `approval_callback_id` nullable base64url22 callback ID; `status` held/approved/cancelled; `schema_version:1`. An approved row requires its real card and approval callback. New held rows start with both IDs null. |
+| `tessie_late_budgets` | `event_key` unique lowercase hex64 SHA256 of the native primary-calendar/event identity; `deliveries` integer1 or2; `first_delay` integer11..1440 minutes; `max_delay` integer between first_delay and1440; `schema_version:1`. No zero-count or reset record exists. |
+| `tessie_late_attempts` | `event_key` references the budget; `slot` integer1 or2, jointly unique with event_key; `channel` owner/recipient; `proposal_id` null for owner or a matching proposal reference for recipient; `payload_json` complete delivery payload below; `payload_sha256` lowercase hex64 of that exact payload binding; `attempted_at` canonical UTC ISO milliseconds; `status` sending/sent/uncertain; `receipt_json` null until a native acknowledgment or exact original readback; `schema_version:1`. Slot1 is owner, slot2 may be owner or recipient. Budget count and retained slots agree. |
+
+Proposal1 JSON has exactly `schema_version:1`, `proposal_id`, `event_id`, `event_source_sha256`, `event_title`, `starts_at`, `expires_at`, `recipient`, `sender_account`, `template_version`, `created_at`. IDs/hashes match the row. Title is bounded160 characters, native event ID512, and mailbox fields are valid fixed-recipient/sending-account strings. Times are canonical UTC ISO milliseconds; expiry is after event start and creation and at most24hours after creation. `event_source_sha256` binds the complete current native event. `template_version` is exactly `tessie-running-late.v1`. No approval boolean, caller body or receipt exists in this shape.
+
+Delivery payload JSON has exactly string fields `to`, `sender`, `subject`, `body`, `messageId`. Owner payload uses its native main Telegram JID and empty sender/subject/messageId; body is bounded owner notice/draft text. Recipient payload binds the proposal's recipient/account/title and fixed approved lateness template, fresh delay/UTC ETA, and deterministic event/slot Message-ID. A sent owner receipt is exactly `{id}` with a numeric native Telegram message ID string. A sent recipient receipt is exactly `{id,threadId}` with bounded native Gmail hex IDs. An uncertain attempt has a null receipt and still consumes its slot. The writer initially records uncertain before external I/O; a retained sending record projects as uncertain, never as permission to retry.
+
+The writer is the native service through the store; the bound callback action only attaches a real card/owner decision. Polling and callback readers validate all required fields and recheck live native owner/event/account before using a recalled proposal. Public consumers receive only complete proposal cards or bounded counts and never read, write or migrate the private tables. Shapes do not change without owner migration and a version bump.
+
+These named tables use the Stateful Artifacts **gate-store exception**. Unsupported database/record versions, malformed rows or exceeded bounds HOLD with instructions to preserve the store and update the host reader/migration owner. Never treat them as empty, downgrade, evict, delete or reinitialize to recover permission or delivery slots. The installer migrates every accepted older database on owner open; no older running-late record version is accepted as if it were current.
+
+The same host component's `ledger.ts` owns the inactive `tessie_late` record1 projection inside backup ledger3 `host/conference-followup-ledger.json`, alongside the existing conference and Tasks gates. It contains exactly `schema_version:1`, `proposals`, `budgets`, `attempts`. The arrays use the complete row shapes above, with all proposal card/approval IDs null and status cancelled, and in-progress attempts uncertain. Projection includes proposals referenced by consumed recipient attempts; it exports no callback rows. Bounds are4096 proposals/budgets and8192 attempts. Backup reads ledger1/2/3 without erasing current gates. Offline restore alone may merge these records, preserving immutable bindings, every consumed slot and native acknowledgment monotonically; it never restores active approval. Unknown shapes or regressions refuse before replacement. The existing backup owner handles scanning/archive installation and never grants an effect.
 
 `tessie_late_request` is a separate schema1 native operation. Its finite actions
 are prepare, poll, status and cancel, with only the action's declared event,
