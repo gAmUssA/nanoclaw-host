@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-applyTo: "src/construction-journal*, src/state-migrations/callback-004-construction-journal.ts, src/conference-followup-ledger.ts, src/ipc-handlers/construction-journal*, skills/construction-costs/** — when preparing or approving construction payment rows, reading protected append history or changing its native Sheets route and backup projection"
+applyTo: "src/construction-journal*, src/state-migrations/callback-006-construction-journal.ts, src/conference-followup-ledger.ts, src/ipc-handlers/construction-journal*, skills/construction-costs/** — when preparing or approving construction payment rows, reading protected append history or changing its native Sheets route and backup projection"
 ---
 
 # Construction Journal Authority

@@ -2,10 +2,7 @@
 
 ### Declare construction journal authority (nanoclaw#1039)
 
-Define exact native owner cards, private database 4, permanent attempt records 1,
-backup artifact 3, dedicated OneCLI Sheets grants, positive append confirmation
-and recovery without replay. Require matching installed producer/provider and
-real owner/native acceptance before reporting delivery.
+Define exact native owner cards, migration006/private database6 after conference2/Tasks3/Tessie4/Outbound5, permanent attempt records1 and backup5 retaining every domain. Keep dedicated OneCLI Sheets grants, positive append confirmation and recovery without replay. Retain the exact native maintenance decoration; reclaim only validated expired/cancelled unattempted drafts, preserving all live proposals and permanent gates. Require matching installed producer/provider and real owner/native acceptance before reporting delivery.
 
 ### Cover the construction consumer manifest (nanoclaw#1039)
 

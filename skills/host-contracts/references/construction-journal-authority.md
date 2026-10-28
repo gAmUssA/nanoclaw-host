@@ -1,4 +1,4 @@
-# Construction journal: private database 4, records 1, backup 3
+# Construction journal: private database 6, records 1, backup 5
 
 Producer: `jbaruch/nanoclaw` `src/construction-journal-*.ts`. Consumer:
 `jbaruch/nanoclaw-construction` `skills/construction-costs/`. The consumer owns
@@ -40,6 +40,8 @@ oversized content rather than truncate financial fields. The Append/Append
 another and Skip payloads contain only schema version 1, a 22-character opaque
 proposal id, exact row SHA256 and append/cancel decision. The private generic
 card transaction binds the actual card id, original full text and both choices.
+Accept only the canonical host card or its one literal `[M] ` maintenance
+decoration; retain that exact native original and refuse other rewrites.
 Release requires the real running callback, exact native message, configured
 owner sender, current main/target, content digest and unexpired 24-hour card.
 An ordinary owner-answer label or agent-written JSON cannot release a row.
@@ -88,8 +90,10 @@ the ACK's physical row/digest and expected duplicate count plus one.
 
 The host-private callback database `DATA_DIR/owner-callbacks/callbacks.db` stays
 masked from agent project views. Its sole upgrader validates existing constraints
-before migrating supported versions 1–4 and refuses unknown versions. Database
-4 adds schema-1 held proposals and schema-1 permanent attempts. Proposals retain
+before migrating supported versions 1–6 and refuses unknown versions. Database
+6 adds schema-1 held proposals and schema-1 permanent attempts after the complete
+conference2/Tasks3/Tessie4/Outbound5 chain. An old outbound-shaped schema3 or
+construction-shaped schema4 is unsupported and remains held unchanged. Proposals retain
 complete row/target/source/digest, expected duplicate count, fingerprint and
 expiry. Attempts retain those immutable bindings plus actual private card,
 callback, owner/main identities, pre-dispatch intent time, optional native ACK and optional
@@ -105,14 +109,18 @@ later status recovery may add confirmation by exact positive read evidence,
 but never resend. A confirmed payment is not reopened after manual deletion.
 
 The core-owned `host/conference-followup-ledger.json` artifact retains its fixed
-historical name/kind and now uses schema 3: conference gates, outbound facts and
-a construction schema-1 permanent-attempt projection. The same core pipeline
-ships its reader/writer. It accepts artifact versions 1–3 and private database
-versions 1–4; older artifacts retain current construction gates. Whole-domain
+historical name/kind and now uses schema 5: conference, Task and Tessie gates,
+outbound facts and a construction schema-1 permanent-attempt projection. The same core pipeline
+ships its reader/writer. It accepts canonical artifact versions 1–5 and private database
+versions 1–6; older artifacts retain current construction gates. Whole-domain
 restore is atomic and monotone. Preserve uncertainty/confirmation and ACK facts;
 refuse immutable conflicts and unsupported schemas. Restore no held proposals,
 active cards or approval buttons. Capacity is 10,000 construction attempts and
 the existing whole-artifact 32 MiB ceiling; overflow fails while retaining gates.
+Proposal storage is bounded at 10,000 retained rows. Reclaim only validated
+cancelled or expired unattempted proposals in the admission transaction. Never
+prune a proposal referenced by a permanent attempt, a still-live draft, or any
+uncertain/confirmed gate. Full live capacity refuses without eviction.
 
 Install this authority and the actual producer before publishing/activating its
 consumer. Actual OneCLI connection/grants, installed private-state protection,
