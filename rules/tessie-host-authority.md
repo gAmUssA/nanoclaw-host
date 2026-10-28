@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-applyTo: "src/host-plugins/tessie/**, src/volume-mounts.ts, skills/tessie-*/**, tests/test_native.py, docs/tessie-host-authority.md — when implementing or using native Tessie vehicle authorization, routing, receipts, location projection or private mount/mask handling"
+applyTo: "src/host-plugins/tessie/**, src/host-plugins/tessie-late/**, src/volume-mounts.ts, skills/tessie-*/**, tests/test_native.py, docs/tessie-host-authority.md — when implementing or using native Tessie vehicle authorization, routing, receipts, location projection or private mount/mask handling"
 ---
 
 # Tessie Host Authority
@@ -13,6 +13,8 @@ applyTo: "src/host-plugins/tessie/**, src/volume-mounts.ts, skills/tessie-*/**, 
 - Missing or unreadable content stops the affected action.
 - Read explicitly when triggered.
 - Never `@`-import the reference.
+- Before producing, consuming or enabling running-late proposals, callbacks, polling or mail, also read `skills/host-contracts/references/tessie-running-late.md` in full.
+- Its full text binds; missing or unreadable content stops that action.
 
 ## Native Ownership
 

@@ -1,5 +1,10 @@
 # Changelog
 
+### Event-bound running-late delegation
+
+Define the Tesla7 host-owned event/recipient/template approval and shared two-message budget. Separate Gmail grants, native Calendar/route revalidation and retained uncertain intents govern dispatch; agent JSON and generic owner answers grant nothing. Vehicle controls and credentials are unchanged. Source publication does not establish installed or live acceptance (nanoclaw-tesla#7).
+
+
 ## 0.1.98 — 2026-10-27
 
 ### Declare protected native outbound delivery receipts (nanoclaw-admin#625)
