@@ -1,5 +1,9 @@
 # Changelog
 
+### Gate outbound receipt activation on host configuration
+
+Keep native outbound receipt production and MCP exposure disabled by default until the runtime owner records actual image, fixture and reader acceptance, then enables the normal host flag. Preserve legacy sends only for canonical globally empty receipt storage; any retained history or unavailable storage holds covered sends without replay, including after main registration changes. Retain all native receipt facts and protected backup behavior independently of public exposure; add no readiness state artifact or caller authority. Version private receipt/backup facts as2, preserving published record1 archives as nonauthorizing unknown-origin history; distinguish only a different native witnessed input after complete successful native return, while degraded public receipts and partial/error/same-input retries remain uncertain and closed.
+
 ## 0.1.105 — 2026-10-28
 
 ### Declare private deployment window records (nanoclaw#1195)
