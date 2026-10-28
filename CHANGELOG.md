@@ -2,7 +2,7 @@
 
 ### Declare construction journal authority (nanoclaw#1039)
 
-Define exact native owner cards, migration006/private database6 after conference2/Tasks3/Tessie4/Outbound5, permanent attempt records1 and backup5 retaining every domain. Keep dedicated OneCLI Sheets grants, positive append confirmation and recovery without replay. Retain the exact native maintenance decoration; reclaim only validated expired/cancelled unattempted drafts, preserving all live proposals and permanent gates. Render Russian owner cards/choices/statuses and keep financial document values out of shared diagnostics through host-classified sensitive delivery. Require matching installed producer/provider and real owner/native acceptance before reporting delivery.
+Define exact native owner cards, migration006/private database6 after conference2/Tasks3/Tessie4/Outbound5, permanent attempt records1 and backup5 retaining every domain. Keep dedicated OneCLI Sheets grants, positive append confirmation and recovery without replay. Retain the exact native maintenance decoration; reclaim only validated expired/cancelled unattempted drafts, preserving all live proposals and permanent gates. Synchronize shared outbound/Tessie readers to database6/envelope5 while preserving every domain and record format, and keep provisional pre-send arming atomic. Render Russian owner cards/choices/statuses and keep financial document values out of shared diagnostics through host-classified sensitive delivery. Require matching installed producer/provider and real owner/native acceptance before reporting delivery.
 
 ### Cover the construction consumer manifest (nanoclaw#1039)
 
@@ -13,7 +13,6 @@ Name `nanoclaw-construction` in the plugin-repository set for managed `jbaruch/*
 ### Bind protected outbound receipts to the canonical fifth private migration
 
 Name outbound migration005 after Tasks3 and Tessie4, and protected backup envelope4 with canonical envelope1–4 readers. Preserve historical outbound-shaped3/envelope2 as unsupported held evidence, existing domain gates, complete native ACK facts and no-replay claims. Declare complete persisted outbound fields and backup mapping, include installer/backup/admission paths in the rule trigger, synchronize shared Tessie ledger4 readers, and require transactional finite capacity with reserved native-ACK growth and no pruning/replay. Keep installation/native acceptance and consumer/cadence enablement separate from authority publication.
-
 
 ## 0.1.102 — 2026-10-28
 
