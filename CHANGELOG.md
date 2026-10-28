@@ -2,7 +2,7 @@
 
 ### Bind protected outbound receipts to the canonical fifth private migration
 
-Name outbound migration005 after Tasks3 and Tessie4, and protected backup envelope4 with canonical envelope1–4 readers. Preserve historical outbound-shaped3/envelope2 as unsupported held evidence, existing domain gates, complete native ACK facts and no-replay claims. Keep installation/native acceptance and consumer/cadence enablement separate from authority publication.
+Name outbound migration005 after Tasks3 and Tessie4, and protected backup envelope4 with canonical envelope1–4 readers. Preserve historical outbound-shaped3/envelope2 as unsupported held evidence, existing domain gates, complete native ACK facts and no-replay claims. Declare complete persisted outbound fields and backup mapping, include installer/backup/admission paths in the rule trigger, synchronize shared Tessie ledger4 readers, and require transactional finite capacity with reserved native-ACK growth and no pruning/replay. Keep installation/native acceptance and consumer/cadence enablement separate from authority publication.
 
 ## 0.1.102 — 2026-10-28
 

@@ -20,6 +20,41 @@ The owner ledger reader accepts canonical envelope1 (conference), envelope2 (plu
 
 Publish/install this authority before enabling receipt consumers. Deploy the owner reader accepting canonical envelopes1–4 before any separately scheduled backup writer emits envelope4; the matching core release supplies both implementations. Keep old backups usable throughout the transition. The public MCP query/response and receipt records stay schema1, so consumers do not migrate private headers or receive a new send capability. During mixed host/agent installation, unavailable or unsupported lookup preserves every pending consumer claim and leaves its cadence disabled. Host-operator-controlled installation, backup/restore tools and installed-native acceptance remain separate from source publication. Do not apply a database4 recovery tool to a new database5 journal.
 
+## Exact Protected Record and Backup Mapping
+
+The non-null `outbound` backup object has exactly `schema_version:1`, `tracking_started_at` and `receipts`. `tracking_started_at` is canonical UTC ISO milliseconds. `receipts` is an array of zero to10,000 complete records with distinct `receipt_id` values; truncation and eviction are forbidden. Every record has every field below. Nulls are explicit and no missing-field defaults are accepted.
+
+| Required field | Persisted normalized type and bound |
+| --- | --- |
+| `schema_version` | Integer1. |
+| `receipt_id` | Lowercase hex64 SHA-256 of exact UTF-8 JavaScript `JSON.stringify([source_group,chat_jid,transport_key])`; recomputed on every decode. |
+| `source_group` | ASCII string matching `^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$`. |
+| `chat_jid` | Exact native destination string matching `^tg:-?[0-9]+$`; not a caller-selectable query scope. |
+| `transport_key` | ASCII base64url-style string matching `^[A-Za-z0-9_-]{1,128}$`. |
+| `binding_sha256` | Lowercase hex64 of the host-normalized complete effect binding. |
+| `payload_sha256` | Lowercase hex64 of the original MCP text's UTF-8 bytes. |
+| `visible_text_sha256` | Lowercase hex64 of the host's logical post-strip/prefix text. |
+| `attempted_at` | Canonical UTC ISO milliseconds, normalized from valid four-digit-year UTC input with optional1–3 fractional digits; impossible normalized dates refuse. |
+| `status` | Literal `uncertain` or `confirmed`. |
+| `host_sent_at` | Null iff uncertain; otherwise canonical UTC ISO milliseconds at or after `attempted_at`. |
+| `native_message_ids` | Array, maximum128, of distinct strings matching `^[1-9][0-9]{0,23}$`; empty iff uncertain, nonempty iff confirmed. Order preserves native chunk order. |
+| `gmail_refs_state` | Literal `unavailable`, `none` or `bound`; uncertain requires unavailable. |
+| `gmail_source_refs` | Null iff unavailable; empty array iff none; nonempty array iff bound. Maximum8 exact objects `{kind:"thread"|"message",id:<lowercase hex1..64>}`, distinct by kind/ID; bound requires a non-null `callback_card_id`. |
+| `callback_card_id` | Null or exact ASCII base64url22 historical private card ID. It never restores a capability. |
+| `tool_stdout` | Null, `Message sent.` or `Message sent and pinned.`; uncertain requires null. Native ACK alone does not manufacture this later tool result or pin success. |
+
+Private `outbound_delivery_tracking` has exactly `singleton` (integer1 primary key), `schema_version` (integer1) and `started_at` (canonical UTC milliseconds). The owner creates exactly one row using its initialization clock. Its backup mapping is `started_at`→`tracking_started_at`. `outbound_delivery_attempts` has exactly the normalized fields above except that `native_message_ids` is stored as JSON text `native_message_ids_json`, and `gmail_source_refs` as null or JSON text `gmail_refs_json`. Each JSON text is bounded to65,536 UTF-16 units before parsing; parsed arrays still obey the smaller bounds above. Other field names/types are unchanged. SQL has primary key `receipt_id`, unique `(source_group,chat_jid,transport_key)` and schema/status/ref-state checks; the canonical owner additionally validates every complete row and recomputed identity. No SQL column has an implicit receipt-field default. The producer creates uncertain rows with null ACK/card/tool/reference data and an empty native-ID array.
+
+Projection parses and validates those two JSON columns into their normalized array/null fields, never includes raw text/choices, and emits all retained receipts. Restore validates the exact normalized object keys and invariants, serializes the two arrays back to their fixed SQL columns, and monotonically merges within the whole multi-domain transaction. It preserves the earliest tracking start; no opaque card ID recreates callback rows. Unknown fields, versions, duplicate identities or conflicting native facts refuse the entire restore before commit.
+
+## Finite Shared Capacity Admission
+
+The permanent gate store has no automatic archival or pruning. `src/protected-delivery-capacity.ts` owns transaction-local admission against the exact canonical full-ledger projection on the same SQLite handle, including uncommitted candidates. Before a new outbound intent, conference send intent, Task creation intent, existing-Task observation or Tessie delivery slot can commit, the owner checks every domain's complete bounds, the10,000 outbound-row limit and the32 MiB UTF-8 JSON-plus-newline archive limit. It reserves conservative remaining growth for native IDs, confirmation times, typed Gmail references and fixed tool results on all unsettled records. Conference confirmation writes cap time strings at27 UTF-16 units; older retained timestamps remain intact. Native acknowledgments of already-admitted intents do not create a new intent or discard evidence to fit.
+
+An exhausted bound rolls back only the new undispatched candidate transaction; prior acknowledged/uncertain gates, slots and original claims remain unchanged. Whole offline restore performs the same check on the merged state before committing any domain. Known storage/schema faults HOLD instead of becoming empty capacity. The fixed capacity diagnostic contains `schema_version:1`, `constraint` (`outbound_rows`, `archive_bytes`, `future_ack_bytes` or `gate_state_unavailable`), `used_bytes`, `reserved_bytes`, `maximum_bytes` and, for the row bound, `observed_rows`/`maximum_rows`. Usage may be null when unavailable; a bounded row query reports at least the first disallowed count, not an exact count beyond its sentinel. No body, account credential or approval is included.
+
+At capacity, new dispatch/import stays held; existing exact replay checks and retained readbacks remain authoritative. Expansion requires a supported reviewed host-owner upgrade that keeps every gate and the complete backup/restore contract usable. This release implements bounded admission and reserved growth, not an archive store, eviction, manual raw-database repair, claim clearing or permission to retry uncertain sends.
+
 ## Fixed Read Route
 
 Main invokes `mcp__nanoclaw__get_outbound_delivery_receipts`. The immutable client registers `get_outbound_delivery_receipts` only in main and sends IPC `outbound_receipts` with `outboundReceiptQuery`. The host derives source and destination from verified IPC identity plus fresh unique main registration, checks that registration again before returning the projection, and accepts no caller-selected account, chat, role, path, body or acknowledgment.
