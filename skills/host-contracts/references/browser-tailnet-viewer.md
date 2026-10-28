@@ -25,30 +25,30 @@ Preconditions, all required:
    approval. Supply no TS_AUTHKEY, OAuth/control token, password or OneCLI export.
 2. Before opt-in or enrollment, verify actual tag ownership, HTTPS availability
    and complete effective ACL/grants. Only the two selected owner devices may
-   reach this node on TCP443. Bind native device IDs to their exact addresses.
+   reach this node on TCP 443. Bind native device IDs to their exact addresses.
    Deny every other TCP/UDP port and every unselected device; broader existing
    allows are blockers. Preserve other tailnet resources. Never tag human devices.
 3. Retain only first-party-generated native node/ACME state at the host's resolved
    `$HOME/.local/state/nanoclaw-browser-viewer/tailscale`, outside checkout,
-   backups and agent/group mounts. Its enclosing directories are0700; files are
-  0600, single-link and owned by actual configured non-root HOST_UID:HOST_GID.
-   Only public `certs/<own-node>.crt` may be0644 inside0700. Refuse aliases,
+   backups and agent/group mounts. Its enclosing directories are 0700; files are
+   0600, single-link and owned by actual configured non-root HOST_UID:HOST_GID.
+   Only public `certs/<own-node>.crt` may be 0644 inside 0700. Refuse aliases,
    foreign inputs and unknown root leaves; do not repair or reuse another node.
 4. Run a reviewed pinned userspace daemon, read-only root, dropped capabilities,
    no TUN, profile/key/group/agent/Docker-socket mounts or forward proxies. Keep
-   noVNC bound to127.0.0.1:6080 and CDP unpublished. Userspace host networking can
+   noVNC bound to 127.0.0.1:6080 and CDP unpublished. Userspace host networking can
    forward other allowed ports to loopback; Serve alone is not a firewall.
 5. Keep enrollment output in the operator TTY, never captured/model/shared logs.
    Disable persistent container logging and daemon telemetry. Native status/Serve
-   metadata may use disposable private0700/0600 slots, removed after projection;
+   metadata may use disposable private 0700/0600 slots, removed after projection;
    never copy raw credential state or use credential-bearing debug dumps.
 6. Fixed enrollment clears routes, exit-node selection/advertisement and SSH,
-   resets only this node's Serve, then sets tailnet-only HTTPS443 to loopback6080.
+   resets only this node's Serve, then sets tailnet-only HTTPS 443 to loopback 6080.
    Verify native online identity and exact Serve/Funnel-off readback. Failure or
    cancellation stops only the bound viewer ID and retains state for inspection;
    no automatic retry, key reset, policy widening or browser lifecycle change.
 7. Routine canonical deployment reuses native state and background Serve.
-   Full deployment with opt-in0 stops only viewer; tiles-only leaves lifecycle
+   Full deployment with opt-in 0 stops only viewer; tiles-only leaves lifecycle
    unchanged. On retirement, stop viewer through canonical deployment, revoke the
    exact node in the real control plane, then retire only its verified private
    state. Unknown/revoked/expired identity holds for inspection; never erase state
@@ -77,7 +77,7 @@ external-runtime interaction classes, limited to their smallest invocation layer
 Manual validation for class1: verify source/image/installed authority and the
 complete class2 policy first. Start only via approved canonical deployment.
 Use actual operator private TTY, authenticate normal SSO, inspect native node
-ID/name/tag/owner, then require exact online Serve443/loopback6080/Funnel-off
+ID/name/tag/owner, then require exact online Serve443/loopback 6080/Funnel-off
 readback. Preserve unknown state and stop the bound viewer on failure.
 
 Manual validation for class2: retain private metadata proving selected phone,
@@ -87,11 +87,11 @@ reach this destination. No API credential, raw state, PIN or enrollment link
 enters shared evidence.
 
 Manual validation for class3: off-home phone AND laptop each load the real noVNC
-HTTPS page and establish wss `/websockify`, HTTP101 and a live frame. An HTML200
+HTTPS page and establish wss `/websockify`, HTTP 101 and a live frame. An HTML 200
 alone fails. The unselected tailnet device fails page AND WebSocket; owner devices
 cannot reach other ports. Off-tailnet access fails with native Funnel absent and
-no exposed6080/9222. Recreate/restart only through canonical deployment and repeat
-same node ID/URL plus allowed/denied pageANDWebSocket checks. Record source,
+no exposed 6080/9222. Recreate/restart only through canonical deployment and repeat
+same node ID/URL plus allowed/denied page and WebSocket checks. Record source,
 installed-contract/native IDs and booleans, never account content or credentials.
 
 Every other interaction follows testing-standards in full. Mandatory deterministic

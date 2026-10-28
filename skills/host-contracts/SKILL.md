@@ -27,8 +27,12 @@ For browser persistence, `rules/browser-profile-storage.md` requires
 `skills/host-contracts/references/browser-profile-storage.md` before using
 the authenticated browser profile.
 
-For private viewer enrollment or access, `rules/browser-tailnet-viewer.md` requires
-`skills/host-contracts/references/browser-tailnet-viewer.md` in full.
+For private viewer enrollment or access, read the full reference required by
+`rules/browser-tailnet-viewer.md`:
+
+```text
+skills/host-contracts/references/browser-tailnet-viewer.md
+```
 
 This read grants no runtime authority, approval or exemption. Resume the
 original task under the loaded contracts. Finish here.
