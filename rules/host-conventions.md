@@ -51,4 +51,6 @@ All scripts in `scripts/` source `scripts/common.sh` for shared config (`NAS_HOS
   3. The script never prints it
 - Narrow exception for website sessions and saved website passwords in the dedicated NAS browser.
 - Preconditions are binding: read `rules/browser-profile-storage.md` before enabling authenticated persistence.
+- Narrow exception for native identity/ACME state of the private Tailscale noVNC viewer.
+- Preconditions are binding: read `rules/browser-tailnet-viewer.md` before relying on it.
 - Every other credential lives in the vault
