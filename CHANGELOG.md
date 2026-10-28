@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.105 — 2026-10-28
+
 ### Declare private deployment window records (nanoclaw#1195)
 
 Name the canonical owner and fixed private marker paths, define transitional TSV/schema-1 dual reads and owner-only migration with exact inactive archives before atomic replacement. Require compatible Admin readers and installed byte verification before native writer rollout. Unsupported history remains an actionable unknown without rewriting logs.
