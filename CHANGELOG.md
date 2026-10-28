@@ -1,5 +1,9 @@
 # Changelog
 
+### Replace the Snitchmd anti-pinning exception
+
+The actual 0.1.98 and 0.1.99 moderation checks rejected the rule that forced a floating third-party image and blocked scanner digest pins. Replace it with a reviewed immutable default, stated renewal and native compatibility requirements. Sync the source gate/default through the matching Core change; preserve explicit operator configuration and the stable authority filename. No moderation override, automatic image update, pull, deployment or native acceptance is introduced.
+
 ## 0.1.99 — 2026-10-28
 
 ### Clarify the held outbound migration reservation
