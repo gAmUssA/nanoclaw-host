@@ -110,7 +110,7 @@ vehicle alias; it uses the visible approved event-title/ETA template.
 
 ## Storage, wire and deployment
 
-The artifact is `DATA_DIR/owner-callbacks/callbacks.db`, native private callback database4. The sole logical state owner is the host running-late component `src/host-plugins/tessie-late/store.ts`; its schema of record is `src/state-migrations/callback-004-tessie-running-late.ts`. `src/callback-store.ts` owns installation and ordered accepted database1→2→3→4 migrations, preserving predecessor constraints before any version write. Tasks owns migration3. Running-late never changes its authority or tables.
+The artifact is `DATA_DIR/owner-callbacks/callbacks.db`, native private callback database4. The sole logical state owner is the host running-late component `src/host-plugins/tessie-late/store.ts`; its schema of record is `src/state-migrations/callback-004-tessie-running-late.ts`. `src/callback-store.ts` owns installation and ordered accepted database1→2→3→4 migrations, preserving predecessor constraints before any version write. The supported predecessor is `callback-003-promise-tasks.ts` from the Tasks source stack, preserving its tables plus existing callbacks and conference records. The old unmerged outbound PR1175 migration3 declaration is held for its owner to rebase/renumber; it is not a supported Tasks3 store. Running-late preserves/refuses unknown predecessors unchanged and never changes another domain’s authority or tables.
 
 Every row has a required literal `schema_version: 1`, with SQL default1 only when the owner creates a row. Every other field is present; nullable fields use explicit null, never an omitted-field default. Current record readers accept only1. The three tables are:
 

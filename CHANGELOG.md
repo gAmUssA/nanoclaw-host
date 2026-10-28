@@ -1,5 +1,9 @@
 # Changelog
 
+### Clarify the held outbound migration reservation
+
+The earlier outbound receipt contract described the unmerged PR1175 prototype as private database3. Actual core360 remains database2, and the owner-approved Tasks3/running-late4 source stack now occupies those versions. Mark the old outbound declaration held and require its sole owner to rebase/renumber and update the complete contract before activation; never reinterpret or reset an unknown retained store.
+
 ### Event-bound running-late delegation
 
 Define the Tesla7 host-owned event/recipient/template approval and shared two-message budget. Separate Gmail grants, native Calendar/route revalidation and retained uncertain intents govern dispatch; agent JSON and generic owner answers grant nothing. Vehicle controls and credentials are unchanged. Source publication does not establish installed or live acceptance (nanoclaw-tesla#7).
