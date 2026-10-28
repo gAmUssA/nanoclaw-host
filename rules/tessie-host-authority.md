@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-applyTo: "src/host-plugins/tessie/**, src/host-plugins/tessie-late/**, src/volume-mounts.ts, skills/tessie-*/**, tests/test_native.py, docs/tessie-host-authority.md — when implementing or using native Tessie vehicle authorization, routing, receipts, location projection or private mount/mask handling"
+applyTo: "src/host-plugins/tessie/**, src/host-plugins/tessie-late/**, src/volume-mounts.ts, skills/tessie-*/**, tests/test_native.py, docs/tessie-host-authority.md — when implementing or using native Tessie vehicle authorization, routing, receipts, location projection or private mount/mask handling, or producing, consuming or enabling running-late proposals, callbacks, polling or mail"
 ---
 
 # Tessie Host Authority
