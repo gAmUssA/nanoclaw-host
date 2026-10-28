@@ -1,5 +1,9 @@
 # Changelog
 
+### Bind protected outbound receipts to the canonical fifth private migration
+
+Name outbound migration005 after Tasks3 and Tessie4, and protected backup envelope4 with canonical envelope1–4 readers. Preserve historical outbound-shaped3/envelope2 as unsupported held evidence, existing domain gates, complete native ACK facts and no-replay claims. Keep installation/native acceptance and consumer/cadence enablement separate from authority publication.
+
 ## 0.1.102 — 2026-10-28
 
 ### Govern the dedicated private browser viewer (#1127)
