@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.104 — 2026-10-28
+
 ### Declare construction journal authority (nanoclaw#1039)
 
 Define exact native owner cards, migration006/private database6 after conference2/Tasks3/Tessie4/Outbound5, permanent attempt records1 and backup5 retaining every domain. Keep dedicated OneCLI Sheets grants, positive append confirmation and recovery without replay. Retain the exact native maintenance decoration; reclaim only validated expired/cancelled unattempted drafts, preserving all live proposals and permanent gates. Synchronize shared outbound/Tessie readers to database6/envelope5 while preserving every domain and record format, and keep provisional pre-send arming atomic. Render Russian owner cards/choices/statuses and keep financial document values out of shared diagnostics through host-classified sensitive delivery. Require matching installed producer/provider and real owner/native acceptance before reporting delivery.
