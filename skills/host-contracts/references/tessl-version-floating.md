@@ -27,7 +27,7 @@ Requirements:
 
 ### Plugin-repo set
 
-The project-root `tessl.json` in each of `jbaruch/nanoclaw-host`, `nanoclaw-admin`, `nanoclaw-core`, `nanoclaw-trusted`, `nanoclaw-untrusted`, `nanoclaw-conferences`, `nanoclaw-media`, `nanoclaw-travel`.
+The project-root `tessl.json` in each of `jbaruch/nanoclaw-host`, `nanoclaw-admin`, `nanoclaw-core`, `nanoclaw-trusted`, `nanoclaw-untrusted`, `nanoclaw-conferences`, `nanoclaw-media`, `nanoclaw-travel`, `nanoclaw-construction`.
 
 Requirements:
 
