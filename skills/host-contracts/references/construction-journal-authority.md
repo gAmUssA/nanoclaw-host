@@ -24,7 +24,7 @@ header spelling and existing nonempty historical method labels. Read the
 complete five-column journal, retain physical row numbers and reject partial or
 malformed rows. Duplicate identity is normalized date/payee/amount; changing
 purpose or method cannot hide a possible duplicate. A matching count requires
-an explicit separate-payment warning and the Append another choice.
+an explicit separate-payment warning and the «Добавить ещё» choice.
 
 Main preview/status/cancel queries have schema version 1. Preview receives a
 complete normalized row and source id/SHA256/summary hints, reads the journal,
@@ -36,8 +36,7 @@ owner, gateway actor, credential, executable, host path or clock override.
 Only the current registered Telegram main chat is eligible. Recheck the unique
 binding and configured owner from host authority at each native boundary. The
 host constructs a complete literal card of at most 2,800 UTF-16 units; refuse
-oversized content rather than truncate financial fields. The Append/Append
-another and Skip payloads contain only schema version 1, a 22-character opaque
+oversized content rather than truncate financial fields. The «Добавить»/«Добавить ещё» and «Пропустить» payloads contain only schema version 1, a 22-character opaque
 proposal id, exact row SHA256 and append/cancel decision. The private generic
 card transaction binds the actual card id, original full text and both choices.
 Accept only the canonical host card or its one literal `[M] ` maintenance
@@ -45,6 +44,17 @@ decoration; retain that exact native original and refuse other rewrites.
 Release requires the real running callback, exact native message, configured
 owner sender, current main/target, content digest and unexpired 24-hour card.
 An ordinary owner-answer label or agent-written JSON cannot release a row.
+
+## Owner language and private diagnostics
+
+Render the owner card, choices and callback statuses in Russian while keeping
+literal business values and wire identifiers unchanged. Never place financial
+row values, source bodies or document excerpts in shared host logs, including
+rejected requests and recoverable failures. Log routing/length/fixed error
+metadata only. Classify validated construction cards as sensitive before
+transport, with no caller-provided flag. Redact expected Telegram errors and
+quarantine recoverable bad requests without replay; programming defects still
+propagate.
 
 ## Installed callback and gateway
 
@@ -116,7 +126,11 @@ versions 1–6; older artifacts retain current construction gates. Whole-domain
 restore is atomic and monotone. Preserve uncertainty/confirmation and ACK facts;
 refuse immutable conflicts and unsupported schemas. Restore no held proposals,
 active cards or approval buttons. Capacity is 10,000 construction attempts and
-the existing whole-artifact 32 MiB ceiling; overflow fails while retaining gates.
+the existing whole-artifact 32 MiB ceiling. Before dispatch, the same owning
+transaction measures the complete candidate archive and reserves maximum
+Construction ACK/confirmation growth. Overflow rolls back only new undispatched
+work while retaining every existing gate; admitted ACK/readback completion needs
+no fresh capacity admission.
 Proposal storage is bounded at 10,000 retained rows. Reclaim only validated
 cancelled or expired unattempted proposals in the admission transaction. Never
 prune a proposal referenced by a permanent attempt, a still-live draft, or any
