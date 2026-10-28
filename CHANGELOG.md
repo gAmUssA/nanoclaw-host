@@ -1,5 +1,9 @@
 # Changelog
 
+### Bind running-late delivery gates to native event identity
+
+Declare retained record2 with literal primary-calendar/event bindings, validated keys and monotone recovery. Refuse unbound record1 stores unchanged without guessing identities or resetting consumed slots. Require the final native sending-profile check before synchronous dispatch admission; proposal and callback wire1, finite routes and the total-two-attempt budget remain unchanged.
+
 ## 0.1.100 — 2026-10-28
 
 ### Replace the Snitchmd anti-pinning exception
