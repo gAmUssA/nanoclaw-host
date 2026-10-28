@@ -29,7 +29,7 @@ The non-null `outbound` backup object has exactly `schema_version:1`, `tracking_
 | `schema_version` | Integer1. |
 | `receipt_id` | Lowercase hex64 SHA-256 of exact UTF-8 JavaScript `JSON.stringify([source_group,chat_jid,transport_key])`; recomputed on every decode. |
 | `source_group` | ASCII string matching `^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$`. |
-| `chat_jid` | Exact native destination string matching `^tg:-?[0-9]+$`; not a caller-selectable query scope. |
+| `chat_jid` | Exact native destination string matching `^tg:-?[0-9]{1,16}$` (maximum20 ASCII characters including `tg:` and optional minus); not a caller-selectable query scope. The [native Bot API limit](https://core.telegram.org/bots/api#chat) is52 significant bits, which fits16 decimal digits. The owner applies this finite width in database, projection and restore validation. |
 | `transport_key` | ASCII base64url-style string matching `^[A-Za-z0-9_-]{1,128}$`. |
 | `binding_sha256` | Lowercase hex64 of the host-normalized complete effect binding. |
 | `payload_sha256` | Lowercase hex64 of the original MCP text's UTF-8 bytes. |
@@ -46,6 +46,8 @@ The non-null `outbound` backup object has exactly `schema_version:1`, `tracking_
 Private `outbound_delivery_tracking` has exactly `singleton` (integer1 primary key), `schema_version` (integer1) and `started_at` (canonical UTC milliseconds). The owner creates exactly one row using its initialization clock. Its backup mapping is `started_at`→`tracking_started_at`. `outbound_delivery_attempts` has exactly the normalized fields above except that `native_message_ids` is stored as JSON text `native_message_ids_json`, and `gmail_source_refs` as null or JSON text `gmail_refs_json`. Each JSON text is bounded to65,536 UTF-16 units before parsing; parsed arrays still obey the smaller bounds above. Other field names/types are unchanged. SQL has primary key `receipt_id`, unique `(source_group,chat_jid,transport_key)` and schema/status/ref-state checks; the canonical owner additionally validates every complete row and recomputed identity. No SQL column has an implicit receipt-field default. The producer creates uncertain rows with null ACK/card/tool/reference data and an empty native-ID array.
 
 Projection parses and validates those two JSON columns into their normalized array/null fields, never includes raw text/choices, and emits all retained receipts. Restore validates the exact normalized object keys and invariants, serializes the two arrays back to their fixed SQL columns, and monotonically merges within the whole multi-domain transaction. It preserves the earliest tracking start; no opaque card ID recreates callback rows. Unknown fields, versions, duplicate identities or conflicting native facts refuse the entire restore before commit.
+
+`callback_card_id` refines only from null to one actual historical card ID while the null side is uncertain. A confirmed null-card receipt describes a plain message and cannot acquire a card through restore. A retained non-null card survives an older uncertain null; two different non-null card IDs refuse the complete transaction. `tool_stdout` refines from null to one of its two allowed literal values only in a confirmed receipt, retains a known value when incoming data is null, and refuses any two different non-null values. In particular, `Message sent.` cannot upgrade to `Message sent and pinned.` through restore. These fields never supply approval or additional delivery permission.
 
 ## Finite Shared Capacity Admission
 

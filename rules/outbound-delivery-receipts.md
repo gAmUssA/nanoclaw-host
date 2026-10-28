@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-applyTo: "src/outbound-delivery-*, src/callback-store*, src/state-migrations/callback-*, src/conference-followup-ledger*, src/protected-delivery-capacity*, src/conference-followup-store*, src/promise-task-store*, src/host-plugins/tessie-late/{store,ledger}*, src/ipc-handlers/outbound-receipts*, src/channels/telegram*, container/agent-runner/src/outbound-receipt-tools*, skills/waiting-on-owner/**, skills/email-surface/** — when producing or reading native outbound delivery receipts or deduplicating reports from confirmed delivery"
+applyTo: "src/outbound-delivery-*, src/callback-store*, src/state-migrations/callback-*, src/conference-followup-ledger*, src/protected-delivery-capacity*, src/conference-followup-store*, src/promise-task-store*, src/host-plugins/tessie-late/{store,ledger}*, src/ipc-handlers/outbound-receipts*, src/channels/telegram*, container/agent-runner/src/outbound-receipt-tools*, skills/waiting-on-owner/**, skills/email-surface/** — when producing or reading native outbound delivery receipts, deduplicating reports, changing their private schema/install chain, or projecting, restoring or admitting shared protected delivery gates"
 ---
 
 # Outbound Delivery Receipts
