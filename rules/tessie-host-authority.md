@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-applyTo: "src/host-plugins/tessie/**, src/host-plugins/tessie-late/**, src/volume-mounts.ts, skills/tessie-*/**, tests/test_native.py, docs/tessie-host-authority.md — when implementing or using native Tessie vehicle authorization, routing, receipts, location projection or private mount/mask handling, or producing, consuming or enabling running-late proposals, callbacks, polling or mail"
+applyTo: "src/host-plugins/tessie/**, src/host-plugins/tessie-late/**, src/host-plugins/tessie-charge/**, src/volume-mounts.ts, skills/tessie-*/**, tests/test_native.py, docs/tessie-host-authority.md — when implementing or using native Tessie vehicle authorization, routing, receipts, location projection or private mount/mask handling, or producing, consuming or enabling running-late proposals, callbacks, polling or mail, or calendar-charging enrollment, polling, status or estimates"
 ---
 
 # Tessie Host Authority
@@ -16,10 +16,15 @@ applyTo: "src/host-plugins/tessie/**, src/host-plugins/tessie-late/**, src/volum
 - Before producing, consuming or enabling running-late proposals, callbacks, polling or mail, also read `skills/host-contracts/references/tessie-running-late.md` in full.
 - Its full text binds.
 - Missing or unreadable content stops that action.
+- Before producing, consuming, enrolling or enabling calendar charging or its estimates, also read `skills/host-contracts/references/tessie-calendar-charge.md` in full.
+- Its full text binds.
+- Missing or unreadable content stops that action.
 
 ## Native Ownership
 
-- Host `jbaruch/nanoclaw` owns schema-1 `tessie_request`/journals and schema-2 protected VIN/chat policy.
+- Host `jbaruch/nanoclaw` owns schema-1 `tessie_request`/journals and schema-2/3 protected VIN/chat policy.
+- The host owns main-only `tessie_charge_request` and private charging gates inside the existing Tessie store.
+- Only host-operator provisioning from an actual owner decision enrolls automatic charging; consumer payloads and files grant no enrollment or control.
 - The host owns `tessie_late_request`, private running-late callbacks and retained proposal/budget/attempt state.
 - Only a native event-bound owner callback delegates recipient mail.
 - Use only the dedicated `nanoclaw-host-tessie-running-late` Gmail identity for that delegation.

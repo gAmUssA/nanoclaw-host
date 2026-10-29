@@ -1,4 +1,4 @@
-# Tessie host authority: policy 2, wire and journal 1
+# Tessie host authority: policy 2/3, wire and command journal 1
 
 Producer: `jbaruch/nanoclaw` `src/host-plugins/tessie/`. Consumer:
 `jbaruch/nanoclaw-tesla` deterministic scripts. Default disabled
@@ -24,7 +24,7 @@ metadata before/after reading. Linux leaf access stays beneath `/proc/self/fd`.
 The same held directory anchors private command journals. No agent write API or
 agent scratch fallback exists.
 
-Protected `policy.json` has exactly `schema_version: 2`, `vehicle_selection`,
+Protected `policy.json` version 2 has exactly `schema_version: 2`, `vehicle_selection`,
 arrays `owner_chats`, `control_chats`, `read_chats`, `vehicles`, nullable
 `default_vehicle`, and nullable integer `low_battery_percent` (1–100).
 `vehicle_selection` is `explicit` or `non_archived`. Empty roles authorize nobody.
@@ -56,7 +56,12 @@ the new exact `<alias>:<action>` confirmation; it cannot silently retarget a VIN
 Only admitted vehicles enter the schema-1 own-role client policy and inventory
 projections. Normalize native nested access for that deterministic reader.
 
-The runtime reads protected policy version 2 only. An unsupported policy version
+The compatible runtime reads protected policy versions 2 and 3. Version 3 adds
+exactly `charge_automation`: null or the host-operator-provisioned configuration defined in
+`tessie-calendar-charge.md`. Version 2 remains unchanged and grants no calendar
+charging. Version 3 with null enrollment is likewise inactive. Publish and install
+the dual reader before the host operator provisions a version-3 policy. No consumer migrates
+or writes protected policy. An unsupported policy version
 refuses with actionable `policy_version`; it is never silently accepted, migrated,
 rewritten or treated as an empty/open policy. The host owner preserves the prior
 file and provisions the reviewed version while the feature is disabled. Policy
@@ -180,3 +185,13 @@ Regression owners: `src/host-plugins/tessie/*.test.ts`,
 `src/container-runner.security.test.ts`, consumer `tests/test_native.py` and
 accepted/confirmation regressions. No real vehicle, account, calendar or live
 OneCLI policy operation is part of those fixtures.
+
+## Calendar charging
+
+Read `skills/host-contracts/references/tessie-calendar-charge.md` in full before
+calendar charging, enrollment, polling or reusable energy estimates. It owns the
+version-3 enrollment and schema-1 charge/notice gates in the same protected Tessie
+store. It adds no callback database migration, credential, role or agent-writable
+authority. Existing manual Tessie requests and command-journal schema 1 retain
+all their current checks. Source publication supplies no enrollment, installed
+readiness, cadence or vehicle acceptance.
