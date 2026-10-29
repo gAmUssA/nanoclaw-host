@@ -84,7 +84,8 @@ above 100. If disconnected, attempt one bounded owner notice with the shortfall.
 If the round trip exceeds usable charge, report minimum energy charging stops.
 Restore the exact retained daily baseline only when the drive is actually done
 and the vehicle is back home, or its original native drive block has an exact
-returned cancelled status. An inaccessible/404 original remains unknown; a bounded
+returned cancelled status or exact native HTTP 410/global/deleted error. Other
+410 responses and inaccessible/404 originals remain unknown; a bounded
 day query never proves cancellation merely by omitting an old event.
 A home label requires matching current cached coordinates with the bounded-age
 native state; do not infer home from a label on an unrelated cached position.
