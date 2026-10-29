@@ -86,7 +86,9 @@ control intent, enroll a vehicle or send a notice.
 Read-only observations are bounded-age cached values; never wake the vehicle.
 Outside 50–100, hold rather than clamp or create an unrestorable baseline.
 Remember the actual native daily baseline even on an observed no-change run.
-A later observed limit change becomes a sticky owner-override hold.
+A later observed limit change becomes a sticky owner-override hold. A native
+manual `set_charge_limit` intent also makes existing charge records for that VIN
+sticky before its POST, including an observed manual A→B→A sequence.
 
 In the enrolled evening, raise only for the measured next-day shortfall and never
 above 100. If disconnected, attempt one bounded owner notice with the shortfall.
@@ -104,8 +106,15 @@ Both charge-state and charge-notice records are host-owned JSON gate stores
 under the Stateful Artifacts Gate Store carve-out. Exact field presence is
 mandatory; there are no omitted-field defaults or extra fields. Unsupported,
 future, malformed, unreadable or misbound state refuses rather than becoming
-absence. No retained record can reopen a control or notice slot. Only version 1
-is accepted now. If a future owner accepts an older version, it MUST migrate and
+absence. No retained record can replay an old command or reopen a notice slot. Only version 1
+is accepted now. An unsupported charge-state version emits safe code
+`charge_state_version`; an unsupported notice version emits
+`charge_notice_version`. The native error envelope preserves that code and this
+fixed message: "Calendar charge gate version is unsupported. Update the installed
+host charging reader for the retained schema; preserve all charge-state and
+notice records. Never reset a gate, erase history or replay an old command."
+Consumers must retain an actionable update/preserve/no-reset diagnostic rather
+than treating the refusal as absent state. If a future owner accepts an older version, it MUST migrate and
 rewrite that supported older record on read before using it; the consumer cannot
 migrate, reset, erase or prune either gate. Keep uncertain effects held.
 
@@ -119,13 +128,14 @@ A charge-state record has exactly:
 | `enrollment_id` | Lowercase hex32 string matching the enrollment epoch |
 | `day` | Real calendar date string `YYYY-MM-DD` for the original owner-zone planning day |
 | `phase` | String `idle`, `active`, `held` or `owner_override` |
-| `hold_reason` | Null or string `uncertain`, `unconfirmed`, `refused`, `manual_limit_changed` |
+| `hold_reason` | Null or string `uncertain`, `unconfirmed`, `refused`, `not_dispatched`, `manual_limit_changed` |
 | `baseline_limit` | Integer 50–100 from the original native daily observation |
 | `managed_limit` | Null or integer 50–100 |
 | `leg_keys` | Array of 0–2000 unique nonempty strings, each at most 1000 units; logical native drive identities |
 | `event_refs` | Array with one exact `{id, leg_key}` object per retained leg; unique `id` strings match `[A-Za-z0-9_-]{1,512}`, unique `leg_key` strings exactly cover `leg_keys` |
 | `last_end` | Finite nonnegative epoch-millisecond number; original last planned end, or zero before any managed drive |
 | `pending` | Null or the exact attempt object below |
+| `before` | Null or the exact pre-attempt checkpoint below; null exactly when `pending` is null |
 
 An attempt has exactly `request_id` (lowercase hex32 string), `action` (string
 `raise` or `restore`), `from_limit` and `to_limit` (integers 50–100), `attempted_at`
@@ -134,17 +144,29 @@ nonnegative epoch milliseconds no earlier than `attempted_at`). Raise requires
 `to_limit > from_limit` and `managed_limit == to_limit`. Restore requires
 `from_limit == managed_limit > to_limit == baseline_limit`.
 
-- `idle`: `managed_limit`, `pending` and `hold_reason` are null. Retained original
+A pre-attempt checkpoint has exactly `day`, `phase`, `managed_limit`, `leg_keys`,
+`event_refs` and `last_end`, with the same types and formats as the enclosing
+record. `phase` is only `idle` or `active`, with those phase invariants. It cannot
+nest a checkpoint, change owner/VIN/enrollment/baseline, or carry an intent.
+Its active `managed_limit`, otherwise the enclosing `baseline_limit`, must equal
+`pending.from_limit`. The entire serialized charge record, including checkpoint,
+must fit the existing store's 1 MiB bound before any mutation.
+
+- `idle`: `managed_limit`, `pending`, `before` and `hold_reason` are null. Retained original
   leg references may remain as inactive history.
 - `active`: managed limit is above baseline, at least one leg remains, and
-  `pending`/`hold_reason` are null.
+  `pending`/`before`/`hold_reason` are null.
 - `held`: pending and hold reason are nonnull. `unconfirmed` requires a nonnull
-  accepted timestamp; `uncertain` and `refused` require null acceptance.
+  accepted timestamp; `uncertain`, `refused` and `not_dispatched` require null acceptance.
 - `owner_override`: hold reason is `manual_limit_changed`; retain prior managed
   limit, references and any otherwise-valid pending attempt without replay.
 
-The fixed filename hashes `[owner_chat, vin, enrollment_id]`. Rebind every loaded
-row to that exact filename; no raw identifier or caller path selects a file.
+The fixed filename is `charge-state-<digest>.json`. `<digest>` is the lowercase
+64-character SHA-256 hex digest of the UTF-8 bytes of ECMAScript
+`JSON.stringify([owner_chat, vin, enrollment_id])`, with those exact field orders,
+no replacer/spacing argument and no trailing newline. JSON string escaping and
+array delimiters provide the framing. Rebind every loaded row to that exact
+filename; no raw identifier or caller path selects a file.
 
 Durably retain the charge intent before the existing broker's command intent and
 single provider POST. Recheck current calendar, native identity, policy, dynamic
@@ -152,7 +174,20 @@ vehicle/alias, private pending gate and actual observed limit before dispatch.
 Set Tessie's attempts to 1 and do not retry an unknown control. Acceptance stays
 unconfirmed until a state timestamp at/after dispatch shows the requested limit.
 Retain accepted receipts through failed confirmation and allow read-only matching
-readback recovery without another POST. Refusal/uncertainty keeps the intent.
+readback recovery without another POST. Any refusal or uncertainty after the POST boundary keeps the intent held. A
+provider non-success alone does not prove that no vehicle effect occurred.
+
+Only the broker may record `not_dispatched`, after a typed source/state preflight
+failure while its actual provider-POST boundary has not been entered. A caller
+error label or JSON cannot supply this witness. At the next poll the owner may
+restore only that exact charge checkpoint, conditional on the current entire
+record and pending operation still matching the retained no-send witness, and on
+current native owner/enrollment authority. Recheck authority against the held
+file immediately before its update. A changed record, revocation, enrollment
+epoch or sticky manual override refuses restoration without modifying the newer
+state. Never restore an older policy. Keep the original command tombstone;
+fresh native facts and a new request identity are mandatory for any new plan.
+Unknown effects and accepted unconfirmed commands never use this recovery.
 
 Tessie supplies no expected-limit/CAS parameter. A Tesla-app mutation after the
 last cached observation, including an ABA change, is not observable. Do not claim
@@ -163,7 +198,9 @@ hold, and no source or fixture can prove the unobservable race absent.
 ## Notices and wire
 
 `charge-notice-<digest>.json` is the host-owned schema-1 gate for one owner/local-
-day notification. Its filename hashes `[owner_chat, day]`. It has exactly integer
+day notification. Its filename digest uses the same SHA-256/UTF-8/compact
+`JSON.stringify` framing as charge-state, over exactly `[owner_chat, day]` in
+that order with no trailing newline. It has exactly integer
 `schema_version: 1`, literal string `kind: calendar_charge_notice`, `owner_chat`
 (the exact current native owner string), `day` (the exact real owner-local
 `YYYY-MM-DD` date), `phase` (string `reserved`, `submitted` or `uncertain`), and
