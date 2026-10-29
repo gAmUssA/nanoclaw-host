@@ -28,16 +28,25 @@ Unsupported versions refuse; never downgrade, clear or rewrite them from an agen
 Only the host operator provisions enrollment from an actual owner decision and grounded
 native vehicle/calendar/home evidence. No consumer enrollment or policy writer
 exists. Preserve the original decision and policy; source release is not approval.
-The enrollment has exactly:
+The enrollment is a JSON object with exactly the following required fields.
+There are no omitted-field defaults. Null is permitted only where stated.
+Booleans are not numbers or integer schema versions. Enrollment text is nonempty,
+trimmed, within the stated UTF-16 length, and excludes Unicode Cc/Cf/Cs/Zl/Zp.
 
-- `schema_version: 1`, lowercase hex32 `enrollment_id`, and existing `owner_chat`;
-- nullable `default_vehicle` alias/VIN and `daily_limit_percent` (integer 50–100);
-- 1–16 exact native `home_saved_locations` labels;
-- `event_vehicles` (at most 1000 exact native Calendar IDs to alias/VIN selectors)
-  and `person_vehicles` (at most 100 exact owner-approved driver labels to selectors);
-- integer `evening_hour` (0–23) in the owner's native current IANA timezone;
-- finite `cold_buffer_fraction` and `highway_buffer_fraction` (0–2),
-  `reserve_percent` (0–50), and nullable positive `charge_rate_kw` (at most 1000).
+| Field | Serialized type and format |
+| --- | --- |
+| `schema_version` | Integer `1` |
+| `enrollment_id` | String matching lowercase `[a-f0-9]{32}` |
+| `owner_chat` | Text of at most 200 units, exactly a protected `owner_chats` member |
+| `default_vehicle` | Null or exact native alias/VIN text of at most 100 units |
+| `daily_limit_percent` | Null or integer 50–100; expected baseline, never an invented observation |
+| `home_saved_locations` | Array of 1–16 unique exact native labels, each text of at most 200 units |
+| `event_vehicles` | JSON object with at most 1000 entries: exact native Calendar ID text keys of at most 512 units to alias/VIN text values of at most 100 units; `{}` means no explicit event mappings |
+| `person_vehicles` | JSON object with at most 100 entries: exact driver-label text keys of at most 254 units to alias/VIN text values of at most 100 units; `{}` means no person mappings |
+| `evening_hour` | Integer 0–23 in the owner's current native IANA timezone |
+| `cold_buffer_fraction`, `highway_buffer_fraction` | Finite numbers 0–2 |
+| `reserve_percent` | Finite number 0–50 |
+| `charge_rate_kw` | Null or finite number greater than zero and at most 1000 |
 
 Mappings are planning data inside protected enrollment. They never grant access
 outside current `non_archived` inventory. Use the current native dynamic fleet;
@@ -91,22 +100,51 @@ A home label requires matching current cached coordinates with the bounded-age
 native state; do not infer home from a label on an unrelated cached position.
 
 Use fixed host-owned `charge-state-<digest>.json` records in the existing store.
-Schema1 binds owner chat, VIN, enrollment epoch, planning day, exact original
-native drive identities, retained baseline/managed limits and the native attempt.
-The exact record keys are `schema_version`, `kind: calendar_charge`, `owner_chat`,
-`vin`, `enrollment_id`, `day`, `phase`, `hold_reason`, `baseline_limit`,
-`managed_limit`, `leg_keys`, `event_refs`, `last_end`, and `pending`.
-`event_refs` contains exact `{id, leg_key}` pairs, one per retained leg.
-Phases are idle, active, held and owner_override. The pending attempt binds the
-opaque native request ID, raise/restore, from/to limits and actual timestamps:
-`request_id`, `action`, `from_limit`, `to_limit`, `attempted_at`, `accepted_at`.
-An accepted timestamp cannot precede its attempt. Active state has a managed limit
-above baseline and no pending attempt. Unconfirmed state requires acceptance;
-uncertain/refused state cannot fabricate it.
-The gate-store exception in Stateful Artifacts applies: unknown/future, malformed,
-misbound or uncertain records refuse new controls; absence never clears a retained
-gate. Only the host owner may migrate a supported older version on read.
-No consumer reset, erase, prune, re-enroll or replay path exists.
+Both charge-state and charge-notice records are host-owned JSON gate stores
+under the Stateful Artifacts Gate Store carve-out. Exact field presence is
+mandatory; there are no omitted-field defaults or extra fields. Unsupported,
+future, malformed, unreadable or misbound state refuses rather than becoming
+absence. No retained record can reopen a control or notice slot. Only version 1
+is accepted now. If a future owner accepts an older version, it MUST migrate and
+rewrite that supported older record on read before using it; the consumer cannot
+migrate, reset, erase or prune either gate. Keep uncertain effects held.
+
+A charge-state record has exactly:
+
+| Field | Serialized type and format |
+| --- | --- |
+| `schema_version`, `kind` | Integer `1`, literal string `calendar_charge` |
+| `owner_chat` | Nonempty string of at most 200 UTF-16 units; bound to the actual enrolled native owner |
+| `vin` | String matching `[A-HJ-NPR-Z0-9]{17}`; bound to current admitted inventory before control |
+| `enrollment_id` | Lowercase hex32 string matching the enrollment epoch |
+| `day` | Real calendar date string `YYYY-MM-DD` for the original owner-zone planning day |
+| `phase` | String `idle`, `active`, `held` or `owner_override` |
+| `hold_reason` | Null or string `uncertain`, `unconfirmed`, `refused`, `manual_limit_changed` |
+| `baseline_limit` | Integer 50–100 from the original native daily observation |
+| `managed_limit` | Null or integer 50–100 |
+| `leg_keys` | Array of 0–2000 unique nonempty strings, each at most 1000 units; logical native drive identities |
+| `event_refs` | Array with one exact `{id, leg_key}` object per retained leg; unique `id` strings match `[A-Za-z0-9_-]{1,512}`, unique `leg_key` strings exactly cover `leg_keys` |
+| `last_end` | Finite nonnegative epoch-millisecond number; original last planned end, or zero before any managed drive |
+| `pending` | Null or the exact attempt object below |
+
+An attempt has exactly `request_id` (lowercase hex32 string), `action` (string
+`raise` or `restore`), `from_limit` and `to_limit` (integers 50–100), `attempted_at`
+(finite nonnegative epoch milliseconds), and `accepted_at` (null or finite
+nonnegative epoch milliseconds no earlier than `attempted_at`). Raise requires
+`to_limit > from_limit` and `managed_limit == to_limit`. Restore requires
+`from_limit == managed_limit > to_limit == baseline_limit`.
+
+- `idle`: `managed_limit`, `pending` and `hold_reason` are null. Retained original
+  leg references may remain as inactive history.
+- `active`: managed limit is above baseline, at least one leg remains, and
+  `pending`/`hold_reason` are null.
+- `held`: pending and hold reason are nonnull. `unconfirmed` requires a nonnull
+  accepted timestamp; `uncertain` and `refused` require null acceptance.
+- `owner_override`: hold reason is `manual_limit_changed`; retain prior managed
+  limit, references and any otherwise-valid pending attempt without replay.
+
+The fixed filename hashes `[owner_chat, vin, enrollment_id]`. Rebind every loaded
+row to that exact filename; no raw identifier or caller path selects a file.
 
 Durably retain the charge intent before the existing broker's command intent and
 single provider POST. Recheck current calendar, native identity, policy, dynamic
@@ -124,11 +162,18 @@ hold, and no source or fixture can prove the unobservable race absent.
 
 ## Notices and wire
 
-`charge-notice-<digest>.json` is a schema-1 reservation for one owner/local-day
-notification. Reserve before send; crash/timeout consumes that day's slot.
-Its exact keys are `schema_version`, `kind: calendar_charge_notice`, `owner_chat`,
-`day`, `phase`, and `plan_sha256`. Phases reserved/submitted/uncertain never permit replay. Submitted means the
-native send call resolved, not a fabricated delivery acknowledgment.
+`charge-notice-<digest>.json` is the host-owned schema-1 gate for one owner/local-
+day notification. Its filename hashes `[owner_chat, day]`. It has exactly integer
+`schema_version: 1`, literal string `kind: calendar_charge_notice`, `owner_chat`
+(the exact current native owner string), `day` (the exact real owner-local
+`YYYY-MM-DD` date), `phase` (string `reserved`, `submitted` or `uncertain`), and
+`plan_sha256` (lowercase hex64 SHA-256 of the complete UTF-8 notice body). All fields
+are required; no nulls, defaults or extra fields are admitted. The same gate-store
+version/malformed/read/migration/refusal contract above applies to this reservation.
+
+Reserve before send; crash/timeout consumes that day's slot. Every valid existing
+phase prevents a second attempt. Submitted means the native send call resolved,
+not a fabricated delivery acknowledgment. A failed notice retains uncertainty.
 
 Use one bounded Russian message per enrolled evening. Keep all structured vehicle
 outcomes in the native poll result; aggregate long fleets without silent text
@@ -151,7 +196,7 @@ not create main context. Fixed safe errors preserve holds without provider prose
 
 Publish this authority first; merge/install the actual producer before releasing
 the consumer. Verify installed bytes and dual-policy compatibility before the host operator
-provisions policy 3. Keep consumer cadence absent until Root separately registers
+provisions policy 3. Keep consumer cadence absent until the host operator separately registers
 and verifies the actual main cadence after enrollment. No source test or publish
 operation performs that activation.
 
