@@ -50,7 +50,7 @@ Proceed immediately to Step 4.
 
 Open UGOS Pro → Docker → Projects. The new project appears with `state = 1` (stopped-but-registered). Click **Start**.
 
-The container comes up against the in-repo compose file with `${VAR}` placeholders interpolated from `~/nanoclaw/.env` through the `.env` symlink chain. If the container exits with an env-related error, the missing variable lives in `~/nanoclaw/.env`, not in the UGOS Pro UI — never paste literals into UGOS Pro's project env UI to "fix" it (see `rules/ugos-compose-projects.md`).
+The container comes up against the in-repo compose file with `${VAR}` placeholders interpolated from `~/nanoclaw/.env` through the `.env` symlink chain. If the container exits with an env-related error, a missing non-secret variable belongs in `~/nanoclaw/.env`; a missing credential belongs in the OneCLI vault, never `.env` (`rules/host-conventions.md` Credentials live in the vault). Never paste literals into UGOS Pro's project env UI to "fix" either (see `rules/ugos-compose-projects.md`).
 
 Proceed immediately to Step 5.
 
