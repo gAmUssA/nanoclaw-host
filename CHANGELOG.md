@@ -1,5 +1,9 @@
 # Changelog
 
+### Bind calendar charging to the existing protected Tessie owner
+
+Define the policy 2/3 reader-first enrollment, fixed main-only planning API, measured energy and private limit/notice gates for Tesla #2. Preserve dynamic non-archived selection, current OneCLI credentials and manual controls. Keep Host-operator enrollment, source/consumer installation, vehicle/cadence proof and acceptance of the provider’s missing CAS protection separate from publication.
+
 ## 0.1.106 — 2026-10-28
 
 ### Gate outbound receipt activation on host configuration
