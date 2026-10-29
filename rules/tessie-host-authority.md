@@ -1,6 +1,6 @@
 ---
 alwaysApply: false
-applyTo: "src/host-plugins/tessie/**, src/host-plugins/tessie-late/**, src/host-plugins/tessie-charge/**, src/volume-mounts.ts, skills/tessie-*/**, tests/test_native.py, docs/tessie-host-authority.md — when implementing or using native Tessie vehicle authorization, routing, receipts, location projection or private mount/mask handling, or producing, consuming or enabling running-late proposals, callbacks, polling or mail"
+applyTo: "src/host-plugins/tessie/**, src/host-plugins/tessie-late/**, src/host-plugins/tessie-charge/**, src/volume-mounts.ts, skills/tessie-*/**, tests/test_native.py, docs/tessie-host-authority.md — when implementing or using native Tessie vehicle authorization, routing, receipts, location projection or private mount/mask handling, or producing, consuming or enabling running-late proposals, callbacks, polling or mail, or calendar-charging enrollment, polling, status or estimates"
 ---
 
 # Tessie Host Authority
@@ -17,7 +17,8 @@ applyTo: "src/host-plugins/tessie/**, src/host-plugins/tessie-late/**, src/host-
 - Its full text binds.
 - Missing or unreadable content stops that action.
 - Before producing, consuming, enrolling or enabling calendar charging or its estimates, also read `skills/host-contracts/references/tessie-calendar-charge.md` in full.
-- Its full text binds; missing or unreadable content stops that action.
+- Its full text binds.
+- Missing or unreadable content stops that action.
 
 ## Native Ownership
 
