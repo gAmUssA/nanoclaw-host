@@ -2,36 +2,33 @@
 alwaysApply: true
 ---
 
-# Snitchmd Image Floating
+# Snitchmd Reviewed Image
 
-## Approved exception to `coding-policy: dependency-management`
+## Committed Default
 
-The `fetch_markdown` sidecar image default in `jbaruch/nanoclaw` `src/ipc-handlers/ops-fetch.ts` MUST be the floating tag `syabro/snitchmd:latest` — never a literal `0.2.x` tag, never a `sha256:` digest. This file is the authority-of-record.
+- Declare the `fetch_markdown` renderer default in `jbaruch/nanoclaw` `src/ipc-handlers/ops-fetch.ts` as an immutable `syabro/snitchmd@sha256:<digest>` reference.
+- A tag plus digest is also immutable; a tag alone is not.
+- Change the pin only through a focused source PR with normal reviews and CI.
+- Record official upstream manifest provenance and supported platforms beside the pin.
+- Verify native fetch compatibility before deploying a changed image.
+- Do not reject a dependency-scanner pin merely for being immutable.
 
-## Why this dependency floats
+## Renewal
 
-- snitchmd is a renderer and content extractor, not an API contract — `fetch_markdown` consumes its markdown output, whose shape is stable across point releases
-- Its value is adversarial freshness: each release carries updated CloakBrowser fingerprints, and a pinned image degrades toward blocked fetches as anti-bot detection advances
-- A pin's renewal cadence competes with an adversary's release cadence; the operator learns the pin is stale by `fetch_markdown` silently failing on the sites that matter
-- `SNITCHMD_IMAGE` is the operator's escape hatch: an install needing a reproducible build sets a tag or digest in its own environment, which the deploy gate below does not read
+- The maintainer checks official upstream image metadata monthly and after compatibility reports.
+- Keep the existing pin until the replacement completes source review and native validation.
+- Do not execute newly published upstream bytes solely from a mutable tag.
+- Add automated renewal when the repository's dependency scanner supports the declaration.
 
-## Verify on every deploy
+## Deployment and Operator Configuration
 
-`scripts/deploy.sh` MUST read the image default out of `src/ipc-handlers/ops-fetch.ts` and fail the deploy when it is anything other than the literal `syabro/snitchmd:latest`.
+- The canonical `scripts/deploy.sh` source gate requires one supported immutable committed default.
+- Missing, unreadable, moved, ambiguous, floating or malformed declarations refuse deployment.
+- The gate does not read or change explicit `SNITCHMD_IMAGE` operator configuration.
+- Keep that existing override separate from the source default; an IPC caller cannot select an image.
+- Do not pull, retag, recreate a service or change operator configuration to satisfy a source check.
 
-The check catches:
+## Surface Sync
 
-- A hand-edit "just to reproduce that one bug" that never got reverted
-- A merge from a fork carrying a pinned default
-- A well-meaning dependency-scanner PR rewriting the default to a digest
-- A rename or refactor that moves the constant somewhere the gate can no longer see it — an unreadable source file fails the deploy rather than passing vacuously
-
-Run this check in `scripts/deploy.sh`, not just CI: the gate exists to keep a pin from reaching the NAS, and a deploy can be driven from a working tree CI never saw.
-
-## Env override is not a pin
-
-`SNITCHMD_IMAGE` set in `~/nanoclaw/.env` on a given box is configuration, not a committed dependency, and is out of the gate's scope. The rule governs the committed default only.
-
-## Surface sync
-
-When the image reference moves or the covered path changes, update in lock-step: this rule's Approved-exception paragraph, the `verify_snitchmd_image_floating` check in `jbaruch/nanoclaw` `scripts/deploy.sh`, the rationale comment beside the constant in `src/ipc-handlers/ops-fetch.ts`, and `jbaruch/nanoclaw`'s CHANGELOG. See `coding-policy: context-artifacts` Surface Sync.
+- Update this rule, the source default and renewal comment, the canonical deploy gate, `docs/fetch-tools.md` and CHANGELOG together when the dependency contract changes.
+- Keep `rules/snitchmd-image-floating.md` as the stable authority lookup path; its historical filename grants no floating exception.

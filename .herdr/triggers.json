@@ -24,7 +24,8 @@
     "skills/nuke/*",
     "skills/promote/*",
     "skills/ship-code/*",
-    "skills/update-from-upstream/*"
+    "skills/update-from-upstream/*",
+    "skills/host-contracts/*"
   ],
   "cli_spec_paths": [
     "skills/add-ugos-project/scripts/register-ugos-project.sh"

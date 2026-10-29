@@ -1,11 +1,13 @@
 {
   "name": "jbaruch/nanoclaw-host",
-  "version": "0.1.69",
+  "version": "0.1.107",
   "description": "Host rules and skills for Viktor's NanoClaw installation, with upstream synchronization and GitHub writes restricted to gAmUssA forks.",
   "private": false,
   "skills": [
     "skills/ship-code",
-    "skills/update-from-upstream"
+    "skills/update-from-upstream",
+    "skills/host-contracts",
+    "skills/learning-evidence-runtime"
   ],
   "rules": [
     "rules/viktor-fork-safety.md",
@@ -14,6 +16,19 @@
     "rules/no-error-suppression.md",
     "rules/no-deferral.md",
     "rules/boyscout-host.md",
-    "rules/run-ledger-contract.md"
+    "rules/run-ledger-contract.md",
+    "rules/persona-persist-direct-push.md",
+    "rules/group-ipc-snapshots.md",
+    "rules/task-restart-recovery.md",
+    "rules/learning-evidence-runtime.md",
+    "rules/learning-hints-contract.md",
+    "rules/whatsapp-channel-control.md",
+    "rules/learning-usage-runtime.md",
+    "rules/flight-assist-location.md",
+    "rules/memory-budget-policy.md",
+    "rules/tessie-host-authority.md",
+    "rules/outbound-delivery-receipts.md",
+    "rules/construction-journal-authority.md",
+    "rules/deployment-marker-windows.md"
   ]
 }

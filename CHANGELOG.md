@@ -1,5 +1,238 @@
 # Changelog
 
+## 0.1.107 — 2026-10-29
+
+### Bind calendar charging to the existing protected Tessie owner
+
+Define the policy 2/3 reader-first enrollment, fixed main-only planning API, measured energy and private limit/notice gates for Tesla #2. Preserve dynamic non-archived selection, current OneCLI credentials and manual controls. Keep Host-operator enrollment, source/consumer installation, vehicle/cadence proof and acceptance of the provider’s missing CAS protection separate from publication.
+
+## 0.1.106 — 2026-10-28
+
+### Gate outbound receipt activation on host configuration
+
+Keep native outbound receipt production and MCP exposure disabled by default until the runtime owner records actual image, fixture and reader acceptance, then enables the normal host flag. Preserve legacy sends only for canonical globally empty receipt storage; any retained history or unavailable storage holds covered sends without replay, including after main registration changes. Retain all native receipt facts and protected backup behavior independently of public exposure; add no readiness state artifact or caller authority. Version private receipt/backup facts as2, preserving published record1 archives as nonauthorizing unknown-origin history; distinguish only a different native witnessed input after complete successful native return, while degraded public receipts and partial/error/same-input retries remain uncertain and closed.
+
+## 0.1.105 — 2026-10-28
+
+### Declare private deployment window records (nanoclaw#1195)
+
+Name the canonical owner and fixed private marker paths, define transitional TSV/schema-1 dual reads and owner-only migration with exact inactive archives before atomic replacement. Require compatible Admin readers and installed byte verification before native writer rollout. Unsupported history remains an actionable unknown without rewriting logs.
+
+## 0.1.104 — 2026-10-28
+
+### Declare construction journal authority (nanoclaw#1039)
+
+Define exact native owner cards, migration006/private database6 after conference2/Tasks3/Tessie4/Outbound5, permanent attempt records1 and backup5 retaining every domain. Keep dedicated OneCLI Sheets grants, positive append confirmation and recovery without replay. Retain the exact native maintenance decoration; reclaim only validated expired/cancelled unattempted drafts, preserving all live proposals and permanent gates. Synchronize shared outbound/Tessie readers to database6/envelope5 while preserving every domain and record format, and keep provisional pre-send arming atomic. Render Russian owner cards/choices/statuses and keep financial document values out of shared diagnostics through host-classified sensitive delivery. Require matching installed producer/provider and real owner/native acceptance before reporting delivery.
+
+### Cover the construction consumer manifest (nanoclaw#1039)
+
+Name `nanoclaw-construction` in the plugin-repository set for managed `jbaruch/*` dependencies. Retain the coding-policy SessionStart check and third-party pinning requirements. This adds one consumer path; no credential, image, or runtime authority changes.
+
+## 0.1.103 — 2026-10-28
+
+### Bind protected outbound receipts to the canonical fifth private migration
+
+Name outbound migration005 after Tasks3 and Tessie4, and protected backup envelope4 with canonical envelope1–4 readers. Preserve historical outbound-shaped3/envelope2 as unsupported held evidence, existing domain gates, complete native ACK facts and no-replay claims. Declare complete persisted outbound fields and backup mapping, include installer/backup/admission paths in the rule trigger, synchronize shared Tessie ledger4 readers, and require transactional finite capacity with reserved native-ACK growth and no pruning/replay. Keep installation/native acceptance and consumer/cadence enablement separate from authority publication.
+
+## 0.1.102 — 2026-10-28
+
+### Govern the dedicated private browser viewer (#1127)
+
+Authorize only first-party operator enrollment and native Tailscale node/ACME state for the noVNC viewer. Remove the proposed auth-key-cache/export dependency; retain private ownership, no credential logging, no routes/exit-node/SSH, fixed tailnet-only Serve443, Funnel/CDP prohibition and effective owner-device-only grants. Define the finite SSO/control-plane/off-network device interactions requiring real manual proof while keeping pinned-image startup, configuration/refusal, shell and filesystem behavior CI-gated. Source publication never supplies native acceptance or permission to widen grants.
+
+## 0.1.101 — 2026-10-28
+
+### Bind running-late delivery gates to native event identity
+
+Declare retained record2 with literal primary-calendar/event bindings, validated keys and monotone recovery. Refuse unbound record1 stores unchanged without guessing identities or resetting consumed slots. Require the final native sending-profile check before synchronous dispatch admission; proposal and callback wire1, finite routes and the total-two-attempt budget remain unchanged.
+
+## 0.1.100 — 2026-10-28
+
+### Replace the Snitchmd anti-pinning exception
+
+The actual 0.1.98 and 0.1.99 moderation checks rejected the rule that forced a floating third-party image and blocked scanner digest pins. Replace it with a reviewed immutable default, stated renewal and native compatibility requirements. Sync the source gate/default through the matching Core change; preserve explicit operator configuration and the stable authority filename. No moderation override, automatic image update, pull, deployment or native acceptance is introduced.
+
+## 0.1.99 — 2026-10-28
+
+### Clarify the held outbound migration reservation
+
+The earlier outbound receipt contract described the unmerged PR1175 prototype as private database3. Actual core360 remains database2, and the owner-approved Tasks3/running-late4 source stack now occupies those versions. Mark the old outbound declaration held and require its sole owner to rebase/renumber and update the complete contract before activation; never reinterpret or reset an unknown retained store.
+
+### Event-bound running-late delegation
+
+Define the Tesla7 host-owned event/recipient/template approval and shared two-message budget. Separate Gmail grants, native Calendar/route revalidation and retained uncertain intents govern dispatch; agent JSON and generic owner answers grant nothing. Vehicle controls and credentials are unchanged. Source publication does not establish installed or live acceptance (nanoclaw-tesla#7).
+
+
+## 0.1.98 — 2026-10-27
+
+### Declare protected native outbound delivery receipts (nanoclaw-admin#625)
+
+Define the fixed own-main lookup, protected pre-send intent and complete native acknowledgment contract for cited report deduplication. Bind original payload hashes, host ACK timestamps, all chunk IDs and Gmail references from validated private callback cards. Keep legacy/partial coverage and uncertain attempts explicit without automatic resend. Consumer activation still requires the matching installed producer and native acceptance; receipt lookup grants no owner-decision or send authority.
+
+## 0.1.97 — 2026-10-26
+
+### Preserve empty-disabled Tessie mount compatibility (nanoclaw-tesla#1)
+
+Name the bounded opaque-mount exception: known project/private aliases stay masked, while never-provisioned disabled Tessie preserves owner-approved opaque host mounts under a mandatory quiesced retirement/provision/enablement procedure. Enabled or retained authority refuses unresolved paths even after later disablement. Empty mask bootstrap grants no vehicle or policy-write authority.
+
+## 0.1.96 — 2026-10-26
+
+### Honor dynamic non-archived Tessie vehicle selection (nanoclaw-tesla#1)
+
+Declare protected policy version 2 with explicit or dynamic `non_archived` selection. Fresh inventory admits current and future active OWNER/DRIVER vehicles, derives safe aliases and shared flags, and refuses unknown metadata or ambiguous identities. Archive and rename changes take effect before new operations; completed receipt readback remains available without provider I/O. Unsupported policy versions refuse actionably without implicit migration. Wire and command-journal schemas remain version 1; installation, owner provisioning and live control acceptance remain separate gates.
+
+## 0.1.95 — 2026-10-26
+
+### Declare native Tessie vehicle authority (nanoclaw-tesla#1)
+
+Publish the host-owned schema-1 request/policy/receipt contract before enabling Tesla consumers. Require protected VIN/chat roles, current registered IPC identity, existing OneCLI gateway injection of the vaulted Tessie key, fixed provider routes and host-side non-owner data projection. Private policy/journals remain hidden even while the broker is disabled. Durable intents prevent unknown-outcome replay, and actual dispatch timestamps distinguish acceptance from confirmed state. Producer merge and owner-provisioned installed/live acceptance remain separate readiness gates; this authority grants no vehicle or vault operation.
+
+## 0.1.94 — 2026-10-26
+
+### Declare the canonical memory-budget provider (nanoclaw#1142, nanoclaw-admin#639)
+
+Define the fixed immutable image analyzer and its versioned metadata output for admin memory readers. Bind the one host/image policy and parser, unknown-budget refusal, dual-version maintenance results and reader-before-writer rollout. Lookup and counts grant no live memory-write authority; native image verification remains required.
+
+## 0.1.93 — 2026-10-26
+
+### Route learning delivery from owner replies to maintenance (nanoclaw-admin#570)
+
+Separate the actual caller bootstrap from the continuation target. Owner replies arrive in default, while the scheduled wake resumes in maintenance; requiring the caller to already be maintenance refused every direct approval. The admin-owned schema-2 gate binds the caller UUID and exact existing promotion, then a different maintenance bootstrap performs installed readback without a new approval.
+
+## 0.1.92 — 2026-10-26
+
+### Preserve the installed floating-image authority (coding-policy#642)
+
+Keep the approved snitchmd image policy at its original startup rule path with its original bytes. The 0.1.90 package landed, but its relocated reference failed install moderation. Retain the existing authority while the remaining host contracts stay on demand; no dependency, runtime or security requirement changes.
+
+## 0.1.91 — 2026-10-26
+
+### Bind learning update continuations to a fresh host bootstrap (nanoclaw-admin#570)
+
+Declare the host-minted per-container bootstrap context independently of persistent SDK sessions. Bind the admin schema-2 update continuation to the version-1 native context and require a different maintenance bootstrap before final installed readback. Missing or unsupported context refuses continuation; identity supplies no approval.
+
+## 0.1.90 — 2026-10-26
+
+### Load host procedures when their task applies (coding-policy#642)
+
+Retain the host ownership, credential, main-only browser, private pairing, projection trust and delivery boundaries in compact rule routers. Move the complete operation and exception contracts into the co-shipped host-contracts references, requiring explicit full reads before each affected action and refusing missing installed references. Combined native-session acceptance is tracked in coding-policy#642; no live NanoClaw configuration or role is changed by this extraction.
+
+## 0.1.89 — 2026-10-26
+
+### Declare the host-owned flight-assist location snapshot (nanoclaw-travel#349)
+
+Name the existing NanoClaw producer, per-group state path and schema-1 fields as host authority. Bind travel readers to read-only validation and caller freshness, including rejection of future captures and no presence conclusion from a missing fix. This supplies the installed provider contract required before travel can use the snapshot to suppress an airport departure notice.
+
+## 0.1.88 — 2026-10-26
+
+### Declare private learning usage capture and projection (nanoclaw-admin#570)
+
+Define the host-owned private-store migration and `learning_usage_v1` reader contract. Require a main-only kernel read-only companion, installed producer/reader authority, fail-closed masking even when capture cannot start, and conservative forward-only coverage. Provide a separate main-only read-only registry view for all admitted targets without loading overlay or untrusted prompts. Usage rows supply archive hints only; each archive still requires a fresh owner decision and reviewed publication.
+
+## 0.1.87 — 2026-10-26
+
+### Establish WhatsApp relink acceptance authority (nanoclaw#1146)
+
+Define the host-owned fixed-account relink and private code-delivery contract. Limit the Platform-Bound Untestable Carve-Out to native WhatsApp pairing transport and owner phone approval, retain deterministic CI coverage for the surrounding controls, and require installed continuity and saved-registration acceptance before reporting live completion.
+
+## 0.1.86 — 2026-10-25
+
+### Agent file permissions
+
+Add an always-applied host rule for agent-owned writes and private modes, including checkpoints, media intake, atomic replacement and recovery. Repeated root-run maintenance left agent state unwritable and private documents world-readable (#82). Require identity verification, bounded descriptor-safe repairs and actual agent access checks. The plugin's current scripts contain no live group-state writers; the NanoClaw runtime checkpoint and media producers are tracked separately for correction and deployment.
+
+## 0.1.85 — 2026-10-25
+
+### Declare the browser recovery notice dependency (#1129)
+
+Add `x11-utils` to the persistent browser's approved OS-package inventory. The watchdog's owner-visible restart notice uses `xmessage`, and native acceptance can inspect its window with `xwininfo`; both binaries are supplied by that Debian package. Declaring the package directly avoids depending on its incidental presence through another desktop package.
+
+Publish this inventory before the consumer adds the package to its Dockerfile, deploy gate and changelog together. Install the published authority before deployment. This provider change alone enables no watchdog, browser restart or network exposure; the full consumer remains in jbaruch/nanoclaw#1129.
+
+## 0.1.84 — 2026-10-24
+
+### Document terminal cancellation recovery (#580)
+
+Declare the host-owned versioned native cancellation result for watcher recovery. Require a correlated definite failure and fresh unchanged own-task proof before one new attempt, preserve uncertainty and legacy clients, and retain native source-folder authorization.
+
+## 0.1.83 — 2026-10-24
+
+### Define watcher runtime read contracts (#580)
+
+Declare the host-owned task and registered-group projections, their supported record versions, visibility, context variables and exact effect-proof requirements. Keep legacy task metadata readable without inventing isolated context, and require compatible readers before a writer flip. New watcher activation waits for the installed authority and actual runtime proof.
+
+Name the image-delivered persistent-browser validator, its exact success/error contract, main-only endpoint injection and existing regression coverage. This lookup grants no additional browser access, owner identity or website action authority; saved credentials and encrypted-profile boundaries remain binding.
+
+## 0.1.82 — 2026-10-24
+
+### Allow isolated release test environments
+
+Define the cross-repository rollout order for package additions: publish the approved inventory, change the consumer's gate, Dockerfile comment and changelog in one reviewed PR, install the authority before deploying. During the interval, the consumer's existing narrower set remains binding. This preserves deploy-time checks without requiring atomic commits across independently published repositories.
+
+Add `python3-venv` to the agent image's assessed OS-package set for the main-only learning release runtime (#570). It enables source checkouts to create private Python test environments without changing the image's system interpreter. The consumer change must update `COVERED_IMAGES`, its Dockerfile package list/comment and CHANGELOG together; the existing digest/rebuild/deploy gates still apply. Publish and install this authority before deploying that consumer.
+
+## 0.1.81 — 2026-10-24
+
+### Complete the learning hint rollout contract
+
+Apply the hint authority when its named source writers change, define the accepted text bounds and units, and specify a dual-reader/new-view rollout for future versions. This addresses the additional policy review that arrived during #76's merge window; no learning cadence or runtime projection is activated by the contract publication.
+
+## 0.1.80 — 2026-10-24
+
+### Define versioned learning hint reads
+
+Declare the host-owned `learning_hints_v1` view and the learning collector's read-only schema, scope and refusal contract. A per-row projection version avoids changing legacy message/task writers. Publish this authority before deploying the view and enabling the compatible admin reader for nanoclaw-admin#570; hints remain untrusted and never establish evidence or approval.
+
+## 0.1.79 — 2026-10-22
+
+### Declare the learning evidence runtime (#570)
+
+Own the pinned scanner installation/renewal contract and the main-only read-only transcript namespace for nanoclaw-admin#570. Consumers must bind source selection to the registered current group and keep SDK writes isolated. The runtime manifest supplies the dependency and source-view bounds; the host enables the view only for a compatible published provider.
+
+## 0.1.77 — 2026-10-21
+
+### Persist approved browser access with a dedicated credential boundary
+
+Authorize website sessions and saved website passwords in the dedicated NAS browser for nanoclaw#1037. The operator explicitly requires approved access to remain autonomous across turns and restarts, approves CAPTCHA solving and retains MFA handoff. The storage contract requires authenticated encryption, unattended local key provisioning outside the project and agent mounts, consistent checkpoints and synthetic restart/recovery validation. It does not authorize an unencrypted production profile or move API credentials out of OneCLI.
+
+Declare the existing line-oriented agent-container filter contract, its two consuming scripts and regression coverage. This keeps deployment's container enumeration compatible while excluding the persistent browser from agent cleanup.
+
+## 0.1.76 — 2026-10-21
+
+### Declare the persistent browser's OS packages
+
+Cover `container/visible-browser/Dockerfile` for nanoclaw#1037 with its exact distro package set, watched-agent base alignment, canonical deploy rebuild cadence and real-image CI canary. This lets Chromium receive distro security updates while keeping the bounded runtime-package contract enforced at deployment.
+
+## 0.1.75 — 2026-10-21
+
+### Save mixed persona changes through a review PR
+
+Align the persona persistence authority with the generic content-only direct-push contract. The host still direct-pushes only the two named persona files. If pending commits include another path, it saves a deterministic review branch and opens a PR instead of only refusing the update. The host returns the review URL and leaves main unchanged. Implementation ships in jbaruch/nanoclaw#1047.
+
+## 0.1.74 — 2026-10-21
+
+### Retire the run-ledger owner exception (#65)
+
+Remove the temporary owner-exception sentence from `run-ledger-contract`. coding-policy#773 now recognizes runtime-owned tables and their migrations, so the existing scheduler ownership and reader contract satisfy the policy directly. The ledger schema, replay protection and reader behavior stay unchanged.
+
+## 0.1.73 — 2026-10-20
+
+### Credentials live in the vault (jbaruch/nanoclaw#1048)
+
+`host-conventions` gains a section stating the vault-only rule for runtime credentials and the deploy gate that now enforces it: `jbaruch/nanoclaw` `scripts/deploy.sh` step 1b runs `scripts/check-env-credentials.py` and refuses to deploy while the NAS `.env` holds a credential-shaped variable that `scripts/env-credential-allowlist.json` does not name. The 2026-07-21 strip had left three Trakt secrets in `.env` for three months with nothing to notice; the allowlist keeps only `ONECLI_API_KEY` plus entries citing the open migration issues (#1046 Telegram, #1047 GitHub). Three narrow exceptions carry explicit preconditions: the sole `ONECLI_API_KEY` host control-plane bootstrap key in a mode-600, ignored NAS `.env` never forwarded to agents; a credential with an allowlist entry citing an open migration issue, removed when it closes; and a credential no vault injection path can carry, read by a host script from its own mode-600 env file outside the project tree while an open issue tracks migration. The standalone credential validator also gets a file-specific `common.sh` exception: it reads candidate files as data, resolves paths from CLI arguments or its checkout, performs no network operations, and tests default paths, overrides, non-execution, and deploy failure gating. OneCLI 2.14 offers no secret read-back and injects only headers and paths, so the Trakt refresh secrets, sent in the OAuth request body, cannot live in the vault until it has generic OAuth (jbaruch/nanoclaw#1051). `ugos-compose-projects` and `add-ugos-project` now tell `.env` configuration apart from credentials, which go to the vault.
+
+## 0.1.72 — 2026-10-20
+
+### Promotion reviews follow PR events
+
+The promote skill now describes the opened and synchronize events that start the independent Codex policy and Claude quality reviews. The promotion scripts no longer summon reviewers directly (jbaruch/nanoclaw#1059). It also distinguishes PR-time CI from the post-merge publisher, replacing the obsolete claim that plugin PRs have no CI checks.
+
+## 0.1.70 — 2026-10-20
+
+### Retire Copilot review (jbaruch/coding-policy 0.5.0)
+
+coding-policy 0.5.0 replaced Copilot with an isolated Claude code-quality reviewer that runs from the central fleet beside the Codex policy reviewer, posting as `jbaruch-claude-reviewer[bot]`; Copilot is no longer requested or awaited. Rule `copilot-nudge-after-10min` is removed: there is no Copilot request left to nudge, and the Claude lane starts with every fleet dispatch. `ship-code`, `extract-to-overlay` and `persona-persist-direct-push` now name the Codex and Claude reviewers.
+
 ## 0.1.69 — 2026-10-19
 
 ### Add the run-ledger contract (jbaruch/nanoclaw#1024)
