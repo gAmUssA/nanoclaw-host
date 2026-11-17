@@ -1,5 +1,150 @@
 # Changelog
 
+## 0.6.21 — 2026-11-17
+
+- chore(deps): bump prettier from 3.9.10 to 3.10.0 (#133)
+
+## 0.6.20 — 2026-11-15
+
+- chore: refresh the Tessl-generated ignore block (#134)
+
+## 0.6.19 — 2026-11-14
+
+- docs(rules): require agent_model and a pre-gate on new tasks (#132)
+
+## 0.6.18 — 2026-11-09
+
+### Retire the deployment window marker rule
+
+`rules/deployment-marker-windows.md` becomes `rules/task-run-log-reader.md` and keeps only its Task Run Log Reader section. The deploy-window logs it described are no longer read (nanoclaw-admin#840) or written (jbaruch/nanoclaw#1329): deploy-interrupted runs are logged `killed`, and the heartbeat's exit-137 and registry-missing suppressions had nothing left to suppress.
+
+## 0.6.16 — 2026-11-09
+
+### Run the supply-chain pin checks in CI, not on every deploy
+
+`snitchmd-image-floating`, `sync-cli-floating`, `os-package-floating` and `tessl-version-floating` now name CI checks in `jbaruch/nanoclaw` (`scripts/checks/`, `scripts/supply-chain-pins.test.ts`) instead of `scripts/deploy.sh` gates. They inspect tracked files, and a deploy ships only a commit that already passed CI. Rebuild-on-every-deploy requirements are unchanged.
+
+## 0.6.15 — 2026-11-08
+
+### Retire the construction journal authority rule (nanoclaw#1039)
+
+The host construction journal is removed (jbaruch/nanoclaw#1308); the construction skill appends approved rows itself (jbaruch/nanoclaw-construction#10). The always-loaded `construction-journal-authority` rule and its reference described machinery that no longer exists.
+
+## 0.6.14 — 2026-11-08
+
+### Permit controlled facts instead of private browser error prose
+
+NanoClaw admin's browser prechecks need useful failure history without copying driver output that may contain credentials or page content (nanoclaw-admin#773 and #821; NanoClaw#812). Requiring the original prose after every redaction correction drove an expanding credential parser. Permit the native browser boundary to retain caller-owned operation, exit and validated public error facts instead. Keep terminal failures visible/nonzero, existing aggregate-read failure payloads, fixed repair instructions and entrypoint privacy regressions. This changes no secret-handling floor, state, recovery privilege, browser actor or script authority. Other commands still retain safely redacted error output.
+
+## 0.6.13 — 2026-11-07
+
+### Permit delayed deployment-kill log rows
+
+Task-run rows can be inserted after the shell closes a force-kill interval; two observed entries trailed by about one second. Permit the heartbeat's exit-137 reader to allow at most 60 seconds after that interval. Keep the recorded kill/update intervals, marker schema and strict registry-missing check intact. Name the existing unversioned task-log owner, inline schema and Main read-only reader contract under the legacy-table exception. This authority precedes the consumer fix in jbaruch/nanoclaw-admin#806.
+
+## 0.6.12 — 2026-11-06
+
+### Retire policy for the removed generic outbound receipt framework
+
+Core's df47c29afea03d89f09d0583354c7bfbba3c15bc removed the unused receipt store, query tool, activation flag and origin carrier. The old host authority still required that framework, blocking ordinary post-brief mail filing and encouraging its reconstruction. Replace those stale requirements with the current native send-result contract: successful sends permit the workflow's declared progress bookkeeping; uncertain sends require inspection and no automatic replay. Delivery still grants no owner approval. Retain the real shared capacity contract, callback migration chain and active domains' permanent gates. The existing domain backup contracts are unchanged; this policy change defines no backup-format retirement or migration. No runtime, database or grant changes.
+
+## 0.6.11 — 2026-11-06
+
+### Permit morning-brief lock recovery from a supported interruption (#772)
+
+Admin's morning-brief retry can reclaim its own timestamp lock when a supported canonical-task restart interval covers it, after checking the existing delivery marker and confirmed-date cursor. The host's record still means unknown completion, not worker death or successful delivery. This narrow retry policy accepts a surviving worker's late duplicate risk instead of treating every interrupted lock as live for the full stale window. The scheduler's adopted-maintenance admission stays in force; unsupported or foreign evidence supplies no takeover condition. No new state, liveness service, host cursor writer or resend permission. Authority publishes before the admin consumer; see jbaruch/nanoclaw-admin#772.
+
+## 0.6.10 — 2026-11-06
+
+### Clarify shared libraries versus workflow composition
+
+Ordinary imports of stateless, co-shipped helper libraries are allowed within one plugin. The subprocess contract still applies to calling another skill's workflow or precheck. Shared helpers keep source workflows' existing authority and state ownership.
+
+The shared inbox classifier in nanoclaw-admin#786 exposed an overly broad reading of "share data": it required a new JSON command interface around a library, then generated validation and documentation work for an interface no caller needed. This clarification covers the existing shared Jev and Gmail helper pattern without adding an execution or action privilege.
+
+## 0.6.9 — 2026-11-03
+
+### Removed
+
+- The learning runtime authority: the `learning-evidence-runtime`, `learning-usage-runtime` and `learning-hints-contract` rules, their references and the `learning-evidence-runtime` skill. The learning pass is now one nanoclaw-admin script that reads messages.db and task_run_logs (jbaruch/nanoclaw-admin#709), and nanoclaw core drops the capture, views and transcript projection these rules governed (jbaruch/nanoclaw#1264).
+
+## 0.6.8 — 2026-11-03
+
+### Place reminders read the location snapshot (jbaruch/nanoclaw-admin#739)
+
+`flight-assist-location` now names admin's place reminders as a second reader of `current-location.json`, so a schema change has to account for both readers. The schema and the writer stay the same.
+
+## 0.6.7 — 2026-11-03
+
+### Memory diet is a direct edit (jbaruch/nanoclaw#1256)
+
+`memory-budget-policy` now lets the main agent edit its own MEMORY.md for a memory diet on an explicit main-group request, keeping moved incident text verbatim in linked reference files and never touching exempt sections. The host's plan/result/journal extraction contract is retired with its job tools. The shared budget analyzer contract is unchanged.
+
+## 0.6.6 — 2026-11-03
+
+### Deployment markers are plain appends (jbaruch/nanoclaw#1256)
+
+`deployment-marker-windows` now states the contract directly: `deploy.sh` appends one schema-1 JSON line per window as the agent identity, and readers stay read-only. The 96-line reference described a private-state owner with held descriptors, legacy-history migration and archives, which jbaruch/nanoclaw#1266 replaces with plain shell; the reference is gone.
+
+## 0.6.5 — 2026-11-02
+
+### Fixed
+
+- Sessionize capture no longer asks Chromium to refuse side effects on its rendered read. Chromium classes `checkVisibility` as a side effect, so every capture of a real page held with `EvalError: Possible side-effect in debug-evaluate`. The protocol fixtures could not see it because they fake the browser. Live capture of My Events now returns the complete tree. The expression stays this script's fixed read-only source, and the identity readback keeps the check.
+
+## 0.6.4 — 2026-11-02
+
+### Changed
+
+- Browser profile storage is a plain private folder. The owner retired the encrypted archives, seal/restore lifecycle and profile key: nothing on the single-owner NAS needed protecting from anyone who could read the mode-0700 folder, and that machinery caused the 2026-11-01 browser outage it was meant to guard against. A lost profile now means signing in again.
+- Sessionize capture selects its page by origin, since the plain relay returns real document URLs rather than origin-only metadata. Exact route identity still comes from the Runtime read.
+
+## 0.6.0 — 2026-10-31
+
+### Added
+
+- Host-owned no-argument Sessionize My Events rendered capture, installed-provider
+  authority and consumer lookup contract. Capture reuses one existing validated
+  private browser target, reads in an isolated world and confirms target/document
+  identity before returning; no navigation, account or profile operations.
+- Scoped JavaScript type, format and programmatic DOM/protocol tests with weekly
+  development dependency renewal. Source fixtures prove contracts; native signed-in
+  capture and Conferences acceptance remain separate deployment evidence.
+
+## 0.5.0 — 2026-10-31
+
+### Declare cached vehicle morning-summary authority (tesla #4)
+
+Declare the fixed main-only read aggregate and evidence limits without new enrollment, stores or effects. Bound stored historical observations separately from supported current warnings; generic active firmware coverage remains unavailable and native acceptance remains separate.
+
+## 0.4.0 — 2026-10-31
+
+### Declare protected version-three task inventories
+
+Declare envelope3/row3 for retained read-only task rows, while preserving published envelope2/row2 unchanged. Require container-read-only projection data through every alias before native capability selection, with existing outgoing and own-session inputs remaining writable. Distinguish retained inventory from usable selected effect proof. Keep historical cancelled ids, accepted legacy schedule literals and actual stored timezone combinations visible without normalization, deletion, fabricated absence or effect authorization. Preserve strict selected creation, wake, watcher and cancellation bindings while updating readers before the task projection writer changes.
+
+Complete the reader-first rollout with explicit retirement of old projection formats after every live writer produces version 3 and the compatible cohort is verified. Keep historical rows in the current envelope and independent retained reminder entries; retiring an old projection format never deletes their history or supplies absence proof.
+
+Scope the expanded historical admission grammar to new version-3 records. Published legacy0/1 and version-2 grammars stay unchanged during compatibility; unsupported retained rows hold effect readback until the current host projection is available, without rewriting or deleting those rows.
+
+## 0.3.0 — 2026-10-30
+
+### Declare native floating reminder adoption (#1126 / admin #629)
+
+Version the existing task projection as an explicit envelope2 with host-generated capability metadata and actual per-task timezones, including empty inventories. Keep legacy arrays readable and all scope, exact binding, cancellation and uncertainty gates intact. Require actual compatibility-reader deployment and old-session retirement before the writer switch. Forward the existing accepted task occurrence to prechecks and bind native once claims to that accepted UTC dispatch. Add separate versioned dispatch metadata for recurring logical dates, capturing the accepted zone before queueing instead of retagging a reminder after a timezone change. Keep capability metadata separate from owner identity, approval and effect proof; retain fallback/pinned entries without conversion. The 0.x minor bump records the cross-pipeline shape change. Source publication supplies no native acceptance or permission for a probe task, send, timezone change or vehicle effect.
+
+## 0.2.1 — 2026-10-30
+
+### Declare the main-only meeting chat evidence owner (#677)
+
+Bind the registered-chat reader to installed Host identity before peer-history or native member reads. Preserve current-chat history, search-input provenance, complete context/reply coverage and unknowns without grants or sends. Publish this authority before the compatible Core producer; keep deployed genuine-main acceptance separate.
+
+## 0.2.0 — 2026-10-29
+
+### Use the native home clock for calendar charging (Tesla #2)
+
+Bind charging evenings, tomorrow-drive planning and notice days to the supported native home IANA timezone. Move the Host contract to v2 and nested enrollment/charge/notice gates to schema2 with required home_timezone, while top-level policy3 and native wire1 remain unchanged. Keep legacy enrollment1 basic-policy-readable but charging-held, and discover every retained state/notice gate before effects or day lookup so legacy1 cannot reopen a notice slot. Preserve bytes without guessed migration or rekeying, install readers before new writers, and pin the separately enrolled cadence to native home. Every owner/provider acceptance and separate test requirement remains. Expose the narrow bootstrap in its auto-loaded rule and distinguish creating a missing cadence from preserving and restoring an existing task with its actual prior status. This required contract/serialized-state compatibility change takes a 0.x minor release. The doc-only v2 authority bootstrap precedes the compatible Core reader; actual writers still wait for every matching installation and native owner bindings.
+
 ## 0.1.107 — 2026-10-29
 
 ### Bind calendar charging to the existing protected Tessie owner
